@@ -1,0 +1,148 @@
+{
+  "persona": "priya",
+  "summary": "I finished it, and I read everything, which is the only reason I finished it. The station has a real texture — the logs are good — but it hides required things (a keycard, a duct, a colour cipher) and mislabels a reset as a calibration. Patience got me through; it should not have been required.",
+  "completed": true,
+  "findings": [
+    {
+      "id": "priya-f1",
+      "severity": "medium",
+      "category": "confusion",
+      "title": "The personnel keycard is a tiny sliver on the floor behind the crate with no highlight",
+      "description": "I searched the crate corner deliberately and still needed to crouch before the card was visible. Nothing marks it — no glint, no prompt until you are almost on top of it. A required item should not be the least visible object in the room.",
+      "room": "corridor",
+      "reproSteps": [
+        "Enter the corridor",
+        "Crouch beside the crate on the right",
+        "Keycard sliver becomes visible at floor level"
+      ],
+      "frame": "frames/00001.png",
+      "step": 22
+    },
+    {
+      "id": "priya-f2",
+      "severity": "high",
+      "category": "confusion",
+      "title": "The power door is a dead end — the real entrance is an unmarked floor duct",
+      "description": "The door labelled \"Power • access reader\" accepts the keycard and then says \"Door motor offline. Service duct access available.\" Nothing points to the duct, which sits at ankle height on the opposite wall. Everyone will try this door first and everyone will be turned away.",
+      "room": "corridor",
+      "reproSteps": [
+        "Get the keycard",
+        "Use it on the power door",
+        "Motor offline message; find the duct on the far wall by yourself"
+      ],
+      "frame": "frames/00002.png",
+      "step": 31
+    },
+    {
+      "id": "priya-f3",
+      "severity": "medium",
+      "category": "confusion",
+      "title": "Objective still says 'Restore power' but the service notes say the lab controller does that",
+      "description": "The HUD objective has read \"Restore power\" since the airlock. In the power room the notes explain that this room only bridges the circuit and the lab controller performs the actual restore. The objective text never changes to say so.",
+      "room": "power",
+      "reproSteps": [
+        "Enter the power room",
+        "Read the service notes",
+        "Compare with the HUD objective"
+      ],
+      "frame": "frames/00003.png",
+      "step": 49
+    },
+    {
+      "id": "priya-f4",
+      "severity": "medium",
+      "category": "bug",
+      "title": "Opening settings while typing at the terminal silently wiped the code",
+      "description": "I had typed two digits, opened settings to check subtitles, closed it, and the field was empty. No message. If you do not notice, you submit an incomplete code and get rejected.",
+      "room": "lab",
+      "reproSteps": [
+        "Open the lab terminal",
+        "Type part of the code",
+        "Press Escape to open settings, Escape again to close",
+        "Code field is empty"
+      ],
+      "frame": "frames/00004.png",
+      "step": 64
+    },
+    {
+      "id": "priya-f5",
+      "severity": "low",
+      "category": "boredom",
+      "title": "Forty-five second lift ride with nothing to look at",
+      "description": "The reactor transit lift takes forty-five seconds. There is no window, no log, no audio — just the message \"Reactor transit in progress.\" Even a patient player checks the clock.",
+      "room": "corridor",
+      "reproSteps": [
+        "Collect the bioelectric cell",
+        "Use the reactor lift",
+        "Wait 45 seconds"
+      ],
+      "frame": "frames/00006.png",
+      "step": 111
+    },
+    {
+      "id": "priya-f6",
+      "severity": "high",
+      "category": "unfair",
+      "title": "An oxygen countdown appeared with no announcement",
+      "description": "On arriving in the reactor an oxygen meter appeared in the HUD and started falling. No message, no alarm, no cue. I only noticed because I read the HUD out of habit. Running out presumably means a restart.",
+      "room": "reactor",
+      "reproSteps": [
+        "Enter the reactor",
+        "Watch the HUD: oxygen counts down from 180 with no announcement"
+      ],
+      "frame": "frames/00006.png",
+      "step": 111
+    },
+    {
+      "id": "priya-f7",
+      "severity": "high",
+      "category": "unfair",
+      "title": "Ignition code needs the colour log from the airlock — four rooms back, no reminder",
+      "description": "The ignition sequence is derived from the expedition log in the airlock: cold before life before heat, blue/green/red mapped to 3/2/1. That log is four rooms and forty minutes behind you and nothing in the reactor restates it. I happened to have read it.",
+      "room": "reactor",
+      "reproSteps": [
+        "Read the expedition log in the airlock",
+        "Reach the reactor ignition terminal",
+        "Derive 3-2-1 from colour order with no in-room reminder"
+      ],
+      "frame": "frames/00006.png",
+      "step": 115
+    },
+    {
+      "id": "priya-f8",
+      "severity": "high",
+      "category": "bug",
+      "title": "'Calibrate' silently wiped the accepted sequence",
+      "description": "After the terminal accepted 321, I pressed the panel button labelled Calibrate expecting a tuning step. It cleared the sequence. The label says calibrate; the behaviour is reset.",
+      "room": "reactor",
+      "reproSteps": [
+        "Enter the accepted ignition sequence",
+        "Press Calibrate",
+        "Sequence is cleared; ignite refuses"
+      ],
+      "frame": "frames/00006.png",
+      "step": 121
+    }
+  ],
+  "experience": {
+    "confused": [
+      "Which door is actually the way into the power room",
+      "The objective text lagging behind what the rooms say"
+    ],
+    "bored": [
+      "The reactor lift",
+      "Planters seven through twelve"
+    ],
+    "unfair": [
+      "Unannounced oxygen timer",
+      "Ignition cipher with no in-room reminder",
+      "Calibrate button resetting progress"
+    ],
+    "enjoyed": [
+      "The expedition log paying off at the reactor",
+      "The dark greenhouse — atmospheric and clearly deliberate",
+      "Combining the regulator"
+    ]
+  },
+  "wouldRecommend": 4
+}

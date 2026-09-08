@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Station Kepler — mock replay page</title>
+<style>
+  body { margin: 0; background: #05070a; color: #e8eef5; font: 14px ui-monospace, Menlo, monospace; padding: 16px; }
+  h1 { font-size: 16px; margin: 0 0 8px; }
+  pre { white-space: pre-wrap; opacity: .85; }
+</style>
+</head>
+<body>
+  <h1>Station Kepler — mock replay page</h1>
+  <pre id="out">waiting for ?replay=…</pre>
+  <script type="module">
+    /**
+     * Implements the GAME side of the verification contract with the toy simulator:
+     *   ?seed=<int>&replay=inline:<base64 json>   or   ?replay=<url>
+     *   window.__replay = { done, events }
+     * Test hooks (NOT part of the real game):
+     *   &chaos=nosupport   never define window.__replay   → verifier must report null
+     *   &chaos=drop:C1     suppress one flaw id           → verifier must report false
+     *   &chaos=slow:5000   delay `done` by N ms           → exercises the timeout path
+     */
+    import { replay } from './sim.mjs';
+    const params = new URLSearchParams(location.search);
+    const out = document.getElementById('out');
+    const chaos = params.get('chaos') ?? '';
+    const seed = Number(params.get('seed') ?? 1);
+    const spec = params.get('replay');
+
+    async function loadLog() {
+      if (!spec) return null;
+      if (spec.startsWith('inline:')) return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(spec.slice(7)), (c) => c.charCodeAt(0))));
+      return (await fetch(spec)).json();
+    }
+
+    (async () => {
+      const log = await loadLog();
+      if (!log) { out.textContent = 'no replay requested'; return; }
+      if (chaos === 'nosupport') { out.textContent = 'chaos: pretending replay is unsupported'; return; }
+      const sim = replay(log, seed);
+      let events = sim.events;
+      const drop = chaos.match(/^drop:([A-Z]\d+)$/)?.[1];
+      if (drop) events = events.filter((e) => e.flawId !== drop);
+      const delay = Number(chaos.match(/^slow:(\d+)$/)?.[1] ?? 0);
+      window.__replay = { done: false, events: [], seed, actions: log.length };
+      setTimeout(() => {
+        window.__replay.events = events;
+        window.__replay.done = true;
+        out.textContent = `replayed ${log.length} actions with seed ${seed} → ${events.length} events\n` +
+          events.filter((e) => e.type !== 'position').map((e) => `${String(e.t).padStart(7)}  ${e.type}${e.flawId ? ' ' + e.flawId : ''}${e.puzzle ? ' ' + e.puzzle : ''}${e.room ? ' ' + e.room : ''}${e.item ? ' ' + e.item : ''}`).join('\n');
+      }, delay);
+    })().catch((e) => { out.textContent = 'replay error: ' + e.message; });
+  </script>
+</body>
+</html>

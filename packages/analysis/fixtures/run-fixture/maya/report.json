@@ -1,0 +1,72 @@
+{
+  "persona": "maya",
+  "summary": "Fast start, then a pixel hunt for a keycard and a door that lies about being the way in. The power and lab rooms were fine — quick puzzles, clear feedback. Then the greenhouse asked me to water twelve identical plants and I bailed. Chat was gone by planter three.",
+  "completed": false,
+  "abandonedReason": "Greenhouse watering grind — no new information for nine straight actions.",
+  "findings": [
+    {
+      "id": "maya-f1",
+      "severity": "medium",
+      "category": "confusion",
+      "title": "Tutorial popup vanished before I could read it",
+      "description": "The controls card in the airlock disappeared after a couple of seconds. I had skimmed half of it. There is no way to bring it back, so I guessed the keys — fine for me, brutal for anyone new.",
+      "room": "airlock",
+      "reproSteps": [
+        "Start a new game",
+        "Do nothing for about four seconds",
+        "Tutorial card disappears; no key or menu brings it back"
+      ],
+      "frame": "frames/00000.png",
+      "step": 5
+    },
+    {
+      "id": "maya-f2",
+      "severity": "high",
+      "category": "confusion",
+      "title": "Keycard is hidden behind a crate with no highlight",
+      "description": "Spent a dozen actions circling the crate before I crouched and spotted a yellow sliver on the floor. Nothing glows, nothing hints. Every door in the hub wants this card, so the whole game gates on a pixel hunt.",
+      "room": "corridor",
+      "reproSteps": [
+        "Enter the corridor",
+        "Look at the crate on the right side",
+        "Keycard is a tiny sliver on the floor behind it; only visible from low down"
+      ],
+      "frame": "frames/00003.png",
+      "step": 30
+    },
+    {
+      "id": "maya-f3",
+      "severity": "medium",
+      "category": "boredom",
+      "title": "Watering twelve identical plants is dead air",
+      "description": "Three planters in and nothing new has happened: same animation, same message with a counter. Nine more of these. On stream this is where the audience leaves.",
+      "room": "greenhouse",
+      "reproSteps": [
+        "Restore station power",
+        "Enter the greenhouse",
+        "Hold E on each of the twelve identical planters"
+      ],
+      "frame": "frames/00006.png",
+      "step": 87
+    }
+  ],
+  "experience": {
+    "confused": [
+      "Tutorial vanished before I read it",
+      "Which door is actually the way into the power room",
+      "Where the keycard was"
+    ],
+    "bored": [
+      "The greenhouse planters",
+      "Walking back through the corridor hub for the third time"
+    ],
+    "unfair": [
+      "A required item hidden as a sliver behind a crate"
+    ],
+    "enjoyed": [
+      "Crawling through the vent into the power room felt clever",
+      "Typing the code into the terminal and hearing the station wake up"
+    ]
+  },
+  "wouldRecommend": 2
+}

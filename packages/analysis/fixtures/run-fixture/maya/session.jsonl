@@ -1,0 +1,499 @@
+{"t":0,"kind":"status","status":"starting"}
+{"t":0,"kind":"telemetry","event":{"t":0,"type":"room_entered","room":"airlock"}}
+{"t":900,"kind":"codex","event":{"type":"thread.started","thread_id":"thr_maya_7"}}
+{"t":1800,"kind":"status","status":"playing"}
+{"t":3500,"kind":"telemetry","event":{"t":3500,"type":"flaw_triggered","flawId":"C1"}}
+{"t":4000,"kind":"telemetry","event":{"t":4000,"type":"idle","ms":4000}}
+{"t":7618,"kind":"action","step":0,"tool":"screenshot","args":{},"frame":"frames/00000.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/maya/frames/00000.png"}
+{"t":7918,"kind":"usage","input":57488,"cached":0,"output":155}
+{"t":8118,"kind":"telemetry","event":{"t":8118,"type":"idle","ms":8118}}
+{"t":8818,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_1","type":"reasoning","text":"Popup's gone already. Fine — walking sim, WASD and E. Chat, we're moving."}}}
+{"t":12118,"kind":"telemetry","event":{"t":12118,"type":"idle","ms":12118}}
+{"t":14768,"kind":"action","step":0,"tool":"look","args":{"direction":"left","ms":300}}
+{"t":15068,"kind":"telemetry","event":{"t":15068,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.48}}
+{"t":15068,"kind":"usage","input":57562,"cached":52940,"output":104}
+{"t":16568,"kind":"telemetry","event":{"t":16568,"type":"idle","ms":16568}}
+{"t":20568,"kind":"telemetry","event":{"t":20568,"type":"idle","ms":20568}}
+{"t":21525,"kind":"action","step":1,"tool":"look","args":{"direction":"right","ms":600}}
+{"t":21825,"kind":"usage","input":57169,"cached":51767,"output":140}
+{"t":22125,"kind":"telemetry","event":{"t":22125,"type":"position","x":0,"y":1.65,"z":4,"yaw":-0.48}}
+{"t":24625,"kind":"telemetry","event":{"t":24625,"type":"idle","ms":24625}}
+{"t":26712,"kind":"action","step":2,"tool":"look","args":{"direction":"left","ms":300}}
+{"t":27012,"kind":"telemetry","event":{"t":27012,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":27012,"kind":"usage","input":58109,"cached":53100,"output":163}
+{"t":29012,"kind":"telemetry","event":{"t":29012,"type":"idle","ms":29012}}
+{"t":33012,"kind":"telemetry","event":{"t":33012,"type":"idle","ms":33012}}
+{"t":33543,"kind":"action","step":3,"tool":"move","args":{"direction":"forward","ms":300}}
+{"t":33843,"kind":"telemetry","event":{"t":33843,"type":"position","x":0,"y":1.65,"z":2.92,"yaw":0}}
+{"t":33843,"kind":"usage","input":58636,"cached":53324,"output":193}
+{"t":37843,"kind":"telemetry","event":{"t":37843,"type":"idle","ms":4000}}
+{"t":41631,"kind":"action","step":4,"tool":"move","args":{"direction":"back","ms":300}}
+{"t":41931,"kind":"telemetry","event":{"t":41931,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":41931,"kind":"usage","input":58507,"cached":52875,"output":184}
+{"t":45931,"kind":"telemetry","event":{"t":45931,"type":"idle","ms":4000}}
+{"t":47156,"kind":"action","step":5,"tool":"note_finding","args":{"finding":{"id":"maya-f1","severity":"medium","category":"confusion","title":"Tutorial popup vanished before I could read it","description":"The controls card in the airlock disappeared after a couple of seconds. I had skimmed half of it. There is no way to bring it back, so I guessed the keys — fine for me, brutal for anyone new.","room":"airlock","reproSteps":["Start a new game","Do nothing for about four seconds","Tutorial card disappears; no key or menu brings it back"],"frame":"frames/00000.png","step":5}},"result":"noted maya-f1"}
+{"t":47206,"kind":"finding","finding":{"id":"maya-f1","severity":"medium","category":"confusion","title":"Tutorial popup vanished before I could read it","description":"The controls card in the airlock disappeared after a couple of seconds. I had skimmed half of it. There is no way to bring it back, so I guessed the keys — fine for me, brutal for anyone new.","room":"airlock","reproSteps":["Start a new game","Do nothing for about four seconds","Tutorial card disappears; no key or menu brings it back"],"frame":"frames/00000.png","step":5}}
+{"t":47456,"kind":"usage","input":58686,"cached":53993,"output":451}
+{"t":50156,"kind":"telemetry","event":{"t":50156,"type":"idle","ms":8225}}
+{"t":54156,"kind":"telemetry","event":{"t":54156,"type":"idle","ms":12225}}
+{"t":54616,"kind":"action","step":5,"tool":"interact","args":{},"result":"Nothing here."}
+{"t":54916,"kind":"usage","input":57711,"cached":52026,"output":119}
+{"t":58616,"kind":"telemetry","event":{"t":58616,"type":"idle","ms":16685}}
+{"t":58936,"kind":"action","step":6,"tool":"screenshot","args":{},"frame":"frames/00001.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/maya/frames/00001.png"}
+{"t":59236,"kind":"usage","input":58187,"cached":52872,"output":101}
+{"t":62936,"kind":"telemetry","event":{"t":62936,"type":"idle","ms":21005}}
+{"t":65985,"kind":"action","step":6,"tool":"look","args":{"direction":"right","ms":324}}
+{"t":66285,"kind":"usage","input":58176,"cached":54168,"output":100}
+{"t":66309,"kind":"telemetry","event":{"t":66309,"type":"position","x":0,"y":1.65,"z":4,"yaw":-0.518}}
+{"t":67309,"kind":"telemetry","event":{"t":67309,"type":"idle","ms":25378}}
+{"t":71309,"kind":"telemetry","event":{"t":71309,"type":"idle","ms":29378}}
+{"t":71706,"kind":"action","step":7,"tool":"move","args":{"direction":"forward","ms":1990}}
+{"t":72006,"kind":"usage","input":58196,"cached":53524,"output":130}
+{"t":72206,"kind":"telemetry","event":{"t":72206,"type":"position","x":0.89,"y":1.65,"z":2.44,"yaw":-0.518}}
+{"t":72706,"kind":"telemetry","event":{"t":72706,"type":"position","x":1.78,"y":1.65,"z":0.87,"yaw":-0.518}}
+{"t":73206,"kind":"telemetry","event":{"t":73206,"type":"position","x":2.68,"y":1.65,"z":-0.69,"yaw":-0.518}}
+{"t":73696,"kind":"telemetry","event":{"t":73696,"type":"position","x":3.55,"y":1.65,"z":-2.22,"yaw":-0.518}}
+{"t":77696,"kind":"telemetry","event":{"t":77696,"type":"idle","ms":4000}}
+{"t":79169,"kind":"action","step":8,"tool":"interact","args":{},"result":"fuse added to inventory."}
+{"t":79169,"kind":"telemetry","event":{"t":79169,"type":"item_picked","item":"fuse"}}
+{"t":79469,"kind":"usage","input":57856,"cached":52192,"output":150}
+{"t":82169,"kind":"telemetry","event":{"t":82169,"type":"idle","ms":8473}}
+{"t":86169,"kind":"telemetry","event":{"t":86169,"type":"idle","ms":12473}}
+{"t":86259,"kind":"action","step":9,"tool":"look","args":{"direction":"left","ms":750}}
+{"t":86559,"kind":"usage","input":58572,"cached":53703,"output":169}
+{"t":87009,"kind":"telemetry","event":{"t":87009,"type":"position","x":3.55,"y":1.65,"z":-2.22,"yaw":0.682}}
+{"t":90509,"kind":"telemetry","event":{"t":90509,"type":"idle","ms":16813}}
+{"t":94096,"kind":"action","step":10,"tool":"move","args":{"direction":"forward","ms":1315}}
+{"t":94396,"kind":"usage","input":57671,"cached":52426,"output":103}
+{"t":94596,"kind":"telemetry","event":{"t":94596,"type":"position","x":2.42,"y":1.65,"z":-3.62,"yaw":0.682}}
+{"t":95096,"kind":"telemetry","event":{"t":95096,"type":"position","x":1.28,"y":1.65,"z":-5.02,"yaw":0.682}}
+{"t":95411,"kind":"telemetry","event":{"t":95411,"type":"position","x":0.57,"y":1.65,"z":-5.9,"yaw":0.682}}
+{"t":99411,"kind":"telemetry","event":{"t":99411,"type":"idle","ms":4000}}
+{"t":99771,"kind":"action","step":11,"tool":"interact","args":{},"result":"The hatch opens onto the concourse."}
+{"t":99771,"kind":"telemetry","event":{"t":99771,"type":"room_entered","room":"corridor"}}
+{"t":99771,"kind":"telemetry","event":{"t":99771,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":100071,"kind":"usage","input":58548,"cached":53118,"output":207}
+{"t":103771,"kind":"telemetry","event":{"t":103771,"type":"idle","ms":8360}}
+{"t":104643,"kind":"action","step":12,"tool":"screenshot","args":{},"frame":"frames/00002.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/maya/frames/00002.png"}
+{"t":104943,"kind":"usage","input":58946,"cached":54468,"output":110}
+{"t":105843,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_16","type":"reasoning","text":"Four doors. Card readers. Where is the card."}}}
+{"t":108143,"kind":"telemetry","event":{"t":108143,"type":"idle","ms":12732}}
+{"t":112143,"kind":"telemetry","event":{"t":112143,"type":"idle","ms":16732}}
+{"t":112441,"kind":"action","step":12,"tool":"look","args":{"direction":"left","ms":275}}
+{"t":112716,"kind":"telemetry","event":{"t":112716,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.44}}
+{"t":112741,"kind":"usage","input":57781,"cached":52573,"output":207}
+{"t":116216,"kind":"telemetry","event":{"t":116216,"type":"idle","ms":20805}}
+{"t":117965,"kind":"action","step":13,"tool":"move","args":{"direction":"forward","ms":3000}}
+{"t":118265,"kind":"usage","input":58314,"cached":53570,"output":154}
+{"t":118465,"kind":"telemetry","event":{"t":118465,"type":"position","x":-0.77,"y":1.65,"z":2.37,"yaw":0.44}}
+{"t":118965,"kind":"telemetry","event":{"t":118965,"type":"position","x":-1.53,"y":1.65,"z":0.74,"yaw":0.44}}
+{"t":119465,"kind":"telemetry","event":{"t":119465,"type":"position","x":-2.3,"y":1.65,"z":-0.89,"yaw":0.44}}
+{"t":119965,"kind":"telemetry","event":{"t":119965,"type":"position","x":-3.07,"y":1.65,"z":-2.51,"yaw":0.44}}
+{"t":120465,"kind":"telemetry","event":{"t":120465,"type":"position","x":-3.83,"y":1.65,"z":-4.14,"yaw":0.44}}
+{"t":120965,"kind":"telemetry","event":{"t":120965,"type":"position","x":-4.6,"y":1.65,"z":-5.77,"yaw":0.44}}
+{"t":124965,"kind":"telemetry","event":{"t":124965,"type":"idle","ms":4000}}
+{"t":128315,"kind":"action","step":14,"tool":"interact","args":{},"result":"Access denied. Personnel keycard required."}
+{"t":128615,"kind":"usage","input":57863,"cached":53444,"output":180}
+{"t":129315,"kind":"telemetry","event":{"t":129315,"type":"idle","ms":8350}}
+{"t":132828,"kind":"action","step":15,"tool":"look","args":{"direction":"right","ms":1470}}
+{"t":133128,"kind":"usage","input":58089,"cached":52968,"output":151}
+{"t":134298,"kind":"telemetry","event":{"t":134298,"type":"position","x":-4.6,"y":1.65,"z":-5.77,"yaw":-1.912}}
+{"t":134798,"kind":"telemetry","event":{"t":134798,"type":"idle","ms":13833}}
+{"t":138798,"kind":"telemetry","event":{"t":138798,"type":"idle","ms":17833}}
+{"t":140764,"kind":"action","step":16,"tool":"move","args":{"direction":"forward","ms":2462}}
+{"t":141064,"kind":"usage","input":58308,"cached":53331,"output":124}
+{"t":141264,"kind":"telemetry","event":{"t":141264,"type":"position","x":-2.9,"y":1.65,"z":-5.17,"yaw":-1.912}}
+{"t":141764,"kind":"telemetry","event":{"t":141764,"type":"position","x":-1.21,"y":1.65,"z":-4.57,"yaw":-1.912}}
+{"t":142264,"kind":"telemetry","event":{"t":142264,"type":"position","x":0.49,"y":1.65,"z":-3.96,"yaw":-1.912}}
+{"t":142764,"kind":"telemetry","event":{"t":142764,"type":"position","x":2.18,"y":1.65,"z":-3.36,"yaw":-1.912}}
+{"t":143226,"kind":"telemetry","event":{"t":143226,"type":"position","x":3.75,"y":1.65,"z":-2.81,"yaw":-1.912}}
+{"t":147226,"kind":"telemetry","event":{"t":147226,"type":"idle","ms":4000}}
+{"t":150127,"kind":"action","step":17,"tool":"interact","args":{},"result":"Reading lab_log."}
+{"t":150427,"kind":"usage","input":59113,"cached":54991,"output":142}
+{"t":151627,"kind":"telemetry","event":{"t":151627,"type":"idle","ms":8401}}
+{"t":154406,"kind":"action","step":18,"tool":"interact","args":{},"result":"closed"}
+{"t":154706,"kind":"usage","input":59003,"cached":53446,"output":178}
+{"t":155906,"kind":"telemetry","event":{"t":155906,"type":"idle","ms":12680}}
+{"t":159484,"kind":"action","step":19,"tool":"look","args":{"direction":"right","ms":829}}
+{"t":159784,"kind":"usage","input":58562,"cached":53400,"output":104}
+{"t":160313,"kind":"telemetry","event":{"t":160313,"type":"position","x":3.75,"y":1.65,"z":-2.81,"yaw":-3.238}}
+{"t":160813,"kind":"telemetry","event":{"t":160813,"type":"idle","ms":17587}}
+{"t":164813,"kind":"telemetry","event":{"t":164813,"type":"idle","ms":21587}}
+{"t":165317,"kind":"action","step":20,"tool":"move","args":{"direction":"forward","ms":966}}
+{"t":165617,"kind":"usage","input":58626,"cached":52876,"output":148}
+{"t":165817,"kind":"telemetry","event":{"t":165817,"type":"position","x":3.58,"y":1.65,"z":-1.01,"yaw":-3.238}}
+{"t":166283,"kind":"telemetry","event":{"t":166283,"type":"position","x":3.42,"y":1.65,"z":0.66,"yaw":-3.238}}
+{"t":170283,"kind":"telemetry","event":{"t":170283,"type":"idle","ms":4000}}
+{"t":172136,"kind":"action","step":21,"tool":"look","args":{"direction":"left","ms":400}}
+{"t":172436,"kind":"usage","input":58732,"cached":54607,"output":102}
+{"t":172536,"kind":"telemetry","event":{"t":172536,"type":"position","x":3.42,"y":1.65,"z":0.66,"yaw":-2.598}}
+{"t":174536,"kind":"telemetry","event":{"t":174536,"type":"idle","ms":8253}}
+{"t":178536,"kind":"telemetry","event":{"t":178536,"type":"idle","ms":12253}}
+{"t":180298,"kind":"action","step":22,"tool":"look","args":{"direction":"right","ms":800}}
+{"t":180598,"kind":"usage","input":59541,"cached":54592,"output":218}
+{"t":181098,"kind":"telemetry","event":{"t":181098,"type":"position","x":3.42,"y":1.65,"z":0.66,"yaw":-3.878}}
+{"t":182598,"kind":"telemetry","event":{"t":182598,"type":"idle","ms":16315}}
+{"t":186598,"kind":"telemetry","event":{"t":186598,"type":"idle","ms":20315}}
+{"t":188609,"kind":"action","step":23,"tool":"look","args":{"direction":"left","ms":400}}
+{"t":188909,"kind":"usage","input":58283,"cached":54229,"output":173}
+{"t":189009,"kind":"telemetry","event":{"t":189009,"type":"position","x":3.42,"y":1.65,"z":0.66,"yaw":-3.238}}
+{"t":191009,"kind":"telemetry","event":{"t":191009,"type":"idle","ms":24726}}
+{"t":194643,"kind":"action","step":24,"tool":"move","args":{"direction":"forward","ms":200}}
+{"t":194843,"kind":"telemetry","event":{"t":194843,"type":"position","x":3.35,"y":1.65,"z":1.37,"yaw":-3.238}}
+{"t":194943,"kind":"usage","input":59651,"cached":54714,"output":196}
+{"t":198843,"kind":"telemetry","event":{"t":198843,"type":"idle","ms":4000}}
+{"t":199228,"kind":"action","step":25,"tool":"move","args":{"direction":"back","ms":200}}
+{"t":199428,"kind":"telemetry","event":{"t":199428,"type":"position","x":3.42,"y":1.65,"z":0.66,"yaw":-3.238}}
+{"t":199528,"kind":"usage","input":58960,"cached":54216,"output":193}
+{"t":203428,"kind":"telemetry","event":{"t":203428,"type":"idle","ms":4000}}
+{"t":204163,"kind":"action","step":26,"tool":"interact","args":{},"result":"Nothing here."}
+{"t":204463,"kind":"usage","input":59730,"cached":54338,"output":177}
+{"t":207663,"kind":"telemetry","event":{"t":207663,"type":"idle","ms":8235}}
+{"t":208398,"kind":"action","step":27,"tool":"interact","args":{},"result":"Nothing here."}
+{"t":208698,"kind":"usage","input":59278,"cached":54226,"output":196}
+{"t":211898,"kind":"telemetry","event":{"t":211898,"type":"idle","ms":12470}}
+{"t":214113,"kind":"action","step":28,"tool":"screenshot","args":{},"frame":"frames/00003.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/maya/frames/00003.png"}
+{"t":214413,"kind":"usage","input":59215,"cached":54312,"output":102}
+{"t":216113,"kind":"telemetry","event":{"t":216113,"type":"idle","ms":16685}}
+{"t":218583,"kind":"action","step":28,"tool":"crouch","args":{"on":true},"result":"crouching"}
+{"t":218583,"kind":"telemetry","event":{"t":218583,"type":"position","x":3.42,"y":0.8,"z":0.66,"yaw":-3.238}}
+{"t":218883,"kind":"usage","input":59179,"cached":53857,"output":194}
+{"t":220583,"kind":"telemetry","event":{"t":220583,"type":"idle","ms":21155}}
+{"t":223870,"kind":"action","step":29,"tool":"interact","args":{},"result":"keycard added to inventory."}
+{"t":223870,"kind":"telemetry","event":{"t":223870,"type":"flaw_triggered","flawId":"C3"}}
+{"t":223870,"kind":"telemetry","event":{"t":223870,"type":"item_picked","item":"keycard"}}
+{"t":224170,"kind":"usage","input":59971,"cached":54275,"output":136}
+{"t":224870,"kind":"telemetry","event":{"t":224870,"type":"idle","ms":25442}}
+{"t":228870,"kind":"telemetry","event":{"t":228870,"type":"idle","ms":29442}}
+{"t":230250,"kind":"action","step":30,"tool":"note_finding","args":{"finding":{"id":"maya-f2","severity":"high","category":"confusion","title":"Keycard is hidden behind a crate with no highlight","description":"Spent a dozen actions circling the crate before I crouched and spotted a yellow sliver on the floor. Nothing glows, nothing hints. Every door in the hub wants this card, so the whole game gates on a pixel hunt.","room":"corridor","reproSteps":["Enter the corridor","Look at the crate on the right side","Keycard is a tiny sliver on the floor behind it; only visible from low down"],"frame":"frames/00003.png","step":30}},"result":"noted maya-f2"}
+{"t":230300,"kind":"finding","finding":{"id":"maya-f2","severity":"high","category":"confusion","title":"Keycard is hidden behind a crate with no highlight","description":"Spent a dozen actions circling the crate before I crouched and spotted a yellow sliver on the floor. Nothing glows, nothing hints. Every door in the hub wants this card, so the whole game gates on a pixel hunt.","room":"corridor","reproSteps":["Enter the corridor","Look at the crate on the right side","Keycard is a tiny sliver on the floor behind it; only visible from low down"],"frame":"frames/00003.png","step":30}}
+{"t":230550,"kind":"usage","input":59152,"cached":54634,"output":468}
+{"t":233250,"kind":"telemetry","event":{"t":233250,"type":"idle","ms":33822}}
+{"t":237223,"kind":"action","step":30,"tool":"crouch","args":{"on":false},"result":"standing"}
+{"t":237223,"kind":"telemetry","event":{"t":237223,"type":"position","x":3.42,"y":1.65,"z":0.66,"yaw":-3.238}}
+{"t":237523,"kind":"usage","input":60028,"cached":55952,"output":185}
+{"t":237723,"kind":"telemetry","event":{"t":237723,"type":"idle","ms":38295}}
+{"t":241723,"kind":"telemetry","event":{"t":241723,"type":"idle","ms":42295}}
+{"t":243425,"kind":"action","step":31,"tool":"look","args":{"direction":"right","ms":1366}}
+{"t":243725,"kind":"usage","input":59832,"cached":55160,"output":205}
+{"t":244791,"kind":"telemetry","event":{"t":244791,"type":"position","x":3.42,"y":1.65,"z":0.66,"yaw":-5.424}}
+{"t":245791,"kind":"telemetry","event":{"t":245791,"type":"idle","ms":46363}}
+{"t":249791,"kind":"telemetry","event":{"t":249791,"type":"idle","ms":50363}}
+{"t":249874,"kind":"action","step":32,"tool":"move","args":{"direction":"forward","ms":2837}}
+{"t":250174,"kind":"usage","input":59780,"cached":55395,"output":109}
+{"t":250374,"kind":"telemetry","event":{"t":250374,"type":"position","x":2.05,"y":1.65,"z":-0.52,"yaw":-5.424}}
+{"t":250874,"kind":"telemetry","event":{"t":250874,"type":"position","x":0.69,"y":1.65,"z":-1.7,"yaw":-5.424}}
+{"t":251374,"kind":"telemetry","event":{"t":251374,"type":"position","x":-0.67,"y":1.65,"z":-2.87,"yaw":-5.424}}
+{"t":251874,"kind":"telemetry","event":{"t":251874,"type":"position","x":-2.04,"y":1.65,"z":-4.05,"yaw":-5.424}}
+{"t":252374,"kind":"telemetry","event":{"t":252374,"type":"position","x":-3.4,"y":1.65,"z":-5.22,"yaw":-5.424}}
+{"t":252711,"kind":"telemetry","event":{"t":252711,"type":"position","x":-4.32,"y":1.65,"z":-6.01,"yaw":-5.424}}
+{"t":256711,"kind":"telemetry","event":{"t":256711,"type":"idle","ms":4000}}
+{"t":258918,"kind":"action","step":33,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":259218,"kind":"usage","input":59056,"cached":54415,"output":114}
+{"t":260918,"kind":"telemetry","event":{"t":260918,"type":"idle","ms":8207}}
+{"t":264918,"kind":"telemetry","event":{"t":264918,"type":"idle","ms":12207}}
+{"t":265634,"kind":"action","step":34,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":265934,"kind":"usage","input":59656,"cached":55394,"output":152}
+{"t":269134,"kind":"telemetry","event":{"t":269134,"type":"idle","ms":16423}}
+{"t":271851,"kind":"action","step":35,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":272151,"kind":"usage","input":59896,"cached":55112,"output":138}
+{"t":273351,"kind":"telemetry","event":{"t":273351,"type":"idle","ms":20640}}
+{"t":277237,"kind":"action","step":36,"tool":"look","args":{"direction":"left","ms":300}}
+{"t":277537,"kind":"telemetry","event":{"t":277537,"type":"position","x":-4.32,"y":1.65,"z":-6.01,"yaw":-4.944}}
+{"t":277537,"kind":"usage","input":59761,"cached":54539,"output":150}
+{"t":278037,"kind":"telemetry","event":{"t":278037,"type":"idle","ms":25326}}
+{"t":281873,"kind":"action","step":37,"tool":"look","args":{"direction":"right","ms":300}}
+{"t":282173,"kind":"telemetry","event":{"t":282173,"type":"position","x":-4.32,"y":1.65,"z":-6.01,"yaw":-5.424}}
+{"t":282173,"kind":"usage","input":59656,"cached":55112,"output":163}
+{"t":282673,"kind":"telemetry","event":{"t":282673,"type":"idle","ms":29962}}
+{"t":286673,"kind":"telemetry","event":{"t":286673,"type":"idle","ms":33962}}
+{"t":289243,"kind":"action","step":38,"tool":"move","args":{"direction":"left","ms":200}}
+{"t":289443,"kind":"telemetry","event":{"t":289443,"type":"position","x":-4.79,"y":1.65,"z":-5.47,"yaw":-5.424}}
+{"t":289543,"kind":"usage","input":59982,"cached":54629,"output":156}
+{"t":293443,"kind":"telemetry","event":{"t":293443,"type":"idle","ms":4000}}
+{"t":296364,"kind":"action","step":39,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":296664,"kind":"usage","input":60343,"cached":54800,"output":180}
+{"t":297564,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_46","type":"reasoning","text":"Motor offline. A duct? Where is the duct."}}}
+{"t":297864,"kind":"telemetry","event":{"t":297864,"type":"idle","ms":8421}}
+{"t":300651,"kind":"action","step":40,"tool":"screenshot","args":{},"frame":"frames/00004.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/maya/frames/00004.png"}
+{"t":300951,"kind":"usage","input":60569,"cached":55857,"output":203}
+{"t":302151,"kind":"telemetry","event":{"t":302151,"type":"idle","ms":12708}}
+{"t":305216,"kind":"action","step":40,"tool":"look","args":{"direction":"left","ms":1373}}
+{"t":305516,"kind":"usage","input":60101,"cached":54302,"output":184}
+{"t":306589,"kind":"telemetry","event":{"t":306589,"type":"position","x":-4.79,"y":1.65,"z":-5.47,"yaw":-3.227}}
+{"t":307089,"kind":"telemetry","event":{"t":307089,"type":"idle","ms":17646}}
+{"t":311089,"kind":"telemetry","event":{"t":311089,"type":"idle","ms":21646}}
+{"t":312786,"kind":"action","step":41,"tool":"move","args":{"direction":"forward","ms":438}}
+{"t":313086,"kind":"usage","input":60177,"cached":54731,"output":167}
+{"t":313224,"kind":"telemetry","event":{"t":313224,"type":"position","x":-4.92,"y":1.65,"z":-3.9,"yaw":-3.227}}
+{"t":317224,"kind":"telemetry","event":{"t":317224,"type":"idle","ms":4000}}
+{"t":320938,"kind":"action","step":42,"tool":"interact","args":{},"result":"Maintenance recording playing."}
+{"t":320938,"kind":"telemetry","event":{"t":320938,"type":"flaw_triggered","flawId":"A1"}}
+{"t":321238,"kind":"usage","input":60116,"cached":55277,"output":171}
+{"t":321438,"kind":"telemetry","event":{"t":321438,"type":"idle","ms":8214}}
+{"t":325438,"kind":"telemetry","event":{"t":325438,"type":"idle","ms":12214}}
+{"t":326864,"kind":"action","step":43,"tool":"listen","args":{},"result":"[{\"id\":\"pickup\",\"transcript\":\"Equipment acquired.\"},{\"id\":\"pickup\",\"transcript\":\"Equipment acquired.\"},{\"id\":\"vent_code\",\"transcript\":\"Maintenance duct access code: four, eight, two. I repeat: four, eight, two.\"}]"}
+{"t":327164,"kind":"usage","input":60384,"cached":55565,"output":202}
+{"t":329864,"kind":"telemetry","event":{"t":329864,"type":"idle","ms":16640}}
+{"t":331966,"kind":"action","step":43,"tool":"look","args":{"direction":"right","ms":48}}
+{"t":332014,"kind":"telemetry","event":{"t":332014,"type":"position","x":-4.92,"y":1.65,"z":-3.9,"yaw":-3.304}}
+{"t":332266,"kind":"usage","input":59993,"cached":54653,"output":118}
+{"t":334014,"kind":"telemetry","event":{"t":334014,"type":"idle","ms":20790}}
+{"t":338014,"kind":"telemetry","event":{"t":338014,"type":"idle","ms":24790}}
+{"t":339534,"kind":"action","step":44,"tool":"move","args":{"direction":"forward","ms":1776}}
+{"t":339834,"kind":"usage","input":60171,"cached":55619,"output":198}
+{"t":340034,"kind":"telemetry","event":{"t":340034,"type":"position","x":-5.21,"y":1.65,"z":-2.12,"yaw":-3.304}}
+{"t":340534,"kind":"telemetry","event":{"t":340534,"type":"position","x":-5.51,"y":1.65,"z":-0.35,"yaw":-3.304}}
+{"t":341034,"kind":"telemetry","event":{"t":341034,"type":"position","x":-5.8,"y":1.65,"z":1.43,"yaw":-3.304}}
+{"t":341310,"kind":"telemetry","event":{"t":341310,"type":"position","x":-5.96,"y":1.65,"z":2.41,"yaw":-3.304}}
+{"t":345310,"kind":"telemetry","event":{"t":345310,"type":"idle","ms":4000}}
+{"t":348326,"kind":"action","step":45,"tool":"interact","args":{},"result":"vent_lock awaits a code."}
+{"t":348626,"kind":"usage","input":59596,"cached":55520,"output":176}
+{"t":349326,"kind":"telemetry","event":{"t":349326,"type":"idle","ms":8016}}
+{"t":352843,"kind":"action","step":46,"tool":"type_text","args":{"text":"482\n"},"result":"Duct access released."}
+{"t":352843,"kind":"telemetry","event":{"t":352843,"type":"puzzle_solved","puzzle":"vent_code"}}
+{"t":353143,"kind":"usage","input":59878,"cached":55801,"output":171}
+{"t":353343,"kind":"telemetry","event":{"t":353343,"type":"idle","ms":12033}}
+{"t":357343,"kind":"telemetry","event":{"t":357343,"type":"idle","ms":16033}}
+{"t":360628,"kind":"action","step":47,"tool":"look","args":{"direction":"right","ms":1672}}
+{"t":360928,"kind":"usage","input":59858,"cached":55283,"output":122}
+{"t":362300,"kind":"telemetry","event":{"t":362300,"type":"position","x":-5.96,"y":1.65,"z":2.41,"yaw":-5.979}}
+{"t":362800,"kind":"telemetry","event":{"t":362800,"type":"idle","ms":21490}}
+{"t":366800,"kind":"telemetry","event":{"t":366800,"type":"idle","ms":25490}}
+{"t":369652,"kind":"action","step":48,"tool":"move","args":{"direction":"forward","ms":161}}
+{"t":369813,"kind":"telemetry","event":{"t":369813,"type":"position","x":-6.13,"y":1.65,"z":1.86,"yaw":-5.979}}
+{"t":369952,"kind":"usage","input":59621,"cached":54915,"output":156}
+{"t":373813,"kind":"telemetry","event":{"t":373813,"type":"idle","ms":4000}}
+{"t":374104,"kind":"action","step":49,"tool":"crouch","args":{"on":true},"result":"crouching"}
+{"t":374104,"kind":"telemetry","event":{"t":374104,"type":"position","x":-6.13,"y":0.8,"z":1.86,"yaw":-5.979}}
+{"t":374404,"kind":"usage","input":61066,"cached":56374,"output":108}
+{"t":378104,"kind":"telemetry","event":{"t":378104,"type":"idle","ms":8291}}
+{"t":378482,"kind":"action","step":50,"tool":"interact","args":{},"result":"You crawl through into the power room."}
+{"t":378482,"kind":"telemetry","event":{"t":378482,"type":"flaw_triggered","flawId":"G1"}}
+{"t":378482,"kind":"telemetry","event":{"t":378482,"type":"puzzle_solved","puzzle":"vent"}}
+{"t":378482,"kind":"telemetry","event":{"t":378482,"type":"room_entered","room":"power"}}
+{"t":378482,"kind":"telemetry","event":{"t":378482,"type":"flaw_triggered","flawId":"C4"}}
+{"t":378482,"kind":"telemetry","event":{"t":378482,"type":"position","x":0,"y":0.8,"z":4,"yaw":0}}
+{"t":378782,"kind":"usage","input":59683,"cached":54779,"output":196}
+{"t":382482,"kind":"telemetry","event":{"t":382482,"type":"idle","ms":12669}}
+{"t":384191,"kind":"action","step":51,"tool":"crouch","args":{"on":false},"result":"standing"}
+{"t":384191,"kind":"telemetry","event":{"t":384191,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":384491,"kind":"usage","input":60107,"cached":56012,"output":188}
+{"t":386691,"kind":"telemetry","event":{"t":386691,"type":"idle","ms":16878}}
+{"t":390691,"kind":"telemetry","event":{"t":390691,"type":"idle","ms":20878}}
+{"t":391911,"kind":"action","step":52,"tool":"screenshot","args":{},"frame":"frames/00005.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/maya/frames/00005.png"}
+{"t":392211,"kind":"usage","input":59875,"cached":55190,"output":185}
+{"t":394911,"kind":"telemetry","event":{"t":394911,"type":"idle","ms":25098}}
+{"t":397581,"kind":"action","step":52,"tool":"look","args":{"direction":"left","ms":212}}
+{"t":397793,"kind":"telemetry","event":{"t":397793,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.339}}
+{"t":397881,"kind":"usage","input":60187,"cached":55523,"output":183}
+{"t":399293,"kind":"telemetry","event":{"t":399293,"type":"idle","ms":29480}}
+{"t":403293,"kind":"telemetry","event":{"t":403293,"type":"idle","ms":33480}}
+{"t":405342,"kind":"action","step":53,"tool":"move","args":{"direction":"forward","ms":2254}}
+{"t":405642,"kind":"usage","input":60859,"cached":56146,"output":170}
+{"t":405842,"kind":"telemetry","event":{"t":405842,"type":"position","x":-0.6,"y":1.65,"z":2.3,"yaw":0.339}}
+{"t":406342,"kind":"telemetry","event":{"t":406342,"type":"position","x":-1.2,"y":1.65,"z":0.61,"yaw":0.339}}
+{"t":406842,"kind":"telemetry","event":{"t":406842,"type":"position","x":-1.8,"y":1.65,"z":-1.09,"yaw":0.339}}
+{"t":407342,"kind":"telemetry","event":{"t":407342,"type":"position","x":-2.4,"y":1.65,"z":-2.79,"yaw":0.339}}
+{"t":407596,"kind":"telemetry","event":{"t":407596,"type":"position","x":-2.7,"y":1.65,"z":-3.65,"yaw":0.339}}
+{"t":411596,"kind":"telemetry","event":{"t":411596,"type":"idle","ms":4000}}
+{"t":414446,"kind":"action","step":54,"tool":"interact","args":{},"result":"Fuse seated. Engage the main breaker."}
+{"t":414446,"kind":"telemetry","event":{"t":414446,"type":"item_used","item":"fuse"}}
+{"t":414446,"kind":"telemetry","event":{"t":414446,"type":"puzzle_solved","puzzle":"fuse_socket"}}
+{"t":414746,"kind":"usage","input":60015,"cached":54420,"output":121}
+{"t":415946,"kind":"telemetry","event":{"t":415946,"type":"idle","ms":8350}}
+{"t":419946,"kind":"telemetry","event":{"t":419946,"type":"idle","ms":12350}}
+{"t":422032,"kind":"action","step":55,"tool":"look","args":{"direction":"right","ms":1101}}
+{"t":422332,"kind":"usage","input":59948,"cached":54430,"output":157}
+{"t":423133,"kind":"telemetry","event":{"t":423133,"type":"position","x":-2.7,"y":1.65,"z":-3.65,"yaw":-1.422}}
+{"t":424133,"kind":"telemetry","event":{"t":424133,"type":"idle","ms":16537}}
+{"t":427515,"kind":"action","step":56,"tool":"move","args":{"direction":"forward","ms":1351}}
+{"t":427815,"kind":"usage","input":61462,"cached":57435,"output":178}
+{"t":428015,"kind":"telemetry","event":{"t":428015,"type":"position","x":-0.92,"y":1.65,"z":-3.92,"yaw":-1.422}}
+{"t":428515,"kind":"telemetry","event":{"t":428515,"type":"position","x":0.86,"y":1.65,"z":-4.18,"yaw":-1.422}}
+{"t":428866,"kind":"telemetry","event":{"t":428866,"type":"position","x":2.11,"y":1.65,"z":-4.37,"yaw":-1.422}}
+{"t":432866,"kind":"telemetry","event":{"t":432866,"type":"idle","ms":4000}}
+{"t":433888,"kind":"action","step":57,"tool":"interact","args":{"hold_ms":2500},"result":"Distribution bridged. Restore power at the lab controller."}
+{"t":433888,"kind":"telemetry","event":{"t":433888,"type":"flaw_triggered","flawId":"G2"}}
+{"t":434188,"kind":"usage","input":60866,"cached":55841,"output":123}
+{"t":436388,"kind":"telemetry","event":{"t":436388,"type":"puzzle_solved","puzzle":"breaker"}}
+{"t":436888,"kind":"telemetry","event":{"t":436888,"type":"idle","ms":8022}}
+{"t":440888,"kind":"telemetry","event":{"t":440888,"type":"idle","ms":12022}}
+{"t":443680,"kind":"action","step":58,"tool":"look","args":{"direction":"right","ms":819}}
+{"t":443980,"kind":"usage","input":61182,"cached":56406,"output":114}
+{"t":444499,"kind":"telemetry","event":{"t":444499,"type":"position","x":2.11,"y":1.65,"z":-4.37,"yaw":-2.733}}
+{"t":444999,"kind":"telemetry","event":{"t":444999,"type":"idle","ms":16133}}
+{"t":448999,"kind":"telemetry","event":{"t":448999,"type":"idle","ms":20133}}
+{"t":449375,"kind":"action","step":59,"tool":"move","args":{"direction":"forward","ms":1073}}
+{"t":449675,"kind":"usage","input":61487,"cached":56292,"output":136}
+{"t":449875,"kind":"telemetry","event":{"t":449875,"type":"position","x":2.83,"y":1.65,"z":-2.72,"yaw":-2.733}}
+{"t":450375,"kind":"telemetry","event":{"t":450375,"type":"position","x":3.54,"y":1.65,"z":-1.07,"yaw":-2.733}}
+{"t":450448,"kind":"telemetry","event":{"t":450448,"type":"position","x":3.65,"y":1.65,"z":-0.83,"yaw":-2.733}}
+{"t":454448,"kind":"telemetry","event":{"t":454448,"type":"idle","ms":4000}}
+{"t":454818,"kind":"action","step":60,"tool":"interact","args":{},"result":"wire added to inventory."}
+{"t":454818,"kind":"telemetry","event":{"t":454818,"type":"item_picked","item":"wire"}}
+{"t":455118,"kind":"usage","input":60706,"cached":55726,"output":128}
+{"t":458818,"kind":"telemetry","event":{"t":458818,"type":"idle","ms":8370}}
+{"t":462383,"kind":"action","step":61,"tool":"look","args":{"direction":"right","ms":541}}
+{"t":462683,"kind":"usage","input":61530,"cached":57149,"output":204}
+{"t":462924,"kind":"telemetry","event":{"t":462924,"type":"position","x":3.65,"y":1.65,"z":-0.83,"yaw":-3.598}}
+{"t":463424,"kind":"telemetry","event":{"t":463424,"type":"idle","ms":12976}}
+{"t":467424,"kind":"telemetry","event":{"t":467424,"type":"idle","ms":16976}}
+{"t":470574,"kind":"action","step":62,"tool":"move","args":{"direction":"forward","ms":2048}}
+{"t":470874,"kind":"usage","input":60504,"cached":56440,"output":128}
+{"t":471074,"kind":"telemetry","event":{"t":471074,"type":"position","x":2.85,"y":1.65,"z":0.79,"yaw":-3.598}}
+{"t":471574,"kind":"telemetry","event":{"t":471574,"type":"position","x":2.06,"y":1.65,"z":2.4,"yaw":-3.598}}
+{"t":472074,"kind":"telemetry","event":{"t":472074,"type":"position","x":1.26,"y":1.65,"z":4.02,"yaw":-3.598}}
+{"t":472574,"kind":"telemetry","event":{"t":472574,"type":"position","x":0.47,"y":1.65,"z":5.64,"yaw":-3.598}}
+{"t":472622,"kind":"telemetry","event":{"t":472622,"type":"position","x":0.39,"y":1.65,"z":5.79,"yaw":-3.598}}
+{"t":476622,"kind":"telemetry","event":{"t":476622,"type":"idle","ms":4000}}
+{"t":478327,"kind":"action","step":63,"tool":"interact","args":{},"result":"Back through the door."}
+{"t":478327,"kind":"telemetry","event":{"t":478327,"type":"room_entered","room":"corridor"}}
+{"t":478327,"kind":"telemetry","event":{"t":478327,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":478627,"kind":"usage","input":61738,"cached":57551,"output":110}
+{"t":480827,"kind":"telemetry","event":{"t":480827,"type":"idle","ms":8205}}
+{"t":482653,"kind":"action","step":64,"tool":"look","args":{"direction":"left","ms":99}}
+{"t":482752,"kind":"telemetry","event":{"t":482752,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.158}}
+{"t":482953,"kind":"usage","input":60515,"cached":55709,"output":184}
+{"t":485252,"kind":"telemetry","event":{"t":485252,"type":"idle","ms":12630}}
+{"t":487295,"kind":"action","step":65,"tool":"move","args":{"direction":"forward","ms":2732}}
+{"t":487595,"kind":"usage","input":60511,"cached":54856,"output":176}
+{"t":487795,"kind":"telemetry","event":{"t":487795,"type":"position","x":-0.28,"y":1.65,"z":2.22,"yaw":0.158}}
+{"t":488295,"kind":"telemetry","event":{"t":488295,"type":"position","x":-0.57,"y":1.65,"z":0.45,"yaw":0.158}}
+{"t":488795,"kind":"telemetry","event":{"t":488795,"type":"position","x":-0.85,"y":1.65,"z":-1.33,"yaw":0.158}}
+{"t":489295,"kind":"telemetry","event":{"t":489295,"type":"position","x":-1.14,"y":1.65,"z":-3.11,"yaw":0.158}}
+{"t":489795,"kind":"telemetry","event":{"t":489795,"type":"position","x":-1.42,"y":1.65,"z":-4.89,"yaw":0.158}}
+{"t":490027,"kind":"telemetry","event":{"t":490027,"type":"position","x":-1.55,"y":1.65,"z":-5.71,"yaw":0.158}}
+{"t":494027,"kind":"telemetry","event":{"t":494027,"type":"idle","ms":4000}}
+{"t":494321,"kind":"action","step":66,"tool":"interact","args":{},"result":"The door grinds open."}
+{"t":494321,"kind":"telemetry","event":{"t":494321,"type":"item_used","item":"keycard"}}
+{"t":494321,"kind":"telemetry","event":{"t":494321,"type":"room_entered","room":"lab"}}
+{"t":494321,"kind":"telemetry","event":{"t":494321,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":494621,"kind":"usage","input":61144,"cached":55620,"output":109}
+{"t":498321,"kind":"telemetry","event":{"t":498321,"type":"idle","ms":8294}}
+{"t":499122,"kind":"action","step":67,"tool":"move","args":{"direction":"forward","ms":2111}}
+{"t":499422,"kind":"usage","input":61518,"cached":55967,"output":213}
+{"t":499622,"kind":"telemetry","event":{"t":499622,"type":"position","x":0,"y":1.65,"z":2.2,"yaw":0}}
+{"t":500122,"kind":"telemetry","event":{"t":500122,"type":"position","x":0,"y":1.65,"z":0.4,"yaw":0}}
+{"t":500622,"kind":"telemetry","event":{"t":500622,"type":"position","x":0,"y":1.65,"z":-1.4,"yaw":0}}
+{"t":501122,"kind":"telemetry","event":{"t":501122,"type":"position","x":0,"y":1.65,"z":-3.2,"yaw":0}}
+{"t":501233,"kind":"telemetry","event":{"t":501233,"type":"position","x":0,"y":1.65,"z":-3.6,"yaw":0}}
+{"t":505233,"kind":"telemetry","event":{"t":505233,"type":"idle","ms":4000}}
+{"t":508142,"kind":"action","step":68,"tool":"interact","args":{},"result":"terminal awaits a code."}
+{"t":508442,"kind":"usage","input":61734,"cached":56758,"output":110}
+{"t":509642,"kind":"telemetry","event":{"t":509642,"type":"idle","ms":8409}}
+{"t":513642,"kind":"telemetry","event":{"t":513642,"type":"idle","ms":12409}}
+{"t":513694,"kind":"action","step":69,"tool":"type_text","args":{"text":"7319\n"},"result":"Station power restored. Botanical reserve unlocked."}
+{"t":513694,"kind":"telemetry","event":{"t":513694,"type":"puzzle_solved","puzzle":"station_power"}}
+{"t":513994,"kind":"usage","input":60774,"cached":55405,"output":117}
+{"t":517694,"kind":"telemetry","event":{"t":517694,"type":"idle","ms":16461}}
+{"t":519473,"kind":"action","step":70,"tool":"look","args":{"direction":"right","ms":1075}}
+{"t":519773,"kind":"usage","input":60998,"cached":55431,"output":204}
+{"t":520548,"kind":"telemetry","event":{"t":520548,"type":"position","x":0,"y":1.65,"z":-3.6,"yaw":-1.72}}
+{"t":522048,"kind":"telemetry","event":{"t":522048,"type":"idle","ms":20815}}
+{"t":526048,"kind":"telemetry","event":{"t":526048,"type":"idle","ms":24815}}
+{"t":526075,"kind":"action","step":71,"tool":"move","args":{"direction":"forward","ms":874}}
+{"t":526375,"kind":"usage","input":61184,"cached":56937,"output":219}
+{"t":526575,"kind":"telemetry","event":{"t":526575,"type":"position","x":1.78,"y":1.65,"z":-3.33,"yaw":-1.72}}
+{"t":526949,"kind":"telemetry","event":{"t":526949,"type":"position","x":3.11,"y":1.65,"z":-3.13,"yaw":-1.72}}
+{"t":530949,"kind":"telemetry","event":{"t":530949,"type":"idle","ms":4000}}
+{"t":533322,"kind":"action","step":72,"tool":"interact","args":{},"result":"casing added to inventory."}
+{"t":533322,"kind":"telemetry","event":{"t":533322,"type":"item_picked","item":"casing"}}
+{"t":533622,"kind":"usage","input":60927,"cached":56858,"output":102}
+{"t":535322,"kind":"telemetry","event":{"t":535322,"type":"idle","ms":8373}}
+{"t":539322,"kind":"telemetry","event":{"t":539322,"type":"idle","ms":12373}}
+{"t":539755,"kind":"action","step":73,"tool":"look","args":{"direction":"right","ms":1082}}
+{"t":540055,"kind":"usage","input":62059,"cached":57460,"output":154}
+{"t":540837,"kind":"telemetry","event":{"t":540837,"type":"position","x":3.11,"y":1.65,"z":-3.13,"yaw":-3.451}}
+{"t":543337,"kind":"telemetry","event":{"t":543337,"type":"idle","ms":16388}}
+{"t":546900,"kind":"action","step":74,"tool":"move","args":{"direction":"forward","ms":2588}}
+{"t":547200,"kind":"usage","input":62163,"cached":58099,"output":141}
+{"t":547400,"kind":"telemetry","event":{"t":547400,"type":"position","x":2.56,"y":1.65,"z":-1.42,"yaw":-3.451}}
+{"t":547900,"kind":"telemetry","event":{"t":547900,"type":"position","x":2.01,"y":1.65,"z":0.3,"yaw":-3.451}}
+{"t":548400,"kind":"telemetry","event":{"t":548400,"type":"position","x":1.47,"y":1.65,"z":2.01,"yaw":-3.451}}
+{"t":548900,"kind":"telemetry","event":{"t":548900,"type":"position","x":0.92,"y":1.65,"z":3.73,"yaw":-3.451}}
+{"t":549400,"kind":"telemetry","event":{"t":549400,"type":"position","x":0.37,"y":1.65,"z":5.44,"yaw":-3.451}}
+{"t":549488,"kind":"telemetry","event":{"t":549488,"type":"position","x":0.27,"y":1.65,"z":5.74,"yaw":-3.451}}
+{"t":553488,"kind":"telemetry","event":{"t":553488,"type":"idle","ms":4000}}
+{"t":556999,"kind":"action","step":75,"tool":"interact","args":{},"result":"Back through the door."}
+{"t":556999,"kind":"telemetry","event":{"t":556999,"type":"room_entered","room":"corridor"}}
+{"t":556999,"kind":"telemetry","event":{"t":556999,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":557299,"kind":"usage","input":61098,"cached":55848,"output":123}
+{"t":557499,"kind":"telemetry","event":{"t":557499,"type":"idle","ms":8011}}
+{"t":561499,"kind":"telemetry","event":{"t":561499,"type":"idle","ms":12011}}
+{"t":561987,"kind":"action","step":76,"tool":"look","args":{"direction":"right","ms":99}}
+{"t":562086,"kind":"telemetry","event":{"t":562086,"type":"position","x":0,"y":1.65,"z":4,"yaw":-0.158}}
+{"t":562287,"kind":"usage","input":61344,"cached":56263,"output":164}
+{"t":565586,"kind":"telemetry","event":{"t":565586,"type":"idle","ms":16098}}
+{"t":567792,"kind":"action","step":77,"tool":"move","args":{"direction":"forward","ms":2732}}
+{"t":568092,"kind":"usage","input":61344,"cached":55850,"output":202}
+{"t":568292,"kind":"telemetry","event":{"t":568292,"type":"position","x":0.28,"y":1.65,"z":2.22,"yaw":-0.158}}
+{"t":568792,"kind":"telemetry","event":{"t":568792,"type":"position","x":0.57,"y":1.65,"z":0.45,"yaw":-0.158}}
+{"t":569292,"kind":"telemetry","event":{"t":569292,"type":"position","x":0.85,"y":1.65,"z":-1.33,"yaw":-0.158}}
+{"t":569792,"kind":"telemetry","event":{"t":569792,"type":"position","x":1.14,"y":1.65,"z":-3.11,"yaw":-0.158}}
+{"t":570292,"kind":"telemetry","event":{"t":570292,"type":"position","x":1.42,"y":1.65,"z":-4.89,"yaw":-0.158}}
+{"t":570524,"kind":"telemetry","event":{"t":570524,"type":"position","x":1.55,"y":1.65,"z":-5.71,"yaw":-0.158}}
+{"t":574524,"kind":"telemetry","event":{"t":574524,"type":"idle","ms":4000}}
+{"t":575063,"kind":"action","step":78,"tool":"interact","args":{},"result":"Warm, damp air."}
+{"t":575063,"kind":"telemetry","event":{"t":575063,"type":"room_entered","room":"greenhouse"}}
+{"t":575063,"kind":"telemetry","event":{"t":575063,"type":"flaw_triggered","flawId":"D2"}}
+{"t":575063,"kind":"telemetry","event":{"t":575063,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":575363,"kind":"usage","input":62410,"cached":57948,"output":165}
+{"t":578563,"kind":"telemetry","event":{"t":578563,"type":"idle","ms":8039}}
+{"t":580133,"kind":"action","step":79,"tool":"screenshot","args":{},"frame":"frames/00006.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/maya/frames/00006.png"}
+{"t":580433,"kind":"usage","input":62100,"cached":56440,"output":114}
+{"t":581333,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_89","type":"reasoning","text":"Dark. Twelve planters. Oh no."}}}
+{"t":582633,"kind":"telemetry","event":{"t":582633,"type":"idle","ms":12109}}
+{"t":584406,"kind":"action","step":79,"tool":"look","args":{"direction":"left","ms":290}}
+{"t":584696,"kind":"telemetry","event":{"t":584696,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.464}}
+{"t":584706,"kind":"usage","input":61391,"cached":56656,"output":205}
+{"t":586696,"kind":"telemetry","event":{"t":586696,"type":"idle","ms":16172}}
+{"t":590696,"kind":"telemetry","event":{"t":590696,"type":"idle","ms":20172}}
+{"t":591285,"kind":"action","step":80,"tool":"move","args":{"direction":"forward","ms":2795}}
+{"t":591585,"kind":"usage","input":62321,"cached":58134,"output":180}
+{"t":591785,"kind":"telemetry","event":{"t":591785,"type":"position","x":-0.81,"y":1.65,"z":2.39,"yaw":0.464}}
+{"t":592285,"kind":"telemetry","event":{"t":592285,"type":"position","x":-1.61,"y":1.65,"z":0.78,"yaw":0.464}}
+{"t":592785,"kind":"telemetry","event":{"t":592785,"type":"position","x":-2.42,"y":1.65,"z":-0.83,"yaw":0.464}}
+{"t":593285,"kind":"telemetry","event":{"t":593285,"type":"position","x":-3.22,"y":1.65,"z":-2.44,"yaw":0.464}}
+{"t":593785,"kind":"telemetry","event":{"t":593785,"type":"position","x":-4.03,"y":1.65,"z":-4.05,"yaw":0.464}}
+{"t":594080,"kind":"telemetry","event":{"t":594080,"type":"position","x":-4.5,"y":1.65,"z":-5,"yaw":0.464}}
+{"t":598080,"kind":"telemetry","event":{"t":598080,"type":"idle","ms":4000}}
+{"t":598534,"kind":"action","step":81,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 1 / 12 complete."}
+{"t":598834,"kind":"usage","input":61649,"cached":56755,"output":174}
+{"t":602534,"kind":"telemetry","event":{"t":602534,"type":"idle","ms":8454}}
+{"t":606534,"kind":"telemetry","event":{"t":606534,"type":"idle","ms":12454}}
+{"t":608266,"kind":"action","step":82,"tool":"look","args":{"direction":"right","ms":1271}}
+{"t":608566,"kind":"usage","input":61473,"cached":55856,"output":197}
+{"t":609537,"kind":"telemetry","event":{"t":609537,"type":"position","x":-4.5,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":610537,"kind":"telemetry","event":{"t":610537,"type":"idle","ms":16457}}
+{"t":614537,"kind":"telemetry","event":{"t":614537,"type":"idle","ms":20457}}
+{"t":616550,"kind":"action","step":83,"tool":"move","args":{"direction":"forward","ms":834}}
+{"t":616850,"kind":"usage","input":62600,"cached":58199,"output":138}
+{"t":617050,"kind":"telemetry","event":{"t":617050,"type":"position","x":-2.7,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":617384,"kind":"telemetry","event":{"t":617384,"type":"position","x":-1.5,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":621384,"kind":"telemetry","event":{"t":621384,"type":"idle","ms":4000}}
+{"t":622011,"kind":"action","step":84,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 2 / 12 complete."}
+{"t":622311,"kind":"usage","input":62359,"cached":57056,"output":111}
+{"t":625511,"kind":"telemetry","event":{"t":625511,"type":"idle","ms":8127}}
+{"t":629511,"kind":"telemetry","event":{"t":629511,"type":"idle","ms":12127}}
+{"t":632249,"kind":"action","step":85,"tool":"move","args":{"direction":"forward","ms":834}}
+{"t":632549,"kind":"usage","input":62399,"cached":56908,"output":180}
+{"t":632749,"kind":"telemetry","event":{"t":632749,"type":"position","x":0.3,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":633083,"kind":"telemetry","event":{"t":633083,"type":"position","x":1.5,"y":1.65,"z":-5.01,"yaw":-1.57}}
+{"t":637083,"kind":"telemetry","event":{"t":637083,"type":"idle","ms":4000}}
+{"t":640447,"kind":"action","step":86,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 3 / 12 complete."}
+{"t":640747,"kind":"usage","input":62415,"cached":57600,"output":168}
+{"t":643347,"kind":"gate","gate":"patience","detail":"no ground-truth progress for 9 steps in greenhouse (patience 3 × 3)"}
+{"t":643447,"kind":"telemetry","event":{"t":643447,"type":"idle","ms":10364}}
+{"t":644147,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_97","type":"reasoning","text":"Chat is leaving. Watering plants is not content."}}}
+{"t":647447,"kind":"telemetry","event":{"t":647447,"type":"idle","ms":14364}}
+{"t":647835,"kind":"action","step":87,"tool":"note_finding","args":{"finding":{"id":"maya-f3","severity":"medium","category":"boredom","title":"Watering twelve identical plants is dead air","description":"Three planters in and nothing new has happened: same animation, same message with a counter. Nine more of these. On stream this is where the audience leaves.","room":"greenhouse","reproSteps":["Restore station power","Enter the greenhouse","Hold E on each of the twelve identical planters"],"frame":"frames/00006.png","step":87}},"result":"noted maya-f3"}
+{"t":647885,"kind":"finding","finding":{"id":"maya-f3","severity":"medium","category":"boredom","title":"Watering twelve identical plants is dead air","description":"Three planters in and nothing new has happened: same animation, same message with a counter. Nine more of these. On stream this is where the audience leaves.","room":"greenhouse","reproSteps":["Restore station power","Enter the greenhouse","Hold E on each of the twelve identical planters"],"frame":"frames/00006.png","step":87}}
+{"t":648135,"kind":"usage","input":62595,"cached":57795,"output":467}
+{"t":648235,"kind":"gate","gate":"abandon","detail":"Twelve identical plants to water and nothing new happens. Chat left; so am I."}
+{"t":651835,"kind":"telemetry","event":{"t":651835,"type":"idle","ms":18752}}
+{"t":655550,"kind":"action","step":87,"tool":"abandon","args":{"reason":"Twelve identical plants to water and nothing new happens. Chat left; so am I."},"result":"session ended by persona"}
+{"t":655850,"kind":"usage","input":61976,"cached":57898,"output":219}
+{"t":658050,"kind":"status","status":"reporting"}
+{"t":667050,"kind":"codex","event":{"type":"turn.completed","usage":{"input_tokens":5940041,"cached_input_tokens":5403146,"output_tokens":16507}}}
+{"t":667550,"kind":"status","status":"done"}

@@ -1,0 +1,674 @@
+{
+  "recall": 0.8,
+  "precision": 0.75,
+  "byClass": {
+    "objective": {
+      "total": 4,
+      "found": 2
+    },
+    "confusion": {
+      "total": 4,
+      "found": 4
+    },
+    "familiarity": {
+      "total": 2,
+      "found": 1
+    },
+    "pacing": {
+      "total": 2,
+      "found": 2
+    },
+    "fairness": {
+      "total": 2,
+      "found": 2
+    },
+    "accessibility": {
+      "total": 1,
+      "found": 1
+    },
+    "decoy": {
+      "total": 2,
+      "found": 1
+    }
+  },
+  "decoysFlagged": [
+    "D1"
+  ],
+  "emergent": [
+    "cf-05"
+  ],
+  "found": [
+    "B1",
+    "B3",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "G1",
+    "P1",
+    "P2",
+    "U1",
+    "U2",
+    "A1"
+  ],
+  "missed": [
+    "B2",
+    "B4",
+    "G2"
+  ],
+  "totals": {
+    "ledger": 17,
+    "nonDecoy": 15,
+    "clusters": 16,
+    "matchedNonDecoy": 12,
+    "decoyClusters": 1,
+    "unmatched": 3
+  },
+  "matches": [
+    {
+      "clusterId": "cf-01",
+      "ledgerId": "B1",
+      "class": "objective",
+      "method": "keywords",
+      "personas": [
+        "sam"
+      ],
+      "detail": [
+        "sam: room lab + 5 shared title concepts (and the flaw fired in this session)"
+      ]
+    },
+    {
+      "clusterId": "cf-02",
+      "ledgerId": "A1",
+      "class": "accessibility",
+      "method": "keywords",
+      "personas": [
+        "dana"
+      ],
+      "detail": [
+        "dana: room corridor + 5 shared title concepts (and the flaw fired in this session)"
+      ]
+    },
+    {
+      "clusterId": "cf-03",
+      "ledgerId": "C3",
+      "class": "confusion",
+      "method": "keywords+telemetry",
+      "personas": [
+        "robert",
+        "maya",
+        "priya"
+      ],
+      "detail": [
+        "robert: room corridor + 4 shared title concepts (flaw never fired in this session)",
+        "maya: flaw_triggered C3 fired 1 step(s) from the finding and the text shares 4 concept(s) with the ledger title",
+        "priya: flaw_triggered C3 fired 1 step(s) from the finding and the text shares 5 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-04",
+      "ledgerId": "C1",
+      "class": "confusion",
+      "method": "telemetry",
+      "personas": [
+        "sam",
+        "maya",
+        "robert"
+      ],
+      "detail": [
+        "sam: flaw_triggered C1 fired 5 step(s) from the finding and the text shares 3 concept(s) with the ledger title",
+        "maya: flaw_triggered C1 fired 5 step(s) from the finding and the text shares 3 concept(s) with the ledger title",
+        "robert: flaw_triggered C1 fired 5 step(s) from the finding and the text shares 4 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-06",
+      "ledgerId": "C2",
+      "class": "confusion",
+      "method": "telemetry",
+      "personas": [
+        "priya"
+      ],
+      "detail": [
+        "priya: flaw_triggered C2 fired 1 step(s) from the finding and the text shares 5 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-07",
+      "ledgerId": "U2",
+      "class": "fairness",
+      "method": "telemetry",
+      "personas": [
+        "priya"
+      ],
+      "detail": [
+        "priya: flaw_triggered U2 fired 1 step(s) from the finding and the text shares 5 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-08",
+      "ledgerId": "U1",
+      "class": "fairness",
+      "method": "telemetry",
+      "personas": [
+        "priya"
+      ],
+      "detail": [
+        "priya: flaw_triggered U1 fired 2 step(s) from the finding and the text shares 7 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-09",
+      "ledgerId": "G1",
+      "class": "familiarity",
+      "method": "telemetry",
+      "personas": [
+        "robert"
+      ],
+      "detail": [
+        "robert: flaw_triggered G1 fired 3 step(s) from the finding and the text shares 1 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-11",
+      "ledgerId": "C4",
+      "class": "confusion",
+      "method": "keywords",
+      "personas": [
+        "priya"
+      ],
+      "detail": [
+        "priya: room power + 5 shared title concepts (and the flaw fired in this session)"
+      ]
+    },
+    {
+      "clusterId": "cf-12",
+      "ledgerId": "B3",
+      "class": "objective",
+      "method": "telemetry",
+      "personas": [
+        "priya"
+      ],
+      "detail": [
+        "priya: flaw_triggered B3 fired 3 step(s) from the finding and the text shares 5 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-13",
+      "ledgerId": "D1",
+      "class": "decoy",
+      "method": "telemetry",
+      "personas": [
+        "robert"
+      ],
+      "detail": [
+        "robert: flaw_triggered D1 fired 2 step(s) from the finding and the text shares 2 concept(s) with the ledger title"
+      ]
+    },
+    {
+      "clusterId": "cf-14",
+      "ledgerId": "P1",
+      "class": "pacing",
+      "method": "keywords",
+      "personas": [
+        "maya"
+      ],
+      "detail": [
+        "maya: room greenhouse + 5 shared title concepts (flaw never fired in this session)"
+      ]
+    },
+    {
+      "clusterId": "cf-15",
+      "ledgerId": "P2",
+      "class": "pacing",
+      "method": "telemetry",
+      "personas": [
+        "priya"
+      ],
+      "detail": [
+        "priya: flaw_triggered P2 fired 1 step(s) from the finding and the text shares 3 concept(s) with the ledger title"
+      ]
+    }
+  ],
+  "unmatched": [
+    {
+      "clusterId": "cf-05",
+      "title": "The power door is a dead end — the real entrance is an unmarked floor duct",
+      "attribution": "game",
+      "room": "corridor"
+    },
+    {
+      "clusterId": "cf-10",
+      "title": "Lab terminal rejects every code and gives no hint where the code is",
+      "attribution": "agent",
+      "room": "lab"
+    },
+    {
+      "clusterId": "cf-16",
+      "title": "I picked up a ceramic fuse but nothing tells me what it is for",
+      "attribution": "unclear",
+      "room": "airlock"
+    }
+  ],
+  "predictions": [
+    {
+      "ledgerId": "B1",
+      "class": "objective",
+      "expected": [
+        "sam"
+      ],
+      "actual": [
+        "sam"
+      ],
+      "hit": [
+        "sam"
+      ],
+      "missedPredictions": [],
+      "unexpected": [],
+      "verdict": "held"
+    },
+    {
+      "ledgerId": "B2",
+      "class": "objective",
+      "expected": [
+        "sam",
+        "priya"
+      ],
+      "actual": [],
+      "hit": [],
+      "missedPredictions": [
+        "sam",
+        "priya"
+      ],
+      "unexpected": [],
+      "verdict": "failed"
+    },
+    {
+      "ledgerId": "B3",
+      "class": "objective",
+      "expected": [
+        "priya",
+        "robert"
+      ],
+      "actual": [
+        "priya"
+      ],
+      "hit": [
+        "priya"
+      ],
+      "missedPredictions": [
+        "robert"
+      ],
+      "unexpected": [],
+      "verdict": "partial"
+    },
+    {
+      "ledgerId": "B4",
+      "class": "objective",
+      "expected": [
+        "priya"
+      ],
+      "actual": [],
+      "hit": [],
+      "missedPredictions": [
+        "priya"
+      ],
+      "unexpected": [],
+      "verdict": "failed"
+    },
+    {
+      "ledgerId": "C1",
+      "class": "confusion",
+      "expected": [
+        "maya",
+        "robert"
+      ],
+      "actual": [
+        "sam",
+        "maya",
+        "robert"
+      ],
+      "hit": [
+        "maya",
+        "robert"
+      ],
+      "missedPredictions": [],
+      "unexpected": [
+        "sam"
+      ],
+      "verdict": "held"
+    },
+    {
+      "ledgerId": "C2",
+      "class": "confusion",
+      "expected": [
+        "priya",
+        "robert"
+      ],
+      "actual": [
+        "priya"
+      ],
+      "hit": [
+        "priya"
+      ],
+      "missedPredictions": [
+        "robert"
+      ],
+      "unexpected": [],
+      "verdict": "partial"
+    },
+    {
+      "ledgerId": "C3",
+      "class": "confusion",
+      "expected": [
+        "priya",
+        "robert"
+      ],
+      "actual": [
+        "robert",
+        "maya",
+        "priya"
+      ],
+      "hit": [
+        "priya",
+        "robert"
+      ],
+      "missedPredictions": [],
+      "unexpected": [
+        "maya"
+      ],
+      "verdict": "held"
+    },
+    {
+      "ledgerId": "C4",
+      "class": "confusion",
+      "expected": [
+        "robert",
+        "dana"
+      ],
+      "actual": [
+        "priya"
+      ],
+      "hit": [],
+      "missedPredictions": [
+        "robert",
+        "dana"
+      ],
+      "unexpected": [
+        "priya"
+      ],
+      "verdict": "failed"
+    },
+    {
+      "ledgerId": "G1",
+      "class": "familiarity",
+      "expected": [
+        "robert",
+        "dana"
+      ],
+      "actual": [
+        "robert"
+      ],
+      "hit": [
+        "robert"
+      ],
+      "missedPredictions": [
+        "dana"
+      ],
+      "unexpected": [],
+      "verdict": "partial"
+    },
+    {
+      "ledgerId": "G2",
+      "class": "familiarity",
+      "expected": [
+        "robert",
+        "dana"
+      ],
+      "actual": [],
+      "hit": [],
+      "missedPredictions": [
+        "robert",
+        "dana"
+      ],
+      "unexpected": [],
+      "verdict": "failed"
+    },
+    {
+      "ledgerId": "P1",
+      "class": "pacing",
+      "expected": [
+        "maya",
+        "sam"
+      ],
+      "actual": [
+        "maya"
+      ],
+      "hit": [
+        "maya"
+      ],
+      "missedPredictions": [
+        "sam"
+      ],
+      "unexpected": [],
+      "verdict": "partial"
+    },
+    {
+      "ledgerId": "P2",
+      "class": "pacing",
+      "expected": [
+        "maya",
+        "sam"
+      ],
+      "actual": [
+        "priya"
+      ],
+      "hit": [],
+      "missedPredictions": [
+        "maya",
+        "sam"
+      ],
+      "unexpected": [
+        "priya"
+      ],
+      "verdict": "failed"
+    },
+    {
+      "ledgerId": "U1",
+      "class": "fairness",
+      "expected": [
+        "maya",
+        "sam",
+        "dana"
+      ],
+      "actual": [
+        "priya"
+      ],
+      "hit": [],
+      "missedPredictions": [
+        "maya",
+        "sam",
+        "dana"
+      ],
+      "unexpected": [
+        "priya"
+      ],
+      "verdict": "failed"
+    },
+    {
+      "ledgerId": "U2",
+      "class": "fairness",
+      "expected": [
+        "maya",
+        "sam"
+      ],
+      "actual": [
+        "priya"
+      ],
+      "hit": [],
+      "missedPredictions": [
+        "maya",
+        "sam"
+      ],
+      "unexpected": [
+        "priya"
+      ],
+      "verdict": "failed"
+    },
+    {
+      "ledgerId": "A1",
+      "class": "accessibility",
+      "expected": [
+        "dana"
+      ],
+      "actual": [
+        "dana"
+      ],
+      "hit": [
+        "dana"
+      ],
+      "missedPredictions": [],
+      "unexpected": [],
+      "verdict": "held"
+    },
+    {
+      "ledgerId": "D1",
+      "class": "decoy",
+      "expected": [],
+      "actual": [
+        "robert"
+      ],
+      "hit": [],
+      "missedPredictions": [],
+      "unexpected": [
+        "robert"
+      ],
+      "verdict": "false-positive"
+    },
+    {
+      "ledgerId": "D2",
+      "class": "decoy",
+      "expected": [],
+      "actual": [],
+      "hit": [],
+      "missedPredictions": [],
+      "unexpected": [],
+      "verdict": "held"
+    }
+  ],
+  "perPersona": {
+    "maya": {
+      "predicted": [
+        "C1",
+        "P1",
+        "P2",
+        "U1",
+        "U2"
+      ],
+      "hits": [
+        "C1",
+        "P1"
+      ],
+      "hitRate": 0.4,
+      "reported": [
+        "C1",
+        "C3",
+        "P1"
+      ],
+      "unexpected": [
+        "C3"
+      ]
+    },
+    "robert": {
+      "predicted": [
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "G1",
+        "G2"
+      ],
+      "hits": [
+        "C1",
+        "C3",
+        "G1"
+      ],
+      "hitRate": 0.429,
+      "reported": [
+        "C1",
+        "C3",
+        "G1"
+      ],
+      "unexpected": []
+    },
+    "sam": {
+      "predicted": [
+        "B1",
+        "B2",
+        "P1",
+        "P2",
+        "U1",
+        "U2"
+      ],
+      "hits": [
+        "B1"
+      ],
+      "hitRate": 0.167,
+      "reported": [
+        "B1",
+        "C1"
+      ],
+      "unexpected": [
+        "C1"
+      ]
+    },
+    "priya": {
+      "predicted": [
+        "B2",
+        "B3",
+        "B4",
+        "C2",
+        "C3"
+      ],
+      "hits": [
+        "B3",
+        "C2",
+        "C3"
+      ],
+      "hitRate": 0.6,
+      "reported": [
+        "B3",
+        "C2",
+        "C3",
+        "C4",
+        "P2",
+        "U1",
+        "U2"
+      ],
+      "unexpected": [
+        "C4",
+        "P2",
+        "U1",
+        "U2"
+      ]
+    },
+    "dana": {
+      "predicted": [
+        "C4",
+        "G1",
+        "G2",
+        "U1",
+        "A1"
+      ],
+      "hits": [
+        "A1"
+      ],
+      "hitRate": 0.2,
+      "reported": [
+        "A1"
+      ],
+      "unexpected": []
+    }
+  }
+}

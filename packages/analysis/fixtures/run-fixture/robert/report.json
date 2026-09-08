@@ -1,0 +1,100 @@
+{
+  "persona": "robert",
+  "summary": "I read every word I was shown, and the game kept taking words away from me. The instructions closed before I finished. Two doors wanted a card I could not find. A duct told me it was too low and never told me what to do about it. I do not think I am the audience for this, but I also do not think it was fair.",
+  "completed": false,
+  "abandonedReason": "Stuck at the low service duct with no way to proceed; no keycard found.",
+  "findings": [
+    {
+      "id": "robert-f1",
+      "severity": "high",
+      "category": "confusion",
+      "title": "The instructions disappeared while I was still reading them",
+      "description": "A box of text explained the controls, then it vanished before I had finished. I could not find any way to see it again and did not know how to move for a long time. I only found the W key by trying every key on the keyboard.",
+      "room": "airlock",
+      "reproSteps": [
+        "Start a new game and begin reading the instruction box",
+        "It closes on its own after a few seconds",
+        "No key or menu shows it again"
+      ],
+      "frame": "frames/00000.png",
+      "step": 5
+    },
+    {
+      "id": "robert-f2",
+      "severity": "low",
+      "category": "confusion",
+      "title": "I picked up a ceramic fuse but nothing tells me what it is for",
+      "description": "The fuse went into my inventory with a chime. The screen says \"carrying: fuse\" and nothing else. I would have liked a sentence about where it belongs.",
+      "room": "airlock",
+      "reproSteps": [
+        "Pick up the fuse in the airlock",
+        "Check the inventory text"
+      ],
+      "frame": "frames/00001.png",
+      "step": 16
+    },
+    {
+      "id": "robert-f3",
+      "severity": "medium",
+      "category": "bug",
+      "title": "Sealed bulkhead door cannot be opened",
+      "description": "There is a large door on the right side of the hall. Pressing E on it says it is welded shut and permanently sealed. It looks exactly like the other doors, so I assume it is supposed to open and something is broken.",
+      "room": "corridor",
+      "reproSteps": [
+        "Enter the corridor",
+        "Walk to the bulkhead on the right wall",
+        "Press E — it never opens"
+      ],
+      "frame": "frames/00002.png",
+      "step": 23
+    },
+    {
+      "id": "robert-f4",
+      "severity": "high",
+      "category": "confusion",
+      "title": "I cannot find the keycard the card readers want",
+      "description": "Two doors say \"Personnel keycard required\". I have walked the whole hall, looked at the crate from every side and pressed E on everything. If there is a card here I cannot see it.",
+      "room": "corridor",
+      "reproSteps": [
+        "Enter the corridor without a keycard",
+        "Press E on the power or lab door",
+        "Search the hall — no card is visible from standing height"
+      ],
+      "frame": "frames/00003.png",
+      "step": 43
+    },
+    {
+      "id": "robert-f5",
+      "severity": "high",
+      "category": "unfair",
+      "title": "The service duct says the opening is too low and nothing I press gets me through",
+      "description": "The recording gave me the duct code and the terminal accepted it. But when I press E at the duct it just says the opening is too low. I have tried every key I know. Nothing explains how to get lower.",
+      "room": "corridor",
+      "reproSteps": [
+        "Enter 482 at the duct terminal",
+        "Walk to the service duct and press E",
+        "Message: \"The opening is too low\" — no hint how to proceed"
+      ],
+      "frame": "frames/00003.png",
+      "step": 55
+    }
+  ],
+  "experience": {
+    "confused": [
+      "How to move, after the instructions vanished",
+      "What the fuse was for",
+      "Where the keycard is",
+      "How to get through the low duct"
+    ],
+    "bored": [],
+    "unfair": [
+      "The instruction card closing itself",
+      "Being told the duct is too low with no way to get lower"
+    ],
+    "enjoyed": [
+      "The expedition log — it read like a real person wrote it",
+      "The maintenance recording repeating the code twice"
+    ]
+  },
+  "wouldRecommend": 2
+}

@@ -1,0 +1,698 @@
+{"t":0,"kind":"status","status":"starting"}
+{"t":0,"kind":"telemetry","event":{"t":0,"type":"room_entered","room":"airlock"}}
+{"t":900,"kind":"codex","event":{"type":"thread.started","thread_id":"thr_priya_7"}}
+{"t":1800,"kind":"status","status":"playing"}
+{"t":3500,"kind":"telemetry","event":{"t":3500,"type":"flaw_triggered","flawId":"C1"}}
+{"t":4000,"kind":"telemetry","event":{"t":4000,"type":"idle","ms":4000}}
+{"t":6071,"kind":"action","step":0,"tool":"screenshot","args":{},"frame":"frames/00000.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/priya/frames/00000.png"}
+{"t":6371,"kind":"usage","input":57897,"cached":0,"output":162}
+{"t":7271,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_1","type":"reasoning","text":"The briefing card is gone; the log on the wall might repeat it. Read everything first."}}}
+{"t":8071,"kind":"telemetry","event":{"t":8071,"type":"idle","ms":8071}}
+{"t":12071,"kind":"telemetry","event":{"t":12071,"type":"idle","ms":12071}}
+{"t":12090,"kind":"action","step":0,"tool":"look","args":{"direction":"left","ms":320}}
+{"t":12390,"kind":"usage","input":57561,"cached":52501,"output":139}
+{"t":12410,"kind":"telemetry","event":{"t":12410,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.512}}
+{"t":16410,"kind":"telemetry","event":{"t":16410,"type":"idle","ms":16410}}
+{"t":16986,"kind":"action","step":1,"tool":"move","args":{"direction":"forward","ms":2300}}
+{"t":17286,"kind":"usage","input":57958,"cached":52246,"output":183}
+{"t":17486,"kind":"telemetry","event":{"t":17486,"type":"position","x":-0.88,"y":1.65,"z":2.43,"yaw":0.512}}
+{"t":17986,"kind":"telemetry","event":{"t":17986,"type":"position","x":-1.76,"y":1.65,"z":0.86,"yaw":0.512}}
+{"t":18486,"kind":"telemetry","event":{"t":18486,"type":"position","x":-2.65,"y":1.65,"z":-0.71,"yaw":0.512}}
+{"t":18986,"kind":"telemetry","event":{"t":18986,"type":"position","x":-3.53,"y":1.65,"z":-2.28,"yaw":0.512}}
+{"t":19286,"kind":"telemetry","event":{"t":19286,"type":"position","x":-4.06,"y":1.65,"z":-3.22,"yaw":0.512}}
+{"t":23286,"kind":"telemetry","event":{"t":23286,"type":"idle","ms":4000}}
+{"t":23307,"kind":"action","step":2,"tool":"interact","args":{},"result":"Reading early_log."}
+{"t":23607,"kind":"usage","input":58005,"cached":53257,"output":125}
+{"t":27026,"kind":"action","step":3,"tool":"interact","args":{},"result":"closed"}
+{"t":27326,"kind":"usage","input":57825,"cached":52431,"output":180}
+{"t":27526,"kind":"telemetry","event":{"t":27526,"type":"idle","ms":8240}}
+{"t":31526,"kind":"telemetry","event":{"t":31526,"type":"idle","ms":12240}}
+{"t":32334,"kind":"action","step":4,"tool":"look","args":{"direction":"right","ms":1319}}
+{"t":32634,"kind":"usage","input":58617,"cached":53546,"output":185}
+{"t":33653,"kind":"telemetry","event":{"t":33653,"type":"position","x":-4.06,"y":1.65,"z":-3.22,"yaw":-1.598}}
+{"t":35653,"kind":"telemetry","event":{"t":35653,"type":"idle","ms":16367}}
+{"t":38553,"kind":"action","step":5,"tool":"move","args":{"direction":"forward","ms":1989}}
+{"t":38853,"kind":"usage","input":57714,"cached":52435,"output":180}
+{"t":39053,"kind":"telemetry","event":{"t":39053,"type":"position","x":-2.26,"y":1.65,"z":-3.17,"yaw":-1.598}}
+{"t":39553,"kind":"telemetry","event":{"t":39553,"type":"position","x":-0.46,"y":1.65,"z":-3.12,"yaw":-1.598}}
+{"t":40053,"kind":"telemetry","event":{"t":40053,"type":"position","x":1.34,"y":1.65,"z":-3.07,"yaw":-1.598}}
+{"t":40542,"kind":"telemetry","event":{"t":40542,"type":"position","x":3.1,"y":1.65,"z":-3.02,"yaw":-1.598}}
+{"t":44542,"kind":"telemetry","event":{"t":44542,"type":"idle","ms":4000}}
+{"t":44680,"kind":"action","step":6,"tool":"interact","args":{},"result":"fuse added to inventory."}
+{"t":44680,"kind":"telemetry","event":{"t":44680,"type":"item_picked","item":"fuse"}}
+{"t":44980,"kind":"usage","input":58356,"cached":52937,"output":210}
+{"t":48680,"kind":"telemetry","event":{"t":48680,"type":"idle","ms":8138}}
+{"t":49577,"kind":"action","step":7,"tool":"look","args":{"direction":"left","ms":1445}}
+{"t":49877,"kind":"usage","input":58022,"cached":53033,"output":124}
+{"t":51022,"kind":"telemetry","event":{"t":51022,"type":"position","x":3.1,"y":1.65,"z":-3.02,"yaw":0.714}}
+{"t":53022,"kind":"telemetry","event":{"t":53022,"type":"idle","ms":12480}}
+{"t":56077,"kind":"action","step":8,"tool":"move","args":{"direction":"forward","ms":1066}}
+{"t":56377,"kind":"usage","input":57531,"cached":52685,"output":184}
+{"t":56577,"kind":"telemetry","event":{"t":56577,"type":"position","x":1.92,"y":1.65,"z":-4.38,"yaw":0.714}}
+{"t":57077,"kind":"telemetry","event":{"t":57077,"type":"position","x":0.74,"y":1.65,"z":-5.74,"yaw":0.714}}
+{"t":57143,"kind":"telemetry","event":{"t":57143,"type":"position","x":0.59,"y":1.65,"z":-5.92,"yaw":0.714}}
+{"t":61143,"kind":"telemetry","event":{"t":61143,"type":"idle","ms":4000}}
+{"t":62751,"kind":"action","step":9,"tool":"interact","args":{},"result":"The hatch opens onto the concourse."}
+{"t":62751,"kind":"telemetry","event":{"t":62751,"type":"room_entered","room":"corridor"}}
+{"t":62751,"kind":"telemetry","event":{"t":62751,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":63051,"kind":"usage","input":58493,"cached":54417,"output":211}
+{"t":65251,"kind":"telemetry","event":{"t":65251,"type":"idle","ms":8108}}
+{"t":66411,"kind":"action","step":10,"tool":"screenshot","args":{},"frame":"frames/00001.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/priya/frames/00001.png"}
+{"t":66711,"kind":"usage","input":57573,"cached":51914,"output":173}
+{"t":67611,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_12","type":"reasoning","text":"Several things to read here before I touch a door."}}}
+{"t":69411,"kind":"telemetry","event":{"t":69411,"type":"idle","ms":12268}}
+{"t":70085,"kind":"action","step":10,"tool":"look","args":{"direction":"right","ms":385}}
+{"t":70385,"kind":"usage","input":58413,"cached":53431,"output":118}
+{"t":70470,"kind":"telemetry","event":{"t":70470,"type":"position","x":0,"y":1.65,"z":4,"yaw":-0.616}}
+{"t":73470,"kind":"telemetry","event":{"t":73470,"type":"idle","ms":16327}}
+{"t":75062,"kind":"action","step":11,"tool":"move","args":{"direction":"forward","ms":1962}}
+{"t":75362,"kind":"usage","input":57898,"cached":53832,"output":149}
+{"t":75562,"kind":"telemetry","event":{"t":75562,"type":"position","x":1.04,"y":1.65,"z":2.53,"yaw":-0.616}}
+{"t":76062,"kind":"telemetry","event":{"t":76062,"type":"position","x":2.08,"y":1.65,"z":1.06,"yaw":-0.616}}
+{"t":76562,"kind":"telemetry","event":{"t":76562,"type":"position","x":3.12,"y":1.65,"z":-0.41,"yaw":-0.616}}
+{"t":77024,"kind":"telemetry","event":{"t":77024,"type":"position","x":4.08,"y":1.65,"z":-1.76,"yaw":-0.616}}
+{"t":81024,"kind":"telemetry","event":{"t":81024,"type":"idle","ms":4000}}
+{"t":81346,"kind":"action","step":12,"tool":"interact","args":{},"result":"Reading lab_log."}
+{"t":81646,"kind":"usage","input":58391,"cached":53512,"output":197}
+{"t":85264,"kind":"action","step":13,"tool":"interact","args":{},"result":"closed"}
+{"t":85264,"kind":"telemetry","event":{"t":85264,"type":"idle","ms":8240}}
+{"t":85564,"kind":"usage","input":58858,"cached":53163,"output":110}
+{"t":86464,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_16","type":"reasoning","text":"The memo mentioned personnel access. Check the crate corner properly before touching a door."}}}
+{"t":89264,"kind":"telemetry","event":{"t":89264,"type":"idle","ms":12240}}
+{"t":90074,"kind":"action","step":14,"tool":"look","args":{"direction":"right","ms":1711}}
+{"t":90374,"kind":"usage","input":59241,"cached":54078,"output":108}
+{"t":91785,"kind":"telemetry","event":{"t":91785,"type":"position","x":4.08,"y":1.65,"z":-1.76,"yaw":-3.354}}
+{"t":93285,"kind":"telemetry","event":{"t":93285,"type":"idle","ms":16261}}
+{"t":97285,"kind":"telemetry","event":{"t":97285,"type":"idle","ms":20261}}
+{"t":97931,"kind":"action","step":15,"tool":"move","args":{"direction":"forward","ms":694}}
+{"t":98231,"kind":"usage","input":58795,"cached":54028,"output":157}
+{"t":98431,"kind":"telemetry","event":{"t":98431,"type":"position","x":3.7,"y":1.65,"z":-0.01,"yaw":-3.354}}
+{"t":98625,"kind":"telemetry","event":{"t":98625,"type":"position","x":3.56,"y":1.65,"z":0.68,"yaw":-3.354}}
+{"t":102625,"kind":"telemetry","event":{"t":102625,"type":"idle","ms":4000}}
+{"t":103317,"kind":"action","step":16,"tool":"look","args":{"direction":"left","ms":400}}
+{"t":103617,"kind":"usage","input":57948,"cached":53537,"output":155}
+{"t":103717,"kind":"telemetry","event":{"t":103717,"type":"position","x":3.56,"y":1.65,"z":0.68,"yaw":-2.714}}
+{"t":106717,"kind":"telemetry","event":{"t":106717,"type":"idle","ms":8092}}
+{"t":109358,"kind":"action","step":17,"tool":"look","args":{"direction":"right","ms":800}}
+{"t":109658,"kind":"usage","input":58683,"cached":54344,"output":154}
+{"t":110158,"kind":"telemetry","event":{"t":110158,"type":"position","x":3.56,"y":1.65,"z":0.68,"yaw":-3.994}}
+{"t":111158,"kind":"telemetry","event":{"t":111158,"type":"idle","ms":12533}}
+{"t":114053,"kind":"action","step":18,"tool":"move","args":{"direction":"forward","ms":200}}
+{"t":114253,"kind":"telemetry","event":{"t":114253,"type":"position","x":3.01,"y":1.65,"z":1.15,"yaw":-3.994}}
+{"t":114353,"kind":"usage","input":58737,"cached":53333,"output":170}
+{"t":118253,"kind":"telemetry","event":{"t":118253,"type":"idle","ms":4000}}
+{"t":119509,"kind":"action","step":19,"tool":"interact","args":{},"result":"Nothing here."}
+{"t":119809,"kind":"usage","input":59367,"cached":53762,"output":175}
+{"t":122509,"kind":"telemetry","event":{"t":122509,"type":"idle","ms":8256}}
+{"t":123712,"kind":"action","step":20,"tool":"crouch","args":{"on":true},"result":"crouching"}
+{"t":123712,"kind":"telemetry","event":{"t":123712,"type":"position","x":3.01,"y":0.8,"z":1.15,"yaw":-3.994}}
+{"t":124012,"kind":"usage","input":58733,"cached":53126,"output":145}
+{"t":126712,"kind":"telemetry","event":{"t":126712,"type":"idle","ms":12459}}
+{"t":128290,"kind":"action","step":21,"tool":"interact","args":{},"result":"keycard added to inventory."}
+{"t":128290,"kind":"telemetry","event":{"t":128290,"type":"flaw_triggered","flawId":"C3"}}
+{"t":128290,"kind":"telemetry","event":{"t":128290,"type":"item_picked","item":"keycard"}}
+{"t":128590,"kind":"usage","input":58891,"cached":54834,"output":183}
+{"t":130790,"kind":"telemetry","event":{"t":130790,"type":"idle","ms":16537}}
+{"t":132053,"kind":"action","step":22,"tool":"note_finding","args":{"finding":{"id":"priya-f1","severity":"medium","category":"confusion","title":"The personnel keycard is a tiny sliver on the floor behind the crate with no highlight","description":"I searched the crate corner deliberately and still needed to crouch before the card was visible. Nothing marks it — no glint, no prompt until you are almost on top of it. A required item should not be the least visible object in the room.","room":"corridor","reproSteps":["Enter the corridor","Crouch beside the crate on the right","Keycard sliver becomes visible at floor level"],"frame":"frames/00001.png","step":22}},"result":"noted priya-f1"}
+{"t":132103,"kind":"finding","finding":{"id":"priya-f1","severity":"medium","category":"confusion","title":"The personnel keycard is a tiny sliver on the floor behind the crate with no highlight","description":"I searched the crate corner deliberately and still needed to crouch before the card was visible. Nothing marks it — no glint, no prompt until you are almost on top of it. A required item should not be the least visible object in the room.","room":"corridor","reproSteps":["Enter the corridor","Crouch beside the crate on the right","Keycard sliver becomes visible at floor level"],"frame":"frames/00001.png","step":22}}
+{"t":132353,"kind":"usage","input":59209,"cached":53892,"output":461}
+{"t":135053,"kind":"telemetry","event":{"t":135053,"type":"idle","ms":20800}}
+{"t":136635,"kind":"action","step":22,"tool":"crouch","args":{"on":false},"result":"standing"}
+{"t":136635,"kind":"telemetry","event":{"t":136635,"type":"position","x":3.01,"y":1.65,"z":1.15,"yaw":-3.994}}
+{"t":136935,"kind":"usage","input":58927,"cached":53808,"output":130}
+{"t":139135,"kind":"telemetry","event":{"t":139135,"type":"idle","ms":24882}}
+{"t":142027,"kind":"action","step":23,"tool":"screenshot","args":{},"frame":"frames/00002.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/priya/frames/00002.png"}
+{"t":142327,"kind":"usage","input":58941,"cached":54269,"output":214}
+{"t":143527,"kind":"telemetry","event":{"t":143527,"type":"idle","ms":29274}}
+{"t":147330,"kind":"action","step":23,"tool":"look","args":{"direction":"right","ms":930}}
+{"t":147630,"kind":"usage","input":59288,"cached":54060,"output":127}
+{"t":148260,"kind":"telemetry","event":{"t":148260,"type":"position","x":3.01,"y":1.65,"z":1.15,"yaw":-5.482}}
+{"t":148760,"kind":"telemetry","event":{"t":148760,"type":"idle","ms":34507}}
+{"t":152760,"kind":"telemetry","event":{"t":152760,"type":"idle","ms":38507}}
+{"t":153165,"kind":"action","step":24,"tool":"move","args":{"direction":"forward","ms":2847}}
+{"t":153465,"kind":"usage","input":59640,"cached":53921,"output":171}
+{"t":153665,"kind":"telemetry","event":{"t":153665,"type":"position","x":1.72,"y":1.65,"z":-0.1,"yaw":-5.482}}
+{"t":154165,"kind":"telemetry","event":{"t":154165,"type":"position","x":0.43,"y":1.65,"z":-1.35,"yaw":-5.482}}
+{"t":154665,"kind":"telemetry","event":{"t":154665,"type":"position","x":-0.87,"y":1.65,"z":-2.6,"yaw":-5.482}}
+{"t":155165,"kind":"telemetry","event":{"t":155165,"type":"position","x":-2.16,"y":1.65,"z":-3.86,"yaw":-5.482}}
+{"t":155665,"kind":"telemetry","event":{"t":155665,"type":"position","x":-3.45,"y":1.65,"z":-5.11,"yaw":-5.482}}
+{"t":156012,"kind":"telemetry","event":{"t":156012,"type":"position","x":-4.35,"y":1.65,"z":-5.98,"yaw":-5.482}}
+{"t":160012,"kind":"telemetry","event":{"t":160012,"type":"idle","ms":4000}}
+{"t":160329,"kind":"action","step":25,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":160629,"kind":"usage","input":58546,"cached":53554,"output":210}
+{"t":163985,"kind":"action","step":26,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":164285,"kind":"usage","input":59491,"cached":54342,"output":110}
+{"t":164485,"kind":"telemetry","event":{"t":164485,"type":"idle","ms":8473}}
+{"t":167819,"kind":"action","step":27,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":168119,"kind":"usage","input":59235,"cached":55231,"output":155}
+{"t":168819,"kind":"telemetry","event":{"t":168819,"type":"idle","ms":12807}}
+{"t":171500,"kind":"action","step":28,"tool":"look","args":{"direction":"left","ms":300}}
+{"t":171800,"kind":"telemetry","event":{"t":171800,"type":"position","x":-4.35,"y":1.65,"z":-5.98,"yaw":-5.002}}
+{"t":171800,"kind":"usage","input":58779,"cached":54087,"output":190}
+{"t":173300,"kind":"telemetry","event":{"t":173300,"type":"idle","ms":17288}}
+{"t":177300,"kind":"telemetry","event":{"t":177300,"type":"idle","ms":21288}}
+{"t":177404,"kind":"action","step":29,"tool":"move","args":{"direction":"left","ms":200}}
+{"t":177604,"kind":"telemetry","event":{"t":177604,"type":"position","x":-4.56,"y":1.65,"z":-5.29,"yaw":-5.002}}
+{"t":177704,"kind":"usage","input":59650,"cached":55334,"output":220}
+{"t":181274,"kind":"action","step":30,"tool":"interact","args":{},"result":"Door motor offline. Service duct access available."}
+{"t":181574,"kind":"usage","input":59612,"cached":54635,"output":183}
+{"t":181774,"kind":"telemetry","event":{"t":181774,"type":"idle","ms":4170}}
+{"t":185314,"kind":"action","step":31,"tool":"note_finding","args":{"finding":{"id":"priya-f2","severity":"high","category":"confusion","title":"The power door is a dead end — the real entrance is an unmarked floor duct","description":"The door labelled \"Power • access reader\" accepts the keycard and then says \"Door motor offline. Service duct access available.\" Nothing points to the duct, which sits at ankle height on the opposite wall. Everyone will try this door first and everyone will be turned away.","room":"corridor","reproSteps":["Get the keycard","Use it on the power door","Motor offline message; find the duct on the far wall by yourself"],"frame":"frames/00002.png","step":31}},"result":"noted priya-f2"}
+{"t":185364,"kind":"finding","finding":{"id":"priya-f2","severity":"high","category":"confusion","title":"The power door is a dead end — the real entrance is an unmarked floor duct","description":"The door labelled \"Power • access reader\" accepts the keycard and then says \"Door motor offline. Service duct access available.\" Nothing points to the duct, which sits at ankle height on the opposite wall. Everyone will try this door first and everyone will be turned away.","room":"corridor","reproSteps":["Get the keycard","Use it on the power door","Motor offline message; find the duct on the far wall by yourself"],"frame":"frames/00002.png","step":31}}
+{"t":185614,"kind":"usage","input":59243,"cached":54663,"output":371}
+{"t":185814,"kind":"telemetry","event":{"t":185814,"type":"idle","ms":8210}}
+{"t":186514,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_36","type":"reasoning","text":"\"Service duct access available.\" There was a duct on the far wall."}}}
+{"t":189814,"kind":"telemetry","event":{"t":189814,"type":"idle","ms":12210}}
+{"t":191447,"kind":"action","step":31,"tool":"look","args":{"direction":"left","ms":1043}}
+{"t":191747,"kind":"usage","input":59735,"cached":55286,"output":214}
+{"t":192490,"kind":"telemetry","event":{"t":192490,"type":"position","x":-4.56,"y":1.65,"z":-5.29,"yaw":-3.333}}
+{"t":193990,"kind":"telemetry","event":{"t":193990,"type":"idle","ms":16386}}
+{"t":197990,"kind":"telemetry","event":{"t":197990,"type":"idle","ms":20386}}
+{"t":198634,"kind":"action","step":32,"tool":"move","args":{"direction":"forward","ms":397}}
+{"t":198934,"kind":"usage","input":59609,"cached":54958,"output":123}
+{"t":199031,"kind":"telemetry","event":{"t":199031,"type":"position","x":-4.83,"y":1.65,"z":-3.88,"yaw":-3.333}}
+{"t":203031,"kind":"telemetry","event":{"t":203031,"type":"idle","ms":4000}}
+{"t":203626,"kind":"action","step":33,"tool":"interact","args":{},"result":"Maintenance recording playing."}
+{"t":203626,"kind":"telemetry","event":{"t":203626,"type":"flaw_triggered","flawId":"A1"}}
+{"t":203926,"kind":"usage","input":59942,"cached":54785,"output":137}
+{"t":207126,"kind":"telemetry","event":{"t":207126,"type":"idle","ms":8095}}
+{"t":209082,"kind":"action","step":34,"tool":"listen","args":{},"result":"[{\"id\":\"pickup\",\"transcript\":\"Equipment acquired.\"},{\"id\":\"pickup\",\"transcript\":\"Equipment acquired.\"},{\"id\":\"vent_code\",\"transcript\":\"Maintenance duct access code: four, eight, two. I repeat: four, eight, two.\"}]"}
+{"t":209382,"kind":"usage","input":59567,"cached":55118,"output":215}
+{"t":211582,"kind":"telemetry","event":{"t":211582,"type":"idle","ms":12551}}
+{"t":214477,"kind":"action","step":34,"tool":"look","args":{"direction":"left","ms":40}}
+{"t":214517,"kind":"telemetry","event":{"t":214517,"type":"position","x":-4.83,"y":1.65,"z":-3.88,"yaw":-3.269}}
+{"t":214777,"kind":"usage","input":59575,"cached":53981,"output":172}
+{"t":216017,"kind":"telemetry","event":{"t":216017,"type":"idle","ms":16986}}
+{"t":218126,"kind":"action","step":35,"tool":"move","args":{"direction":"forward","ms":1777}}
+{"t":218426,"kind":"usage","input":59336,"cached":55048,"output":112}
+{"t":218626,"kind":"telemetry","event":{"t":218626,"type":"position","x":-5.06,"y":1.65,"z":-2.1,"yaw":-3.269}}
+{"t":219126,"kind":"telemetry","event":{"t":219126,"type":"position","x":-5.28,"y":1.65,"z":-0.31,"yaw":-3.269}}
+{"t":219626,"kind":"telemetry","event":{"t":219626,"type":"position","x":-5.51,"y":1.65,"z":1.47,"yaw":-3.269}}
+{"t":219903,"kind":"telemetry","event":{"t":219903,"type":"position","x":-5.64,"y":1.65,"z":2.46,"yaw":-3.269}}
+{"t":223903,"kind":"telemetry","event":{"t":223903,"type":"idle","ms":4000}}
+{"t":225997,"kind":"action","step":36,"tool":"interact","args":{},"result":"vent_lock awaits a code."}
+{"t":226297,"kind":"usage","input":59622,"cached":55612,"output":174}
+{"t":227997,"kind":"telemetry","event":{"t":227997,"type":"idle","ms":8094}}
+{"t":230093,"kind":"action","step":37,"tool":"type_text","args":{"text":"482\n"},"result":"Duct access released."}
+{"t":230093,"kind":"telemetry","event":{"t":230093,"type":"puzzle_solved","puzzle":"vent_code"}}
+{"t":230393,"kind":"usage","input":60300,"cached":55433,"output":108}
+{"t":232093,"kind":"telemetry","event":{"t":232093,"type":"idle","ms":12190}}
+{"t":236002,"kind":"action","step":38,"tool":"look","args":{"direction":"right","ms":1584}}
+{"t":236302,"kind":"usage","input":59911,"cached":54928,"output":167}
+{"t":237586,"kind":"telemetry","event":{"t":237586,"type":"position","x":-5.64,"y":1.65,"z":2.46,"yaw":-5.803}}
+{"t":238086,"kind":"telemetry","event":{"t":238086,"type":"idle","ms":18183}}
+{"t":241843,"kind":"action","step":39,"tool":"move","args":{"direction":"forward","ms":208}}
+{"t":242051,"kind":"telemetry","event":{"t":242051,"type":"position","x":-5.98,"y":1.65,"z":1.8,"yaw":-5.803}}
+{"t":242143,"kind":"usage","input":60376,"cached":55259,"output":193}
+{"t":245992,"kind":"action","step":40,"tool":"crouch","args":{"on":true},"result":"crouching"}
+{"t":245992,"kind":"telemetry","event":{"t":245992,"type":"position","x":-5.98,"y":0.8,"z":1.8,"yaw":-5.803}}
+{"t":246292,"kind":"usage","input":59387,"cached":55340,"output":106}
+{"t":246492,"kind":"telemetry","event":{"t":246492,"type":"idle","ms":4441}}
+{"t":249658,"kind":"action","step":41,"tool":"interact","args":{},"result":"You crawl through into the power room."}
+{"t":249658,"kind":"telemetry","event":{"t":249658,"type":"flaw_triggered","flawId":"G1"}}
+{"t":249658,"kind":"telemetry","event":{"t":249658,"type":"puzzle_solved","puzzle":"vent"}}
+{"t":249658,"kind":"telemetry","event":{"t":249658,"type":"room_entered","room":"power"}}
+{"t":249658,"kind":"telemetry","event":{"t":249658,"type":"flaw_triggered","flawId":"C4"}}
+{"t":249658,"kind":"telemetry","event":{"t":249658,"type":"position","x":0,"y":0.8,"z":4,"yaw":0}}
+{"t":249958,"kind":"usage","input":59964,"cached":54845,"output":180}
+{"t":250658,"kind":"telemetry","event":{"t":250658,"type":"idle","ms":8607}}
+{"t":254658,"kind":"telemetry","event":{"t":254658,"type":"idle","ms":12607}}
+{"t":255693,"kind":"action","step":42,"tool":"crouch","args":{"on":false},"result":"standing"}
+{"t":255693,"kind":"telemetry","event":{"t":255693,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":255993,"kind":"usage","input":59498,"cached":55106,"output":185}
+{"t":258693,"kind":"telemetry","event":{"t":258693,"type":"idle","ms":16642}}
+{"t":261237,"kind":"action","step":43,"tool":"screenshot","args":{},"frame":"frames/00003.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/priya/frames/00003.png"}
+{"t":261537,"kind":"usage","input":60503,"cached":55422,"output":137}
+{"t":262737,"kind":"telemetry","event":{"t":262737,"type":"idle","ms":20686}}
+{"t":265073,"kind":"action","step":43,"tool":"look","args":{"direction":"left","ms":212}}
+{"t":265285,"kind":"telemetry","event":{"t":265285,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.339}}
+{"t":265373,"kind":"usage","input":60160,"cached":55738,"output":137}
+{"t":266785,"kind":"telemetry","event":{"t":266785,"type":"idle","ms":24734}}
+{"t":270785,"kind":"telemetry","event":{"t":270785,"type":"idle","ms":28734}}
+{"t":271258,"kind":"action","step":44,"tool":"move","args":{"direction":"forward","ms":2254}}
+{"t":271558,"kind":"usage","input":60109,"cached":54334,"output":169}
+{"t":271758,"kind":"telemetry","event":{"t":271758,"type":"position","x":-0.6,"y":1.65,"z":2.3,"yaw":0.339}}
+{"t":272258,"kind":"telemetry","event":{"t":272258,"type":"position","x":-1.2,"y":1.65,"z":0.61,"yaw":0.339}}
+{"t":272758,"kind":"telemetry","event":{"t":272758,"type":"position","x":-1.8,"y":1.65,"z":-1.09,"yaw":0.339}}
+{"t":273258,"kind":"telemetry","event":{"t":273258,"type":"position","x":-2.4,"y":1.65,"z":-2.79,"yaw":0.339}}
+{"t":273512,"kind":"telemetry","event":{"t":273512,"type":"position","x":-2.7,"y":1.65,"z":-3.65,"yaw":0.339}}
+{"t":277512,"kind":"telemetry","event":{"t":277512,"type":"idle","ms":4000}}
+{"t":277579,"kind":"action","step":45,"tool":"interact","args":{},"result":"Fuse seated. Engage the main breaker."}
+{"t":277579,"kind":"telemetry","event":{"t":277579,"type":"item_used","item":"fuse"}}
+{"t":277579,"kind":"telemetry","event":{"t":277579,"type":"puzzle_solved","puzzle":"fuse_socket"}}
+{"t":277879,"kind":"usage","input":60328,"cached":55553,"output":158}
+{"t":281579,"kind":"telemetry","event":{"t":281579,"type":"idle","ms":8067}}
+{"t":282312,"kind":"action","step":46,"tool":"look","args":{"direction":"right","ms":1101}}
+{"t":282612,"kind":"usage","input":59815,"cached":54771,"output":145}
+{"t":283413,"kind":"telemetry","event":{"t":283413,"type":"position","x":-2.7,"y":1.65,"z":-3.65,"yaw":-1.422}}
+{"t":285913,"kind":"telemetry","event":{"t":285913,"type":"idle","ms":12401}}
+{"t":287429,"kind":"action","step":47,"tool":"move","args":{"direction":"forward","ms":1351}}
+{"t":287729,"kind":"usage","input":60149,"cached":55946,"output":216}
+{"t":287929,"kind":"telemetry","event":{"t":287929,"type":"position","x":-0.92,"y":1.65,"z":-3.92,"yaw":-1.422}}
+{"t":288429,"kind":"telemetry","event":{"t":288429,"type":"position","x":0.86,"y":1.65,"z":-4.18,"yaw":-1.422}}
+{"t":288780,"kind":"telemetry","event":{"t":288780,"type":"position","x":2.11,"y":1.65,"z":-4.37,"yaw":-1.422}}
+{"t":292721,"kind":"action","step":48,"tool":"interact","args":{"hold_ms":2500},"result":"Distribution bridged. Restore power at the lab controller."}
+{"t":292721,"kind":"telemetry","event":{"t":292721,"type":"flaw_triggered","flawId":"G2"}}
+{"t":293021,"kind":"usage","input":60901,"cached":56142,"output":215}
+{"t":295221,"kind":"telemetry","event":{"t":295221,"type":"puzzle_solved","puzzle":"breaker"}}
+{"t":295721,"kind":"telemetry","event":{"t":295721,"type":"idle","ms":6941}}
+{"t":299460,"kind":"action","step":49,"tool":"note_finding","args":{"finding":{"id":"priya-f3","severity":"medium","category":"confusion","title":"Objective still says 'Restore power' but the service notes say the lab controller does that","description":"The HUD objective has read \"Restore power\" since the airlock. In the power room the notes explain that this room only bridges the circuit and the lab controller performs the actual restore. The objective text never changes to say so.","room":"power","reproSteps":["Enter the power room","Read the service notes","Compare with the HUD objective"],"frame":"frames/00003.png","step":49}},"result":"noted priya-f3"}
+{"t":299510,"kind":"finding","finding":{"id":"priya-f3","severity":"medium","category":"confusion","title":"Objective still says 'Restore power' but the service notes say the lab controller does that","description":"The HUD objective has read \"Restore power\" since the airlock. In the power room the notes explain that this room only bridges the circuit and the lab controller performs the actual restore. The objective text never changes to say so.","room":"power","reproSteps":["Enter the power room","Read the service notes","Compare with the HUD objective"],"frame":"frames/00003.png","step":49}}
+{"t":299760,"kind":"usage","input":60221,"cached":56096,"output":388}
+{"t":299960,"kind":"telemetry","event":{"t":299960,"type":"idle","ms":11180}}
+{"t":303960,"kind":"telemetry","event":{"t":303960,"type":"idle","ms":15180}}
+{"t":304371,"kind":"action","step":49,"tool":"look","args":{"direction":"right","ms":819}}
+{"t":304671,"kind":"usage","input":60821,"cached":55967,"output":195}
+{"t":305190,"kind":"telemetry","event":{"t":305190,"type":"position","x":2.11,"y":1.65,"z":-4.37,"yaw":-2.733}}
+{"t":308190,"kind":"telemetry","event":{"t":308190,"type":"idle","ms":19410}}
+{"t":309059,"kind":"action","step":50,"tool":"move","args":{"direction":"forward","ms":1073}}
+{"t":309359,"kind":"usage","input":60936,"cached":55307,"output":218}
+{"t":309559,"kind":"telemetry","event":{"t":309559,"type":"position","x":2.83,"y":1.65,"z":-2.72,"yaw":-2.733}}
+{"t":310059,"kind":"telemetry","event":{"t":310059,"type":"position","x":3.54,"y":1.65,"z":-1.07,"yaw":-2.733}}
+{"t":310132,"kind":"telemetry","event":{"t":310132,"type":"position","x":3.65,"y":1.65,"z":-0.83,"yaw":-2.733}}
+{"t":314132,"kind":"telemetry","event":{"t":314132,"type":"idle","ms":4000}}
+{"t":315953,"kind":"action","step":51,"tool":"interact","args":{},"result":"wire added to inventory."}
+{"t":315953,"kind":"telemetry","event":{"t":315953,"type":"item_picked","item":"wire"}}
+{"t":316253,"kind":"usage","input":59720,"cached":55513,"output":212}
+{"t":318453,"kind":"telemetry","event":{"t":318453,"type":"idle","ms":8321}}
+{"t":320498,"kind":"action","step":52,"tool":"look","args":{"direction":"right","ms":541}}
+{"t":320798,"kind":"usage","input":60421,"cached":56078,"output":208}
+{"t":321039,"kind":"telemetry","event":{"t":321039,"type":"position","x":3.65,"y":1.65,"z":-0.83,"yaw":-3.598}}
+{"t":322539,"kind":"telemetry","event":{"t":322539,"type":"idle","ms":12407}}
+{"t":326438,"kind":"action","step":53,"tool":"move","args":{"direction":"forward","ms":2048}}
+{"t":326738,"kind":"usage","input":61044,"cached":56243,"output":111}
+{"t":326938,"kind":"telemetry","event":{"t":326938,"type":"position","x":2.85,"y":1.65,"z":0.79,"yaw":-3.598}}
+{"t":327438,"kind":"telemetry","event":{"t":327438,"type":"position","x":2.06,"y":1.65,"z":2.4,"yaw":-3.598}}
+{"t":327938,"kind":"telemetry","event":{"t":327938,"type":"position","x":1.26,"y":1.65,"z":4.02,"yaw":-3.598}}
+{"t":328438,"kind":"telemetry","event":{"t":328438,"type":"position","x":0.47,"y":1.65,"z":5.64,"yaw":-3.598}}
+{"t":328486,"kind":"telemetry","event":{"t":328486,"type":"position","x":0.39,"y":1.65,"z":5.79,"yaw":-3.598}}
+{"t":332486,"kind":"telemetry","event":{"t":332486,"type":"idle","ms":4000}}
+{"t":333232,"kind":"action","step":54,"tool":"interact","args":{},"result":"Back through the door."}
+{"t":333232,"kind":"telemetry","event":{"t":333232,"type":"room_entered","room":"corridor"}}
+{"t":333232,"kind":"telemetry","event":{"t":333232,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":333532,"kind":"usage","input":60074,"cached":55300,"output":140}
+{"t":336732,"kind":"telemetry","event":{"t":336732,"type":"idle","ms":8246}}
+{"t":338040,"kind":"action","step":55,"tool":"look","args":{"direction":"left","ms":99}}
+{"t":338139,"kind":"telemetry","event":{"t":338139,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.158}}
+{"t":338340,"kind":"usage","input":60250,"cached":55520,"output":112}
+{"t":341139,"kind":"telemetry","event":{"t":341139,"type":"idle","ms":12653}}
+{"t":343484,"kind":"action","step":56,"tool":"move","args":{"direction":"forward","ms":2732}}
+{"t":343784,"kind":"usage","input":61190,"cached":55695,"output":141}
+{"t":343984,"kind":"telemetry","event":{"t":343984,"type":"position","x":-0.28,"y":1.65,"z":2.22,"yaw":0.158}}
+{"t":344484,"kind":"telemetry","event":{"t":344484,"type":"position","x":-0.57,"y":1.65,"z":0.45,"yaw":0.158}}
+{"t":344984,"kind":"telemetry","event":{"t":344984,"type":"position","x":-0.85,"y":1.65,"z":-1.33,"yaw":0.158}}
+{"t":345484,"kind":"telemetry","event":{"t":345484,"type":"position","x":-1.14,"y":1.65,"z":-3.11,"yaw":0.158}}
+{"t":345984,"kind":"telemetry","event":{"t":345984,"type":"position","x":-1.42,"y":1.65,"z":-4.89,"yaw":0.158}}
+{"t":346216,"kind":"telemetry","event":{"t":346216,"type":"position","x":-1.55,"y":1.65,"z":-5.71,"yaw":0.158}}
+{"t":350216,"kind":"telemetry","event":{"t":350216,"type":"idle","ms":4000}}
+{"t":351381,"kind":"action","step":57,"tool":"interact","args":{},"result":"The door grinds open."}
+{"t":351381,"kind":"telemetry","event":{"t":351381,"type":"item_used","item":"keycard"}}
+{"t":351381,"kind":"telemetry","event":{"t":351381,"type":"room_entered","room":"lab"}}
+{"t":351381,"kind":"telemetry","event":{"t":351381,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":351681,"kind":"usage","input":60606,"cached":55323,"output":110}
+{"t":354381,"kind":"telemetry","event":{"t":354381,"type":"idle","ms":8165}}
+{"t":356951,"kind":"action","step":58,"tool":"screenshot","args":{},"frame":"frames/00004.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/priya/frames/00004.png"}
+{"t":357251,"kind":"usage","input":60182,"cached":54571,"output":161}
+{"t":358451,"kind":"telemetry","event":{"t":358451,"type":"idle","ms":12235}}
+{"t":362451,"kind":"telemetry","event":{"t":362451,"type":"idle","ms":16235}}
+{"t":362799,"kind":"action","step":58,"tool":"move","args":{"direction":"forward","ms":2111}}
+{"t":363099,"kind":"usage","input":60579,"cached":55500,"output":112}
+{"t":363299,"kind":"telemetry","event":{"t":363299,"type":"position","x":0,"y":1.65,"z":2.2,"yaw":0}}
+{"t":363799,"kind":"telemetry","event":{"t":363799,"type":"position","x":0,"y":1.65,"z":0.4,"yaw":0}}
+{"t":364299,"kind":"telemetry","event":{"t":364299,"type":"position","x":0,"y":1.65,"z":-1.4,"yaw":0}}
+{"t":364799,"kind":"telemetry","event":{"t":364799,"type":"position","x":0,"y":1.65,"z":-3.2,"yaw":0}}
+{"t":364910,"kind":"telemetry","event":{"t":364910,"type":"position","x":0,"y":1.65,"z":-3.6,"yaw":0}}
+{"t":368910,"kind":"telemetry","event":{"t":368910,"type":"idle","ms":4000}}
+{"t":369892,"kind":"action","step":59,"tool":"interact","args":{},"result":"terminal awaits a code."}
+{"t":370192,"kind":"usage","input":60399,"cached":54924,"output":117}
+{"t":373392,"kind":"telemetry","event":{"t":373392,"type":"idle","ms":8482}}
+{"t":373528,"kind":"action","step":60,"tool":"type_text","args":{"text":"73"},"result":"entered 73"}
+{"t":373828,"kind":"usage","input":60828,"cached":56158,"output":149}
+{"t":377185,"kind":"action","step":61,"tool":"type_text","args":{"text":"Escape"},"result":"settings open"}
+{"t":377185,"kind":"telemetry","event":{"t":377185,"type":"flaw_triggered","flawId":"B3"}}
+{"t":377185,"kind":"telemetry","event":{"t":377185,"type":"menu_opened"}}
+{"t":377485,"kind":"usage","input":61534,"cached":56261,"output":111}
+{"t":377685,"kind":"telemetry","event":{"t":377685,"type":"idle","ms":12775}}
+{"t":381685,"kind":"telemetry","event":{"t":381685,"type":"idle","ms":16775}}
+{"t":382836,"kind":"action","step":62,"tool":"type_text","args":{"text":"Escape"},"result":"settings closed"}
+{"t":382836,"kind":"telemetry","event":{"t":382836,"type":"menu_closed"}}
+{"t":383136,"kind":"usage","input":60784,"cached":55378,"output":127}
+{"t":385836,"kind":"telemetry","event":{"t":385836,"type":"idle","ms":20926}}
+{"t":388630,"kind":"action","step":63,"tool":"type_text","args":{"text":"7319\n"},"result":"Station power restored. Botanical reserve unlocked."}
+{"t":388630,"kind":"telemetry","event":{"t":388630,"type":"puzzle_solved","puzzle":"station_power"}}
+{"t":388930,"kind":"usage","input":61125,"cached":56055,"output":104}
+{"t":390130,"kind":"telemetry","event":{"t":390130,"type":"idle","ms":25220}}
+{"t":392743,"kind":"action","step":64,"tool":"note_finding","args":{"finding":{"id":"priya-f4","severity":"medium","category":"bug","title":"Opening settings while typing at the terminal silently wiped the code","description":"I had typed two digits, opened settings to check subtitles, closed it, and the field was empty. No message. If you do not notice, you submit an incomplete code and get rejected.","room":"lab","reproSteps":["Open the lab terminal","Type part of the code","Press Escape to open settings, Escape again to close","Code field is empty"],"frame":"frames/00004.png","step":64}},"result":"noted priya-f4"}
+{"t":392793,"kind":"finding","finding":{"id":"priya-f4","severity":"medium","category":"bug","title":"Opening settings while typing at the terminal silently wiped the code","description":"I had typed two digits, opened settings to check subtitles, closed it, and the field was empty. No message. If you do not notice, you submit an incomplete code and get rejected.","room":"lab","reproSteps":["Open the lab terminal","Type part of the code","Press Escape to open settings, Escape again to close","Code field is empty"],"frame":"frames/00004.png","step":64}}
+{"t":393043,"kind":"usage","input":61322,"cached":56960,"output":337}
+{"t":394243,"kind":"telemetry","event":{"t":394243,"type":"idle","ms":29333}}
+{"t":398243,"kind":"telemetry","event":{"t":398243,"type":"idle","ms":33333}}
+{"t":398663,"kind":"action","step":64,"tool":"look","args":{"direction":"right","ms":1075}}
+{"t":398963,"kind":"usage","input":60656,"cached":56140,"output":144}
+{"t":399738,"kind":"telemetry","event":{"t":399738,"type":"position","x":0,"y":1.65,"z":-3.6,"yaw":-1.72}}
+{"t":402738,"kind":"telemetry","event":{"t":402738,"type":"idle","ms":37828}}
+{"t":403648,"kind":"action","step":65,"tool":"move","args":{"direction":"forward","ms":874}}
+{"t":403948,"kind":"usage","input":61533,"cached":56407,"output":210}
+{"t":404148,"kind":"telemetry","event":{"t":404148,"type":"position","x":1.78,"y":1.65,"z":-3.33,"yaw":-1.72}}
+{"t":404522,"kind":"telemetry","event":{"t":404522,"type":"position","x":3.11,"y":1.65,"z":-3.13,"yaw":-1.72}}
+{"t":408522,"kind":"telemetry","event":{"t":408522,"type":"idle","ms":4000}}
+{"t":409045,"kind":"action","step":66,"tool":"interact","args":{},"result":"casing added to inventory."}
+{"t":409045,"kind":"telemetry","event":{"t":409045,"type":"item_picked","item":"casing"}}
+{"t":409345,"kind":"usage","input":61243,"cached":57223,"output":182}
+{"t":412545,"kind":"telemetry","event":{"t":412545,"type":"idle","ms":8023}}
+{"t":413225,"kind":"action","step":67,"tool":"look","args":{"direction":"right","ms":1611}}
+{"t":413525,"kind":"usage","input":61583,"cached":56729,"output":125}
+{"t":414836,"kind":"telemetry","event":{"t":414836,"type":"position","x":3.11,"y":1.65,"z":-3.13,"yaw":-4.298}}
+{"t":416836,"kind":"telemetry","event":{"t":416836,"type":"idle","ms":12314}}
+{"t":418520,"kind":"action","step":68,"tool":"move","args":{"direction":"forward","ms":1908}}
+{"t":418820,"kind":"usage","input":60921,"cached":55340,"output":197}
+{"t":419020,"kind":"telemetry","event":{"t":419020,"type":"position","x":1.46,"y":1.65,"z":-2.41,"yaw":-4.298}}
+{"t":419520,"kind":"telemetry","event":{"t":419520,"type":"position","x":-0.18,"y":1.65,"z":-1.68,"yaw":-4.298}}
+{"t":420020,"kind":"telemetry","event":{"t":420020,"type":"position","x":-1.83,"y":1.65,"z":-0.96,"yaw":-4.298}}
+{"t":420428,"kind":"telemetry","event":{"t":420428,"type":"position","x":-3.17,"y":1.65,"z":-0.36,"yaw":-4.298}}
+{"t":424428,"kind":"telemetry","event":{"t":424428,"type":"idle","ms":4000}}
+{"t":424533,"kind":"action","step":69,"tool":"interact","args":{},"result":"Reading lab_notes."}
+{"t":424833,"kind":"usage","input":61173,"cached":56793,"output":145}
+{"t":428533,"kind":"telemetry","event":{"t":428533,"type":"idle","ms":8105}}
+{"t":430664,"kind":"action","step":70,"tool":"interact","args":{},"result":"closed"}
+{"t":430964,"kind":"usage","input":61020,"cached":56737,"output":137}
+{"t":432664,"kind":"telemetry","event":{"t":432664,"type":"idle","ms":12236}}
+{"t":434981,"kind":"action","step":71,"tool":"move","args":{"direction":"left","ms":1876}}
+{"t":435281,"kind":"usage","input":61084,"cached":55687,"output":126}
+{"t":435481,"kind":"telemetry","event":{"t":435481,"type":"position","x":-2.45,"y":1.65,"z":1.28,"yaw":-4.298}}
+{"t":435981,"kind":"telemetry","event":{"t":435981,"type":"position","x":-1.72,"y":1.65,"z":2.93,"yaw":-4.298}}
+{"t":436481,"kind":"telemetry","event":{"t":436481,"type":"position","x":-1,"y":1.65,"z":4.58,"yaw":-4.298}}
+{"t":436857,"kind":"telemetry","event":{"t":436857,"type":"position","x":-0.45,"y":1.65,"z":5.82,"yaw":-4.298}}
+{"t":440857,"kind":"telemetry","event":{"t":440857,"type":"idle","ms":4000}}
+{"t":441558,"kind":"action","step":72,"tool":"interact","args":{},"result":"Back through the door."}
+{"t":441558,"kind":"telemetry","event":{"t":441558,"type":"room_entered","room":"corridor"}}
+{"t":441558,"kind":"telemetry","event":{"t":441558,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":441858,"kind":"usage","input":62139,"cached":57483,"output":184}
+{"t":445058,"kind":"telemetry","event":{"t":445058,"type":"idle","ms":8201}}
+{"t":445478,"kind":"action","step":73,"tool":"look","args":{"direction":"right","ms":99}}
+{"t":445577,"kind":"telemetry","event":{"t":445577,"type":"position","x":0,"y":1.65,"z":4,"yaw":-0.158}}
+{"t":445778,"kind":"usage","input":61826,"cached":56330,"output":114}
+{"t":449077,"kind":"telemetry","event":{"t":449077,"type":"idle","ms":12220}}
+{"t":449390,"kind":"action","step":74,"tool":"move","args":{"direction":"forward","ms":2732}}
+{"t":449690,"kind":"usage","input":61709,"cached":57414,"output":117}
+{"t":449890,"kind":"telemetry","event":{"t":449890,"type":"position","x":0.28,"y":1.65,"z":2.22,"yaw":-0.158}}
+{"t":450390,"kind":"telemetry","event":{"t":450390,"type":"position","x":0.57,"y":1.65,"z":0.45,"yaw":-0.158}}
+{"t":450890,"kind":"telemetry","event":{"t":450890,"type":"position","x":0.85,"y":1.65,"z":-1.33,"yaw":-0.158}}
+{"t":451390,"kind":"telemetry","event":{"t":451390,"type":"position","x":1.14,"y":1.65,"z":-3.11,"yaw":-0.158}}
+{"t":451890,"kind":"telemetry","event":{"t":451890,"type":"position","x":1.42,"y":1.65,"z":-4.89,"yaw":-0.158}}
+{"t":452122,"kind":"telemetry","event":{"t":452122,"type":"position","x":1.55,"y":1.65,"z":-5.71,"yaw":-0.158}}
+{"t":456122,"kind":"telemetry","event":{"t":456122,"type":"idle","ms":4000}}
+{"t":458239,"kind":"action","step":75,"tool":"interact","args":{},"result":"Warm, damp air."}
+{"t":458239,"kind":"telemetry","event":{"t":458239,"type":"room_entered","room":"greenhouse"}}
+{"t":458239,"kind":"telemetry","event":{"t":458239,"type":"flaw_triggered","flawId":"D2"}}
+{"t":458239,"kind":"telemetry","event":{"t":458239,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":458539,"kind":"usage","input":60871,"cached":55406,"output":192}
+{"t":460239,"kind":"telemetry","event":{"t":460239,"type":"idle","ms":8117}}
+{"t":463598,"kind":"action","step":76,"tool":"screenshot","args":{},"frame":"frames/00005.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/priya/frames/00005.png"}
+{"t":463898,"kind":"usage","input":62153,"cached":58011,"output":182}
+{"t":464598,"kind":"telemetry","event":{"t":464598,"type":"idle","ms":12476}}
+{"t":464798,"kind":"codex","event":{"type":"item.completed","item":{"id":"rs_87","type":"reasoning","text":"Dark — deliberately, by the look of the grow lamps. Twelve planters, three rows. Snake through them."}}}
+{"t":467455,"kind":"action","step":76,"tool":"look","args":{"direction":"left","ms":290}}
+{"t":467745,"kind":"telemetry","event":{"t":467745,"type":"position","x":0,"y":1.65,"z":4,"yaw":0.464}}
+{"t":467755,"kind":"usage","input":61985,"cached":56529,"output":159}
+{"t":468745,"kind":"telemetry","event":{"t":468745,"type":"idle","ms":16623}}
+{"t":472745,"kind":"telemetry","event":{"t":472745,"type":"idle","ms":20623}}
+{"t":473550,"kind":"action","step":77,"tool":"move","args":{"direction":"forward","ms":2795}}
+{"t":473850,"kind":"usage","input":61141,"cached":57107,"output":112}
+{"t":474050,"kind":"telemetry","event":{"t":474050,"type":"position","x":-0.81,"y":1.65,"z":2.39,"yaw":0.464}}
+{"t":474550,"kind":"telemetry","event":{"t":474550,"type":"position","x":-1.61,"y":1.65,"z":0.78,"yaw":0.464}}
+{"t":475050,"kind":"telemetry","event":{"t":475050,"type":"position","x":-2.42,"y":1.65,"z":-0.83,"yaw":0.464}}
+{"t":475550,"kind":"telemetry","event":{"t":475550,"type":"position","x":-3.22,"y":1.65,"z":-2.44,"yaw":0.464}}
+{"t":476050,"kind":"telemetry","event":{"t":476050,"type":"position","x":-4.03,"y":1.65,"z":-4.05,"yaw":0.464}}
+{"t":476345,"kind":"telemetry","event":{"t":476345,"type":"position","x":-4.5,"y":1.65,"z":-5,"yaw":0.464}}
+{"t":480345,"kind":"telemetry","event":{"t":480345,"type":"idle","ms":4000}}
+{"t":481636,"kind":"action","step":78,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 1 / 12 complete."}
+{"t":481936,"kind":"usage","input":62153,"cached":57741,"output":113}
+{"t":484636,"kind":"telemetry","event":{"t":484636,"type":"idle","ms":8291}}
+{"t":488635,"kind":"action","step":79,"tool":"look","args":{"direction":"right","ms":1271}}
+{"t":488935,"kind":"usage","input":61434,"cached":56324,"output":136}
+{"t":489906,"kind":"telemetry","event":{"t":489906,"type":"position","x":-4.5,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":490406,"kind":"telemetry","event":{"t":490406,"type":"idle","ms":14061}}
+{"t":494406,"kind":"telemetry","event":{"t":494406,"type":"idle","ms":18061}}
+{"t":495349,"kind":"action","step":80,"tool":"move","args":{"direction":"forward","ms":834}}
+{"t":495649,"kind":"usage","input":62601,"cached":58047,"output":139}
+{"t":495849,"kind":"telemetry","event":{"t":495849,"type":"position","x":-2.7,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":496183,"kind":"telemetry","event":{"t":496183,"type":"position","x":-1.5,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":500183,"kind":"telemetry","event":{"t":500183,"type":"idle","ms":4000}}
+{"t":501185,"kind":"action","step":81,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 2 / 12 complete."}
+{"t":501485,"kind":"usage","input":61324,"cached":56642,"output":132}
+{"t":504185,"kind":"telemetry","event":{"t":504185,"type":"idle","ms":8002}}
+{"t":508185,"kind":"telemetry","event":{"t":508185,"type":"idle","ms":12002}}
+{"t":509173,"kind":"action","step":82,"tool":"move","args":{"direction":"forward","ms":834}}
+{"t":509473,"kind":"usage","input":61902,"cached":57166,"output":188}
+{"t":509673,"kind":"telemetry","event":{"t":509673,"type":"position","x":0.3,"y":1.65,"z":-5,"yaw":-1.57}}
+{"t":510007,"kind":"telemetry","event":{"t":510007,"type":"position","x":1.5,"y":1.65,"z":-5.01,"yaw":-1.57}}
+{"t":514007,"kind":"telemetry","event":{"t":514007,"type":"idle","ms":4000}}
+{"t":514229,"kind":"action","step":83,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 3 / 12 complete."}
+{"t":514529,"kind":"usage","input":61671,"cached":56503,"output":169}
+{"t":518229,"kind":"telemetry","event":{"t":518229,"type":"idle","ms":8222}}
+{"t":520978,"kind":"action","step":84,"tool":"move","args":{"direction":"forward","ms":833}}
+{"t":521278,"kind":"usage","input":62686,"cached":58427,"output":147}
+{"t":521478,"kind":"telemetry","event":{"t":521478,"type":"position","x":3.3,"y":1.65,"z":-5.01,"yaw":-1.57}}
+{"t":521811,"kind":"telemetry","event":{"t":521811,"type":"position","x":4.5,"y":1.65,"z":-5.01,"yaw":-1.57}}
+{"t":525811,"kind":"telemetry","event":{"t":525811,"type":"idle","ms":4000}}
+{"t":527578,"kind":"action","step":85,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 4 / 12 complete."}
+{"t":527878,"kind":"usage","input":62529,"cached":57841,"output":159}
+{"t":530578,"kind":"telemetry","event":{"t":530578,"type":"idle","ms":8767}}
+{"t":534578,"kind":"telemetry","event":{"t":534578,"type":"idle","ms":12767}}
+{"t":536180,"kind":"action","step":86,"tool":"move","args":{"direction":"right","ms":836}}
+{"t":536480,"kind":"usage","input":61940,"cached":57395,"output":207}
+{"t":536680,"kind":"telemetry","event":{"t":536680,"type":"position","x":4.5,"y":1.65,"z":-3.21,"yaw":-1.57}}
+{"t":537016,"kind":"telemetry","event":{"t":537016,"type":"position","x":4.5,"y":1.65,"z":-2,"yaw":-1.57}}
+{"t":541016,"kind":"telemetry","event":{"t":541016,"type":"idle","ms":4000}}
+{"t":542521,"kind":"action","step":87,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 5 / 12 complete."}
+{"t":542821,"kind":"usage","input":62869,"cached":57547,"output":170}
+{"t":545521,"kind":"telemetry","event":{"t":545521,"type":"idle","ms":8505}}
+{"t":548718,"kind":"action","step":88,"tool":"move","args":{"direction":"back","ms":834}}
+{"t":549018,"kind":"usage","input":62399,"cached":57319,"output":107}
+{"t":549218,"kind":"telemetry","event":{"t":549218,"type":"position","x":2.7,"y":1.65,"z":-2,"yaw":-1.57}}
+{"t":549552,"kind":"telemetry","event":{"t":549552,"type":"position","x":1.5,"y":1.65,"z":-2,"yaw":-1.57}}
+{"t":553495,"kind":"action","step":89,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 6 / 12 complete."}
+{"t":553795,"kind":"usage","input":61891,"cached":57062,"output":214}
+{"t":556495,"kind":"telemetry","event":{"t":556495,"type":"idle","ms":6943}}
+{"t":560495,"kind":"telemetry","event":{"t":560495,"type":"idle","ms":10943}}
+{"t":561682,"kind":"action","step":90,"tool":"move","args":{"direction":"back","ms":834}}
+{"t":561982,"kind":"usage","input":63037,"cached":58623,"output":121}
+{"t":562182,"kind":"telemetry","event":{"t":562182,"type":"position","x":-0.3,"y":1.65,"z":-1.99,"yaw":-1.57}}
+{"t":562516,"kind":"telemetry","event":{"t":562516,"type":"position","x":-1.5,"y":1.65,"z":-1.99,"yaw":-1.57}}
+{"t":566329,"kind":"action","step":91,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 7 / 12 complete."}
+{"t":566629,"kind":"usage","input":61938,"cached":57702,"output":217}
+{"t":569329,"kind":"telemetry","event":{"t":569329,"type":"idle","ms":6813}}
+{"t":573329,"kind":"telemetry","event":{"t":573329,"type":"idle","ms":10813}}
+{"t":574305,"kind":"action","step":92,"tool":"move","args":{"direction":"back","ms":833}}
+{"t":574605,"kind":"usage","input":63144,"cached":58719,"output":195}
+{"t":574805,"kind":"telemetry","event":{"t":574805,"type":"position","x":-3.3,"y":1.65,"z":-1.99,"yaw":-1.57}}
+{"t":575138,"kind":"telemetry","event":{"t":575138,"type":"position","x":-4.5,"y":1.65,"z":-1.99,"yaw":-1.57}}
+{"t":579138,"kind":"telemetry","event":{"t":579138,"type":"idle","ms":4000}}
+{"t":581008,"kind":"action","step":93,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 8 / 12 complete."}
+{"t":581308,"kind":"usage","input":62497,"cached":58221,"output":183}
+{"t":584008,"kind":"telemetry","event":{"t":584008,"type":"idle","ms":8870}}
+{"t":588008,"kind":"telemetry","event":{"t":588008,"type":"idle","ms":12870}}
+{"t":588878,"kind":"action","step":94,"tool":"move","args":{"direction":"right","ms":830}}
+{"t":589178,"kind":"usage","input":62003,"cached":56752,"output":108}
+{"t":589378,"kind":"telemetry","event":{"t":589378,"type":"position","x":-4.5,"y":1.65,"z":-0.19,"yaw":-1.57}}
+{"t":589708,"kind":"telemetry","event":{"t":589708,"type":"position","x":-4.5,"y":1.65,"z":1,"yaw":-1.57}}
+{"t":593708,"kind":"telemetry","event":{"t":593708,"type":"idle","ms":4000}}
+{"t":595219,"kind":"action","step":95,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 9 / 12 complete."}
+{"t":595519,"kind":"usage","input":63294,"cached":58194,"output":172}
+{"t":598219,"kind":"telemetry","event":{"t":598219,"type":"idle","ms":8511}}
+{"t":602219,"kind":"telemetry","event":{"t":602219,"type":"idle","ms":12511}}
+{"t":602871,"kind":"action","step":96,"tool":"move","args":{"direction":"forward","ms":832}}
+{"t":603171,"kind":"usage","input":63160,"cached":57891,"output":188}
+{"t":603371,"kind":"telemetry","event":{"t":603371,"type":"position","x":-2.7,"y":1.65,"z":1,"yaw":-1.57}}
+{"t":603703,"kind":"telemetry","event":{"t":603703,"type":"position","x":-1.5,"y":1.65,"z":1,"yaw":-1.57}}
+{"t":607703,"kind":"telemetry","event":{"t":607703,"type":"idle","ms":4000}}
+{"t":609496,"kind":"action","step":97,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 10 / 12 complete."}
+{"t":609796,"kind":"usage","input":62985,"cached":57335,"output":126}
+{"t":612496,"kind":"telemetry","event":{"t":612496,"type":"idle","ms":8793}}
+{"t":616457,"kind":"action","step":98,"tool":"move","args":{"direction":"forward","ms":834}}
+{"t":616757,"kind":"usage","input":62283,"cached":57924,"output":163}
+{"t":616957,"kind":"telemetry","event":{"t":616957,"type":"position","x":0.3,"y":1.65,"z":0.99,"yaw":-1.57}}
+{"t":617291,"kind":"telemetry","event":{"t":617291,"type":"position","x":1.5,"y":1.65,"z":0.99,"yaw":-1.57}}
+{"t":621291,"kind":"telemetry","event":{"t":621291,"type":"idle","ms":4000}}
+{"t":622567,"kind":"action","step":99,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 11 / 12 complete."}
+{"t":622867,"kind":"usage","input":62443,"cached":57955,"output":102}
+{"t":625567,"kind":"telemetry","event":{"t":625567,"type":"idle","ms":8276}}
+{"t":629567,"kind":"telemetry","event":{"t":629567,"type":"idle","ms":12276}}
+{"t":631052,"kind":"action","step":100,"tool":"move","args":{"direction":"forward","ms":833}}
+{"t":631352,"kind":"usage","input":62120,"cached":57110,"output":134}
+{"t":631552,"kind":"telemetry","event":{"t":631552,"type":"position","x":3.3,"y":1.65,"z":0.99,"yaw":-1.57}}
+{"t":631885,"kind":"telemetry","event":{"t":631885,"type":"position","x":4.5,"y":1.65,"z":0.99,"yaw":-1.57}}
+{"t":635885,"kind":"telemetry","event":{"t":635885,"type":"idle","ms":4000}}
+{"t":636759,"kind":"action","step":101,"tool":"interact","args":{"hold_ms":2500},"result":"Specimen irrigated. 12 / 12 complete."}
+{"t":637059,"kind":"usage","input":62132,"cached":56439,"output":106}
+{"t":639259,"kind":"telemetry","event":{"t":639259,"type":"flaw_triggered","flawId":"P1"}}
+{"t":639259,"kind":"telemetry","event":{"t":639259,"type":"puzzle_solved","puzzle":"irrigation"}}
+{"t":640259,"kind":"telemetry","event":{"t":640259,"type":"idle","ms":8374}}
+{"t":643128,"kind":"action","step":102,"tool":"look","args":{"direction":"right","ms":761}}
+{"t":643428,"kind":"usage","input":63550,"cached":59451,"output":163}
+{"t":643889,"kind":"telemetry","event":{"t":643889,"type":"position","x":4.5,"y":1.65,"z":0.99,"yaw":-2.787}}
+{"t":644389,"kind":"telemetry","event":{"t":644389,"type":"idle","ms":12504}}
+{"t":648389,"kind":"telemetry","event":{"t":648389,"type":"idle","ms":16504}}
+{"t":649001,"kind":"action","step":103,"tool":"move","args":{"direction":"forward","ms":790}}
+{"t":649301,"kind":"usage","input":62583,"cached":57962,"output":109}
+{"t":649501,"kind":"telemetry","event":{"t":649501,"type":"position","x":5.13,"y":1.65,"z":2.68,"yaw":-2.787}}
+{"t":649791,"kind":"telemetry","event":{"t":649791,"type":"position","x":5.49,"y":1.65,"z":3.66,"yaw":-2.787}}
+{"t":653791,"kind":"telemetry","event":{"t":653791,"type":"idle","ms":4000}}
+{"t":653925,"kind":"action","step":104,"tool":"interact","args":{},"result":"bio cell added to inventory."}
+{"t":653925,"kind":"telemetry","event":{"t":653925,"type":"item_picked","item":"bio_cell"}}
+{"t":654225,"kind":"usage","input":62722,"cached":58588,"output":176}
+{"t":657925,"kind":"telemetry","event":{"t":657925,"type":"idle","ms":8134}}
+{"t":658134,"kind":"action","step":105,"tool":"look","args":{"direction":"right","ms":895}}
+{"t":658434,"kind":"usage","input":63455,"cached":57732,"output":131}
+{"t":659029,"kind":"telemetry","event":{"t":659029,"type":"position","x":5.49,"y":1.65,"z":3.66,"yaw":-4.219}}
+{"t":662029,"kind":"telemetry","event":{"t":662029,"type":"idle","ms":12238}}
+{"t":663339,"kind":"action","step":106,"tool":"move","args":{"direction":"forward","ms":1480}}
+{"t":663639,"kind":"usage","input":63297,"cached":58946,"output":174}
+{"t":663839,"kind":"telemetry","event":{"t":663839,"type":"position","x":3.9,"y":1.65,"z":4.51,"yaw":-4.219}}
+{"t":664339,"kind":"telemetry","event":{"t":664339,"type":"position","x":2.32,"y":1.65,"z":5.36,"yaw":-4.219}}
+{"t":664819,"kind":"telemetry","event":{"t":664819,"type":"position","x":0.79,"y":1.65,"z":6.18,"yaw":-4.219}}
+{"t":668819,"kind":"telemetry","event":{"t":668819,"type":"idle","ms":4000}}
+{"t":669578,"kind":"action","step":107,"tool":"interact","args":{},"result":"Back through the door."}
+{"t":669578,"kind":"telemetry","event":{"t":669578,"type":"room_entered","room":"corridor"}}
+{"t":669578,"kind":"telemetry","event":{"t":669578,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":669878,"kind":"usage","input":62695,"cached":58664,"output":157}
+{"t":673078,"kind":"telemetry","event":{"t":673078,"type":"idle","ms":8259}}
+{"t":674655,"kind":"action","step":108,"tool":"look","args":{"direction":"right","ms":275}}
+{"t":674930,"kind":"telemetry","event":{"t":674930,"type":"position","x":0,"y":1.65,"z":4,"yaw":-0.44}}
+{"t":674955,"kind":"usage","input":63279,"cached":59198,"output":144}
+{"t":677430,"kind":"telemetry","event":{"t":677430,"type":"idle","ms":12611}}
+{"t":680567,"kind":"action","step":109,"tool":"move","args":{"direction":"forward","ms":3000}}
+{"t":680867,"kind":"usage","input":63296,"cached":59195,"output":108}
+{"t":681067,"kind":"telemetry","event":{"t":681067,"type":"position","x":0.77,"y":1.65,"z":2.37,"yaw":-0.44}}
+{"t":681567,"kind":"telemetry","event":{"t":681567,"type":"position","x":1.53,"y":1.65,"z":0.74,"yaw":-0.44}}
+{"t":682067,"kind":"telemetry","event":{"t":682067,"type":"position","x":2.3,"y":1.65,"z":-0.89,"yaw":-0.44}}
+{"t":682567,"kind":"telemetry","event":{"t":682567,"type":"position","x":3.07,"y":1.65,"z":-2.51,"yaw":-0.44}}
+{"t":683067,"kind":"telemetry","event":{"t":683067,"type":"position","x":3.83,"y":1.65,"z":-4.14,"yaw":-0.44}}
+{"t":683567,"kind":"telemetry","event":{"t":683567,"type":"position","x":4.6,"y":1.65,"z":-5.77,"yaw":-0.44}}
+{"t":687567,"kind":"telemetry","event":{"t":687567,"type":"idle","ms":4000}}
+{"t":688092,"kind":"action","step":110,"tool":"interact","args":{},"result":"Reactor transit complete."}
+{"t":688092,"kind":"telemetry","event":{"t":688092,"type":"flaw_triggered","flawId":"P2"}}
+{"t":688392,"kind":"usage","input":62935,"cached":57159,"output":164}
+{"t":691592,"kind":"telemetry","event":{"t":691592,"type":"idle","ms":8025}}
+{"t":695592,"kind":"telemetry","event":{"t":695592,"type":"idle","ms":12025}}
+{"t":699592,"kind":"telemetry","event":{"t":699592,"type":"idle","ms":16025}}
+{"t":703592,"kind":"telemetry","event":{"t":703592,"type":"idle","ms":20025}}
+{"t":707592,"kind":"telemetry","event":{"t":707592,"type":"idle","ms":24025}}
+{"t":711592,"kind":"telemetry","event":{"t":711592,"type":"idle","ms":28025}}
+{"t":715592,"kind":"telemetry","event":{"t":715592,"type":"idle","ms":32025}}
+{"t":719592,"kind":"telemetry","event":{"t":719592,"type":"idle","ms":36025}}
+{"t":723592,"kind":"telemetry","event":{"t":723592,"type":"idle","ms":40025}}
+{"t":727592,"kind":"telemetry","event":{"t":727592,"type":"idle","ms":44025}}
+{"t":731592,"kind":"telemetry","event":{"t":731592,"type":"idle","ms":48025}}
+{"t":733092,"kind":"telemetry","event":{"t":733092,"type":"room_entered","room":"reactor"}}
+{"t":733092,"kind":"telemetry","event":{"t":733092,"type":"flaw_triggered","flawId":"B4"}}
+{"t":733092,"kind":"telemetry","event":{"t":733092,"type":"flaw_triggered","flawId":"U2"}}
+{"t":733092,"kind":"telemetry","event":{"t":733092,"type":"position","x":0,"y":1.65,"z":4,"yaw":0}}
+{"t":735592,"kind":"telemetry","event":{"t":735592,"type":"idle","ms":52025}}
+{"t":738200,"kind":"action","step":111,"tool":"screenshot","args":{},"frame":"frames/00006.png","result":"/Users/kapie/Projects/astra hackathon/synthetic-playtest/.claude/worktrees/agent-aead0d28dcce3506a/packages/analysis/fixtures/run-fixture/priya/frames/00006.png"}
+{"t":738500,"kind":"usage","input":63635,"cached":59211,"output":140}
+{"t":739700,"kind":"telemetry","event":{"t":739700,"type":"idle","ms":56133}}
+{"t":741819,"kind":"action","step":111,"tool":"note_finding","args":{"finding":{"id":"priya-f5","severity":"low","category":"boredom","title":"Forty-five second lift ride with nothing to look at","description":"The reactor transit lift takes forty-five seconds. There is no window, no log, no audio — just the message \"Reactor transit in progress.\" Even a patient player checks the clock.","room":"corridor","reproSteps":["Collect the bioelectric cell","Use the reactor lift","Wait 45 seconds"],"frame":"frames/00006.png","step":111}},"result":"noted priya-f5"}
+{"t":741869,"kind":"finding","finding":{"id":"priya-f5","severity":"low","category":"boredom","title":"Forty-five second lift ride with nothing to look at","description":"The reactor transit lift takes forty-five seconds. There is no window, no log, no audio — just the message \"Reactor transit in progress.\" Even a patient player checks the clock.","room":"corridor","reproSteps":["Collect the bioelectric cell","Use the reactor lift","Wait 45 seconds"],"frame":"frames/00006.png","step":111}}
+{"t":742119,"kind":"usage","input":63820,"cached":58719,"output":464}
+{"t":743819,"kind":"telemetry","event":{"t":743819,"type":"idle","ms":60252}}
+{"t":746573,"kind":"action","step":111,"tool":"note_finding","args":{"finding":{"id":"priya-f6","severity":"high","category":"unfair","title":"An oxygen countdown appeared with no announcement","description":"On arriving in the reactor an oxygen meter appeared in the HUD and started falling. No message, no alarm, no cue. I only noticed because I read the HUD out of habit. Running out presumably means a restart.","room":"reactor","reproSteps":["Enter the reactor","Watch the HUD: oxygen counts down from 180 with no announcement"],"frame":"frames/00006.png","step":111}},"result":"noted priya-f6"}
+{"t":746623,"kind":"finding","finding":{"id":"priya-f6","severity":"high","category":"unfair","title":"An oxygen countdown appeared with no announcement","description":"On arriving in the reactor an oxygen meter appeared in the HUD and started falling. No message, no alarm, no cue. I only noticed because I read the HUD out of habit. Running out presumably means a restart.","room":"reactor","reproSteps":["Enter the reactor","Watch the HUD: oxygen counts down from 180 with no announcement"],"frame":"frames/00006.png","step":111}}
+{"t":746873,"kind":"usage","input":62923,"cached":58030,"output":378}
+{"t":748073,"kind":"telemetry","event":{"t":748073,"type":"idle","ms":64506}}
+{"t":751260,"kind":"action","step":111,"tool":"use_item","args":{"name":"combine"},"result":"Regulator assembled."}
+{"t":751260,"kind":"telemetry","event":{"t":751260,"type":"item_used","item":"wire"}}
+{"t":751260,"kind":"telemetry","event":{"t":751260,"type":"item_used","item":"casing"}}
+{"t":751260,"kind":"telemetry","event":{"t":751260,"type":"item_picked","item":"regulator"}}
+{"t":751260,"kind":"telemetry","event":{"t":751260,"type":"puzzle_solved","puzzle":"combine_regulator"}}
+{"t":751560,"kind":"usage","input":63384,"cached":59302,"output":182}
+{"t":752260,"kind":"telemetry","event":{"t":752260,"type":"idle","ms":68693}}
+{"t":755072,"kind":"action","step":112,"tool":"move","args":{"direction":"forward","ms":2194}}
+{"t":755372,"kind":"usage","input":63730,"cached":58790,"output":190}
+{"t":755572,"kind":"telemetry","event":{"t":755572,"type":"position","x":0,"y":1.65,"z":2.2,"yaw":0}}
+{"t":756072,"kind":"telemetry","event":{"t":756072,"type":"position","x":0,"y":1.65,"z":0.4,"yaw":0}}
+{"t":756572,"kind":"telemetry","event":{"t":756572,"type":"position","x":0,"y":1.65,"z":-1.4,"yaw":0}}
+{"t":757072,"kind":"telemetry","event":{"t":757072,"type":"position","x":0,"y":1.65,"z":-3.2,"yaw":0}}
+{"t":757266,"kind":"telemetry","event":{"t":757266,"type":"position","x":0,"y":1.65,"z":-3.9,"yaw":0}}
+{"t":761266,"kind":"telemetry","event":{"t":761266,"type":"idle","ms":4000}}
+{"t":762773,"kind":"action","step":113,"tool":"interact","args":{},"result":"sequence awaits a code."}
+{"t":762773,"kind":"telemetry","event":{"t":762773,"type":"flaw_triggered","flawId":"U1"}}
+{"t":763073,"kind":"usage","input":63180,"cached":59057,"output":151}
+{"t":765273,"kind":"telemetry","event":{"t":765273,"type":"idle","ms":8007}}
+{"t":767497,"kind":"action","step":114,"tool":"type_text","args":{"text":"321\n"},"result":"Ignition sequence accepted."}
+{"t":767497,"kind":"telemetry","event":{"t":767497,"type":"puzzle_solved","puzzle":"sequence"}}
+{"t":767797,"kind":"usage","input":64120,"cached":59191,"output":146}
+{"t":769497,"kind":"telemetry","event":{"t":769497,"type":"idle","ms":12231}}
+{"t":772115,"kind":"action","step":115,"tool":"note_finding","args":{"finding":{"id":"priya-f7","severity":"high","category":"unfair","title":"Ignition code needs the colour log from the airlock — four rooms back, no reminder","description":"The ignition sequence is derived from the expedition log in the airlock: cold before life before heat, blue/green/red mapped to 3/2/1. That log is four rooms and forty minutes behind you and nothing in the reactor restates it. I happened to have read it.","room":"reactor","reproSteps":["Read the expedition log in the airlock","Reach the reactor ignition terminal","Derive 3-2-1 from colour order with no in-room reminder"],"frame":"frames/00006.png","step":115}},"result":"noted priya-f7"}
+{"t":772165,"kind":"finding","finding":{"id":"priya-f7","severity":"high","category":"unfair","title":"Ignition code needs the colour log from the airlock — four rooms back, no reminder","description":"The ignition sequence is derived from the expedition log in the airlock: cold before life before heat, blue/green/red mapped to 3/2/1. That log is four rooms and forty minutes behind you and nothing in the reactor restates it. I happened to have read it.","room":"reactor","reproSteps":["Read the expedition log in the airlock","Reach the reactor ignition terminal","Derive 3-2-1 from colour order with no in-room reminder"],"frame":"frames/00006.png","step":115}}
+{"t":772415,"kind":"usage","input":63664,"cached":59581,"output":435}
+{"t":773615,"kind":"telemetry","event":{"t":773615,"type":"idle","ms":16349}}
+{"t":776015,"kind":"action","step":115,"tool":"look","args":{"direction":"left","ms":1044}}
+{"t":776315,"kind":"usage","input":63370,"cached":57953,"output":143}
+{"t":777059,"kind":"telemetry","event":{"t":777059,"type":"position","x":0,"y":1.65,"z":-3.9,"yaw":1.67}}
+{"t":778059,"kind":"telemetry","event":{"t":778059,"type":"idle","ms":20793}}
+{"t":781898,"kind":"action","step":116,"tool":"move","args":{"direction":"forward","ms":867}}
+{"t":782198,"kind":"usage","input":63591,"cached":58378,"output":195}
+{"t":782398,"kind":"telemetry","event":{"t":782398,"type":"position","x":-1.79,"y":1.65,"z":-3.72,"yaw":1.67}}
+{"t":782765,"kind":"telemetry","event":{"t":782765,"type":"position","x":-3.11,"y":1.65,"z":-3.59,"yaw":1.67}}
+{"t":786765,"kind":"telemetry","event":{"t":786765,"type":"idle","ms":4000}}
+{"t":786858,"kind":"action","step":117,"tool":"interact","args":{},"result":"Regulator installed."}
+{"t":786858,"kind":"telemetry","event":{"t":786858,"type":"item_used","item":"regulator"}}
+{"t":786858,"kind":"telemetry","event":{"t":786858,"type":"puzzle_solved","puzzle":"regulator"}}
+{"t":787158,"kind":"usage","input":63284,"cached":59014,"output":106}
+{"t":790858,"kind":"telemetry","event":{"t":790858,"type":"idle","ms":8093}}
+{"t":791456,"kind":"action","step":118,"tool":"look","args":{"direction":"left","ms":1894}}
+{"t":791756,"kind":"usage","input":63996,"cached":59034,"output":139}
+{"t":793350,"kind":"telemetry","event":{"t":793350,"type":"position","x":-3.11,"y":1.65,"z":-3.59,"yaw":4.701}}
+{"t":795350,"kind":"telemetry","event":{"t":795350,"type":"idle","ms":12585}}
+{"t":797538,"kind":"action","step":119,"tool":"move","args":{"direction":"forward","ms":1724}}
+{"t":797838,"kind":"usage","input":63605,"cached":59352,"output":209}
+{"t":798038,"kind":"telemetry","event":{"t":798038,"type":"position","x":-1.31,"y":1.65,"z":-3.57,"yaw":4.701}}
+{"t":798538,"kind":"telemetry","event":{"t":798538,"type":"position","x":0.49,"y":1.65,"z":-3.55,"yaw":4.701}}
+{"t":799038,"kind":"telemetry","event":{"t":799038,"type":"position","x":2.29,"y":1.65,"z":-3.53,"yaw":4.701}}
+{"t":799262,"kind":"telemetry","event":{"t":799262,"type":"position","x":3.1,"y":1.65,"z":-3.52,"yaw":4.701}}
+{"t":803262,"kind":"telemetry","event":{"t":803262,"type":"idle","ms":4000}}
+{"t":804942,"kind":"action","step":120,"tool":"interact","args":{},"result":"Sequence cleared."}
+{"t":804942,"kind":"telemetry","event":{"t":804942,"type":"flaw_triggered","flawId":"C2"}}
+{"t":804942,"kind":"telemetry","event":{"t":804942,"type":"puzzle_failed","puzzle":"sequence"}}
+{"t":805242,"kind":"usage","input":63282,"cached":58444,"output":187}
+{"t":807442,"kind":"telemetry","event":{"t":807442,"type":"idle","ms":8180}}
+{"t":810343,"kind":"action","step":121,"tool":"note_finding","args":{"finding":{"id":"priya-f8","severity":"high","category":"bug","title":"'Calibrate' silently wiped the accepted sequence","description":"After the terminal accepted 321, I pressed the panel button labelled Calibrate expecting a tuning step. It cleared the sequence. The label says calibrate; the behaviour is reset.","room":"reactor","reproSteps":["Enter the accepted ignition sequence","Press Calibrate","Sequence is cleared; ignite refuses"],"frame":"frames/00006.png","step":121}},"result":"noted priya-f8"}
+{"t":810393,"kind":"finding","finding":{"id":"priya-f8","severity":"high","category":"bug","title":"'Calibrate' silently wiped the accepted sequence","description":"After the terminal accepted 321, I pressed the panel button labelled Calibrate expecting a tuning step. It cleared the sequence. The label says calibrate; the behaviour is reset.","room":"reactor","reproSteps":["Enter the accepted ignition sequence","Press Calibrate","Sequence is cleared; ignite refuses"],"frame":"frames/00006.png","step":121}}
+{"t":810643,"kind":"usage","input":63515,"cached":59446,"output":435}
+{"t":811843,"kind":"telemetry","event":{"t":811843,"type":"idle","ms":12581}}
+{"t":815843,"kind":"telemetry","event":{"t":815843,"type":"idle","ms":16581}}
+{"t":816524,"kind":"action","step":121,"tool":"look","args":{"direction":"left","ms":1725}}
+{"t":816824,"kind":"usage","input":64389,"cached":59052,"output":134}
+{"t":818249,"kind":"telemetry","event":{"t":818249,"type":"position","x":3.1,"y":1.65,"z":-3.52,"yaw":7.461}}
+{"t":820249,"kind":"telemetry","event":{"t":820249,"type":"idle","ms":20987}}
+{"t":823542,"kind":"action","step":122,"tool":"move","args":{"direction":"forward","ms":682}}
+{"t":823842,"kind":"usage","input":64733,"cached":59463,"output":195}
+{"t":824042,"kind":"telemetry","event":{"t":824042,"type":"position","x":1.44,"y":1.65,"z":-4.21,"yaw":7.461}}
+{"t":824224,"kind":"telemetry","event":{"t":824224,"type":"position","x":0.83,"y":1.65,"z":-4.46,"yaw":7.461}}
+{"t":828224,"kind":"telemetry","event":{"t":828224,"type":"idle","ms":4000}}
+{"t":828900,"kind":"action","step":123,"tool":"interact","args":{},"result":"sequence awaits a code."}
+{"t":829200,"kind":"usage","input":64068,"cached":59939,"output":110}
+{"t":832400,"kind":"telemetry","event":{"t":832400,"type":"idle","ms":8176}}
+{"t":834495,"kind":"action","step":124,"tool":"type_text","args":{"text":"321\n"},"result":"Ignition sequence accepted."}
+{"t":834495,"kind":"telemetry","event":{"t":834495,"type":"puzzle_solved","puzzle":"sequence"}}
+{"t":834795,"kind":"usage","input":64209,"cached":59778,"output":203}
+{"t":836495,"kind":"telemetry","event":{"t":836495,"type":"idle","ms":12271}}
+{"t":839698,"kind":"action","step":125,"tool":"look","args":{"direction":"left","ms":1080}}
+{"t":839998,"kind":"usage","input":64737,"cached":60021,"output":166}
+{"t":840778,"kind":"telemetry","event":{"t":840778,"type":"position","x":0.83,"y":1.65,"z":-4.46,"yaw":9.189}}
+{"t":841278,"kind":"telemetry","event":{"t":841278,"type":"idle","ms":17054}}
+{"t":845278,"kind":"telemetry","event":{"t":845278,"type":"idle","ms":21054}}
+{"t":846023,"kind":"action","step":126,"tool":"move","args":{"direction":"forward","ms":738}}
+{"t":846323,"kind":"usage","input":64901,"cached":60125,"output":176}
+{"t":846523,"kind":"telemetry","event":{"t":846523,"type":"position","x":0.41,"y":1.65,"z":-2.71,"yaw":9.189}}
+{"t":846761,"kind":"telemetry","event":{"t":846761,"type":"position","x":0.21,"y":1.65,"z":-1.87,"yaw":9.189}}
+{"t":850761,"kind":"telemetry","event":{"t":850761,"type":"idle","ms":4000}}
+{"t":851619,"kind":"action","step":127,"tool":"interact","args":{},"result":"The core ignites. Station Kepler is restored."}
+{"t":851619,"kind":"telemetry","event":{"t":851619,"type":"item_used","item":"bio_cell"}}
+{"t":851619,"kind":"telemetry","event":{"t":851619,"type":"puzzle_solved","puzzle":"reactor"}}
+{"t":851919,"kind":"usage","input":63944,"cached":59002,"output":154}
+{"t":854119,"kind":"status","status":"reporting"}
+{"t":863119,"kind":"codex","event":{"type":"turn.completed","usage":{"input_tokens":8790255,"cached_input_tokens":8042624,"output_tokens":24721}}}
+{"t":863619,"kind":"status","status":"done"}
