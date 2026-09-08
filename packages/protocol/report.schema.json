@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlaytestReport",
+  "description": "The tester's final report. Passed to `codex exec --output-schema`. Mirrors PlaytestReport in contract.ts — keep them in sync.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["persona", "summary", "completed", "findings", "experience", "wouldRecommend"],
+  "properties": {
+    "persona": { "type": "string" },
+    "summary": { "type": "string", "description": "2-4 sentences in the persona's own voice about how the session felt." },
+    "completed": { "type": "boolean" },
+    "abandonedReason": { "type": "string" },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "severity", "category", "title", "description", "reproSteps", "step"],
+        "properties": {
+          "id": { "type": "string" },
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "category": { "type": "string", "enum": ["bug", "confusion", "boredom", "unfair", "accessibility", "other"] },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "room": { "type": "string" },
+          "reproSteps": { "type": "array", "items": { "type": "string" } },
+          "frame": { "type": "string" },
+          "step": { "type": "integer" }
+        }
+      }
+    },
+    "experience": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confused", "bored", "unfair", "enjoyed"],
+      "properties": {
+        "confused": { "type": "array", "items": { "type": "string" } },
+        "bored": { "type": "array", "items": { "type": "string" } },
+        "unfair": { "type": "array", "items": { "type": "string" } },
+        "enjoyed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "wouldRecommend": { "type": "integer", "minimum": 1, "maximum": 5 }
+  }
+}

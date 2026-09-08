@@ -94,3 +94,146 @@ export interface FlawLedgerEntry {
   /** Who we PREDICT catches it — the hypothesis the scoring pass tests. */
   expectedPersonas: string[];
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PLATFORM-SIDE TYPES — shared by persona-mcp, orchestrator, analysis, dashboard
+// ═══════════════════════════════════════════════════════════════════════════
+
+export type ReadingLevel = 'skim' | 'normal' | 'thorough';
+export type Familiarity = 'none' | 'medium' | 'high';
+export type Exploration = 'low' | 'medium' | 'high';
+export type ReasoningEffort = 'low' | 'medium' | 'high';
+
+/** A persona is a PERSON. `enforcement` is how the harness makes that person real. */
+export interface PersonaConfig {
+  id: string;
+  name: string;
+  age: number;
+  bio: string;
+  goal: string;
+  enforcement: {
+    reading: ReadingLevel;          // words visible per text region before pixels are blurred
+    genre_familiarity: Familiarity; // whether control conventions are ever mentioned
+    patience: number;               // no-progress steps before frustration escalates
+    exploration: Exploration;
+    audio: 'on' | 'off';            // whether the listen() tool exists at all
+    step_budget: number;            // hard cap on actions
+    reasoning_effort: ReasoningEffort;
+  };
+}
+
+export type Severity = 'critical' | 'high' | 'medium' | 'low';
+export type FindingCategory = 'bug' | 'confusion' | 'boredom' | 'unfair' | 'accessibility' | 'other';
+
+/** One thing a tester noticed. Emitted via the note_finding tool and in the final report. */
+export interface Finding {
+  id: string;
+  severity: Severity;
+  category: FindingCategory;
+  title: string;
+  description: string;
+  room?: string;
+  /** Human-readable repro steps. The verifier replays the ACTION LOG, not these. */
+  reproSteps: string[];
+  /** Frame path (relative to the persona dir) captured when the finding was noted. */
+  frame?: string;
+  /** Step index when noted — lets the verifier slice the action log. */
+  step: number;
+}
+
+/** The agent's final message, forced by `codex exec --output-schema report.schema.json`. */
+export interface PlaytestReport {
+  persona: string;
+  summary: string;
+  completed: boolean;
+  abandonedReason?: string;
+  findings: Finding[];
+  experience: {
+    confused: string[];
+    bored: string[];
+    unfair: string[];
+    enjoyed: string[];
+  };
+  wouldRecommend: 1 | 2 | 3 | 4 | 5;
+}
+
+/** One line of `<persona>/session.jsonl`. Everything that happened, in order. */
+export type SessionEvent =
+  | { t: number; kind: 'codex'; event: unknown }                    // raw `codex exec --json` line
+  | { t: number; kind: 'telemetry'; event: GameEvent }              // ground truth, never shown to agent
+  | { t: number; kind: 'action'; step: number; tool: string; args: unknown; result?: string; frame?: string }
+  | { t: number; kind: 'finding'; finding: Finding }
+  | { t: number; kind: 'gate'; gate: 'patience' | 'budget' | 'abandon'; detail: string }
+  | { t: number; kind: 'usage'; input: number; cached: number; output: number }
+  | { t: number; kind: 'status'; status: PersonaStatus; detail?: string };
+
+export type PersonaStatus = 'queued' | 'starting' | 'playing' | 'reporting' | 'done' | 'failed' | 'stopped';
+
+export interface CostSummary {
+  steps: number;
+  inputTokens: number;
+  cachedInputTokens: number;
+  outputTokens: number;
+  usd: number;
+}
+
+// Pricing for gpt-6-astra, verified 2026-09-08. Per million tokens.
+export const ASTRA_PRICE = { input: 10, cachedInput: 1, output: 50 } as const;
+export const costUsd = (c: Omit<CostSummary, 'usd' | 'steps'>) =>
+  ((c.inputTokens - c.cachedInputTokens) * ASTRA_PRICE.input
+    + c.cachedInputTokens * ASTRA_PRICE.cachedInput
+    + c.outputTokens * ASTRA_PRICE.output) / 1_000_000;
+
+// ── Run archive layout ──────────────────────────────────────────────────────
+//   runs/<runId>/
+//     run.json                      RunMeta
+//     <personaId>/
+//       persona.json                PersonaConfig actually used
+//       session.jsonl               SessionEvent per line
+//       frames/00000.png …          what the agent SAW (post-redaction)
+//       report.json                 PlaytestReport
+//       cost.json                   CostSummary
+//     analysis/
+//       findings.json               ClusteredFinding[]
+//       score.json                  Score
+//       report.md                   rendered cross-persona report
+
+export interface RunMeta {
+  runId: string;
+  startedAt: string;              // ISO
+  finishedAt?: string;
+  gameUrl: string;
+  seed: number;
+  backend: 'local' | 'modal';
+  personas: string[];
+  status: 'running' | 'done' | 'failed' | 'stopped';
+}
+
+/** A finding after dedup across personas. */
+export interface ClusteredFinding {
+  id: string;
+  title: string;
+  category: FindingCategory;
+  severity: Severity;
+  description: string;
+  room?: string;
+  /** Which personas reported it, and how many times each. */
+  reporters: Array<{ persona: string; count: number; findingIds: string[] }>;
+  /** 3+ of 4 stalling at the same ground-truth spot = the game; 1 = the agent. */
+  attribution: 'game' | 'agent' | 'unclear';
+  verified: boolean | null;       // null = not yet replayed
+  verificationNote?: string;
+  /** Matched ledger id, if the analysis joined it to a known injected flaw. */
+  ledgerId?: string;
+  frames: string[];
+}
+
+export interface Score {
+  recall: number;                 // ledger flaws found / ledger flaws (excl. decoys)
+  precision: number;              // findings matched to ledger / all findings
+  byClass: Record<FlawClass, { total: number; found: number }>;
+  decoysFlagged: string[];        // false positives
+  emergent: string[];             // unledgered findings that look real — triage manually
+  found: string[];
+  missed: string[];
+}
