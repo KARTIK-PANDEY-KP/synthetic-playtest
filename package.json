@@ -4,9 +4,16 @@
   "type": "module",
   "scripts": {
     "game:dev": "pnpm --filter station-kepler dev",
-    "game:build": "pnpm --filter station-kepler build",
-    "spike:codex-vision": "spikes/codex-vision/run.sh",
+    "game:build": "pnpm --filter station-kepler exec vite build",
+    "game:test": "cd apps/game && node scripts/verify.mjs",
     "smoke": "node packages/persona-mcp/smoke.mjs",
-    "proof:redaction": "node packages/persona-mcp/proof-redaction.mjs"
+    "test:runner": "node packages/persona-mcp/test-server.mjs",
+    "proof:redaction": "node packages/persona-mcp/proof-redaction.mjs",
+    "serve:game": "node packages/persona-mcp/serve.mjs --port 5273",
+    "runner": "node packages/persona-mcp/runner.mjs",
+    "orchestrator": "pnpm --filter orchestrator start",
+    "orchestrator:dev": "pnpm --filter orchestrator dev",
+    "spike:codex-vision": "spikes/codex-vision/run.sh",
+    "test": "pnpm game:build && pnpm game:test && pnpm smoke && pnpm test:runner"
   }
 }

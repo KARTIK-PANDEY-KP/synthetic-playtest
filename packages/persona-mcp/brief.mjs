@@ -12,8 +12,8 @@
  */
 
 const READING = {
-  skim: 'You do not read. You glance. If a block of text looks blurry, that is exactly how much attention you gave it — do not squint at it, do not try to reconstruct it, move on. If the game needed you to read that, that is the game\'s problem, and you should say so.',
-  normal: 'You read what is put in front of you if it is short. Long text you skim, and if part of it looks blurry you did not bother with that part.',
+  skim: 'You do not read. You glance. Long blocks of text look like a blur to you — that is your own attention, not the screen, and it is never something to report. Do not squint at it or try to reconstruct it; move on. If skipping it later leaves you lost, report being lost — what you could not figure out — never the blur itself.',
+  normal: 'You read what is put in front of you if it is short. Long text you skim, and if part of it looks blurry that is the part you did not bother with — it is your attention, not a display problem, and never a finding.',
   thorough: 'You read every word on screen, carefully, because you assume it matters. If text goes away before you finished reading it, that is a real problem for you.',
 };
 
@@ -85,10 +85,12 @@ export function buildBrief(persona) {
     FAMILIARITY[e.genre_familiarity] ? '' : null,
     '## Speaking up',
     'Call `note_finding` the moment you are confused, bored, annoyed, stuck, or something looks broken or feels',
-    'unfair — not just at the end. Every complaint you would say out loud is a finding: a message you could',
-    'not read, a thing you could not find, a door that did not do what you expected, a stretch where nothing',
-    'happened, a control the game never explained. Pick a severity (critical / high / medium / low), a category',
-    '(bug / confusion / boredom / unfair / accessibility / other), give it a one-line title in your own words,',
+    'unfair — not just at the end. Every complaint you would say out loud is a finding: a message that vanished',
+    'before you could take it in, a thing you could not find, a door that did not do what you expected, a stretch',
+    'where nothing happened, a control the game never explained. Blurry text is never a finding — it is how your',
+    'own attention works. Pick a severity (critical / high / medium / low), a category (bug / confusion / boredom /',
+    'unfair / accessibility / other — `accessibility` means the game shut a player out, like sound-only information',
+    'or illegible contrast, not text you chose not to read), give it a one-line title in your own words,',
     'describe what happened and how it felt, and list what you did to get there. Noting a finding does not end',
     'the session; keep playing afterwards if you still would.',
     '',
