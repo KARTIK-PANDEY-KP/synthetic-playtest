@@ -3,7 +3,8 @@ dist/
 build/
 .next/
 out/
-runs/
+# anchored: an unanchored `runs/` also swallowed apps/dashboard/src/app/runs/ (the run pages)
+/runs/
 *.log
 .DS_Store
 
