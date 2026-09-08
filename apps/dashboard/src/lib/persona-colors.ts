@@ -1,11 +1,11 @@
 import { basePersonaId } from "./format";
 
 const FIXED: Record<string, string> = {
-  maya: "#ffb020",
-  robert: "#7fb2ff",
-  sam: "#7ee787",
-  priya: "#ff7bd5",
-  dana: "#63e6ff",
+  maya: "#4e719f",
+  robert: "#668695",
+  sam: "#587b66",
+  priya: "#88728e",
+  dana: "#4b8586",
 };
 
 const POOL = ["#ffd166", "#06d6a0", "#ef8354", "#b8f2e6", "#c79bff", "#ff9f9f", "#8be9fd", "#f1fa8c"];

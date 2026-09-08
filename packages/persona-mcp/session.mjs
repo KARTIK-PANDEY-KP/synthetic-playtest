@@ -97,7 +97,7 @@ export class GameSession {
     args = args ?? {};
 
     if (name === 'abandon') return this.#abandon(String(args.reason ?? ''));
-    if (name === 'note_finding') return this.#noteFinding(args);
+    if (name === 'note_finding') return await this.#noteFinding(args);
     if (this.abandoned) return { text: OVER, isError: false };
 
     if (!this.driver.loaded) {
@@ -199,7 +199,21 @@ export class GameSession {
     return text;
   }
 
-  #noteFinding(a) {
+  async #noteFinding(a) {
+    // Ground truth at the moment of the note — where they are, what they hold, what they
+    // have done — so the report can set the scene. Never shown to the agent.
+    let state;
+    try {
+      const snap = this.driver?.loaded ? await this.driver.state() : null;
+      const rooms = []; for (const e of this.history) if (e.kind === 'telemetry' && e.event?.type === 'room_entered' && rooms[rooms.length - 1] !== e.event.room) rooms.push(e.event.room);
+      const t0 = this.history.find((e) => e.kind === 'status' && e.status === 'playing')?.t ?? this.history[0]?.t ?? Date.now();
+      state = {
+        ...(snap?.room ? { room: snap.room } : {}), ...(snap?.objective ? { objective: snap.objective } : {}),
+        inventory: snap?.inventory ?? [], solved: snap?.solved ?? [], roomsVisited: rooms,
+        stepsSoFar: this.steps, stepBudget: this.persona.enforcement?.step_budget ?? 0,
+        minutesIn: Math.round((Date.now() - t0) / 6000) / 10,
+      };
+    } catch { /* a snapshot failure must never block the note */ }
     const finding = {
       id: `${this.persona.id}-f${this.findings.length + 1}`,
       severity: ['critical', 'high', 'medium', 'low'].includes(a.severity) ? a.severity : 'medium',
@@ -210,6 +224,7 @@ export class GameSession {
       reproSteps: Array.isArray(a.reproSteps) ? a.reproSteps.map(String) : [],
       ...(this.lastFrame ? { frame: this.lastFrame } : {}),
       step: this.steps,
+      ...(state ? { state } : {}),
     };
     this.findings.push(finding);
     this.emit({ kind: 'finding', finding });

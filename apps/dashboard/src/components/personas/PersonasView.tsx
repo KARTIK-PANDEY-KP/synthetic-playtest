@@ -30,13 +30,13 @@ export function PersonasView() {
   const startBlank = () => { setBasedOn(null); setDraft(DEFAULT_PERSONA); };
 
   return (
-    <div className="mx-auto grid max-w-[1240px] grid-cols-12 gap-6 px-6 py-5">
-      <section className="col-span-4 rise">
+    <div className="workspace grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <section className="lg:col-span-4">
         <p className="eyebrow">roster · {personas.length}</p>
-        <h1 className="display mt-1 text-[28px]">Personas</h1>
-        <p className="mt-1 text-[14px] text-muted">Pick one to use as a starting point, or start blank.</p>
+        <h1 className="display mt-1 text-[28px]">Tester library</h1>
+        <p className="mt-1 text-[14px] text-muted">Review tester profiles. Select a profile to create a new tester based on it.</p>
         <Button variant="outline" onClick={startBlank} className="mt-3 w-full">+ New persona</Button>
-        <ul className="mt-3 max-h-[calc(100vh-15rem)] space-y-2 overflow-y-auto pr-1" data-persona-list>
+        <ul className="mt-3  space-y-2 overflow-y-auto pr-1" data-persona-list>
           {personas.map((p) => (
             <li key={p.id}>
               <button
@@ -51,12 +51,12 @@ export function PersonasView() {
                     <span className="text-[12px] text-dim">{p.age}</span>
                     {!SEEDS.has(p.id) && <Tag tone="amber">custom</Tag>}
                   </span>
-                  <span className="mt-0.5 line-clamp-2 block text-[13px] leading-snug text-muted">{p.bio}</span>
+                  <span className="mt-0.5 block text-[14px] leading-relaxed text-muted">{p.bio}</span>
                   <span className="mt-1.5 flex flex-wrap gap-1">
                     <Tag>{p.enforcement.reading}</Tag>
-                    <Tag>{p.enforcement.genre_familiarity} conv.</Tag>
+                    <Tag>{p.enforcement.genre_familiarity} experience</Tag>
                     <Tag tone={p.enforcement.audio === "off" ? "danger" : "muted"}>{p.enforcement.audio === "off" ? "sound off" : "sound on"}</Tag>
-                    <Tag>p{p.enforcement.patience}</Tag>
+                    <Tag>Patience: {p.enforcement.patience}</Tag>
                   </span>
                 </span>
               </button>
@@ -65,9 +65,9 @@ export function PersonasView() {
         </ul>
       </section>
 
-      <section className="col-span-8 rise" style={{ animationDelay: "100ms" }}>
+      <section className="lg:col-span-8" style={{ animationDelay: "100ms" }}>
         <p className="eyebrow">{basedOn ? `new persona · based on ${basedOn}` : "new persona"}</p>
-        <h2 className="display mt-1 text-[28px]">Make a person the harness can enforce</h2>
+        <h2 className="display mt-1 text-[28px]">Define a tester profile</h2>
         <PersonaForm
           key={basedOn ?? "blank"}
           value={draft}
@@ -82,7 +82,7 @@ export function PersonasView() {
       </section>
 
       {toast && (
-        <div className="fixed bottom-5 right-5 z-50 rise rounded-lg bg-amber px-4 py-3 text-[15px] font-semibold text-ink shadow-xl" data-toast>{toast}</div>
+        <div className="fixed bottom-5 right-5 z-50 rise rounded-lg bg-amber px-4 py-3 text-[15px] font-semibold text-white shadow-xl" data-toast role="status">{toast}</div>
       )}
     </div>
   );

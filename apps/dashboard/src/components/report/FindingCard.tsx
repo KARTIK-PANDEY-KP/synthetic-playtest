@@ -10,7 +10,7 @@ export function FindingCard({ f, runId, nameOf }: { f: ClusteredFinding; runId: 
   const frames = f.frames.map((ref) => ({ ref, url: frameUrl(runId, ref) })).filter((x) => x.url);
   return (
     <article className="panel relative flex overflow-hidden" data-finding={f.id}>
-      <span className={`w-1.5 shrink-0 ${RAIL[f.severity]}`} />
+      <span className={`w-1 shrink-0 ${RAIL[f.severity]}`} />
       <div className="min-w-0 flex-1 p-4">
         <div className="flex flex-wrap items-center gap-1.5">
           <SeverityChip value={f.severity} />
@@ -31,21 +31,21 @@ export function FindingCard({ f, runId, nameOf }: { f: ClusteredFinding; runId: 
           </span>
         </div>
 
-        <p className="mt-2.5 text-[14.5px] leading-snug text-fg/90">{f.description}</p>
+        <p className="mt-2.5 text-[14.5px] leading-relaxed text-fg/90">{f.description}</p>
 
         {frames.length > 0 && (
           <div className="mt-3 flex gap-1.5 overflow-x-auto">
             {frames.map((x) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={x.ref} src={x.url!} alt={x.ref} loading="lazy" className="h-16 w-28 shrink-0 rounded-md object-cover ring-1 ring-line" title={x.ref} />
+              <a key={x.ref} href={x.url!} target="_blank" rel="noreferrer" className="shrink-0 rounded border border-line overflow-hidden hover:border-info" aria-label={`Open full-size evidence for ${f.title}`}><img src={x.url!} alt={`Screenshot evidence for ${f.title}`} loading="lazy" className="h-20 w-36 object-contain bg-[#111923]"/><span className="block text-xs text-info px-2 py-1.5">View full size ↗</span></a>
             ))}
           </div>
         )}
 
         {f.verificationNote && (
           <p className={`mt-3 flex gap-2 text-[13px] leading-snug ${f.verified === true ? "text-ok/90" : f.verified === false ? "text-danger/90" : "text-muted"}`}>
-            <span className="shrink-0 font-mono">{f.verified === true ? "✓ replay" : f.verified === false ? "✗ replay" : "○ unverified"}</span>
-            <span className="italic">{f.verificationNote}</span>
+            <span className="shrink-0 font-mono">{f.verified === true ? "✓ Verified" : f.verified === false ? "Not reproduced" : "Unverified"}</span>
+            <span className="leading-relaxed">{f.verificationNote}</span>
           </p>
         )}
       </div>

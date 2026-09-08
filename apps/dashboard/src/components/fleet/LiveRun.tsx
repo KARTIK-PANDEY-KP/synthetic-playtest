@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "@/lib/api";
-import { useFleet, useRun } from "@/lib/fleet-store";
-import { basePersonaId } from "@/lib/format";
-import { Button, Empty, Spinner } from "@/components/ui";
+import { runCost, useFleet, useRun } from "@/lib/fleet-store";
+import { basePersonaId, usd } from "@/lib/format";
+import { Button, Empty, Spinner, Segmented, StatusChip } from "@/components/ui";
+import { RunNav } from "@/components/RunNav";
 import { Pane } from "./Pane";
 import { ExpandedPane } from "./ExpandedPane";
+import { useSearchParams } from "next/navigation";
 
 export function gridFor(n: number): { cols: number; rows: number } {
   if (n <= 1) return { cols: 1, rows: 1 };
@@ -23,7 +25,13 @@ export function gridFor(n: number): { cols: number; rows: number } {
 export function LiveRun({ runId }: { runId: string }) {
   const { state } = useFleet();
   const run = useRun(runId);
+  const [view, setView] = useState<"readable" | "fit" | "list">("readable");
   const [focus, setFocus] = useState<string | null>(null);
+  // /runs/<id>?expand=<persona> — deep link from the plain-English report into the play-through
+  const searchParams = useSearchParams();
+  const expandParam = searchParams.get("expand");
+  const openedLink = useRef<string | null>(null);
+  useEffect(() => { const key = `${runId}:${expandParam}`; if (expandParam && run?.personas[expandParam] && openedLink.current !== key) { openedLink.current = key; setFocus(expandParam); } }, [expandParam, run, runId]);
   const [stopping, setStopping] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -56,41 +64,20 @@ export function LiveRun({ runId }: { runId: string }) {
   }
 
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] flex-col">
-      {/* run strip */}
-      <div className="flex h-10 shrink-0 items-center gap-4 border-b border-line px-4 text-[14px]">
-        <span className="eyebrow">run</span>
-        <span className="font-medium">{meta.runId}</span>
-        <span className="text-dim">seed {meta.seed} · {meta.backend} · {personas.length} agent{personas.length === 1 ? "" : "s"}</span>
-        <span className="flex items-center gap-1.5 text-dim">
-          {meta.status === "running" ? <><span className="live-dot" /> live</> : <><span className="h-2 w-2 rounded-full bg-amber" /> {meta.status}</>}
-        </span>
-        <span className="ml-auto text-dim">{doneCount}/{personas.length} reports in</span>
-        {meta.status === "running" && (
-          <Button variant="danger" onClick={stop} disabled={stopping} className="!px-3 !py-1 !text-[13px]">{stopping ? "stopping…" : "Stop run"}</Button>
-        )}
-        <Link
-          href={`/runs/${runId}/report`}
-          className={`rounded-lg px-3 py-1 text-[13px] font-semibold ring-1 transition-colors ${allDone ? "bg-amber text-ink ring-amber hover:bg-amber2" : "text-muted ring-line2 hover:text-fg"}`}
-        >
-          {allDone ? "Open fleet report →" : "Report (pending)"}
-        </Link>
-      </div>
-
-      {/* grid */}
-      <div
-        className="grid min-h-0 flex-1 gap-2 p-2"
-        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` }}
-        data-grid-cols={cols}
-        data-grid-rows={rows}
-      >
-        {personas.map((p, i) => (
-          <Pane key={p.id} runId={runId} p={p} config={state.personaConfigs[basePersonaId(p.id)]} dense={dense} index={i} onOpen={() => setFocus(p.id)} />
-        ))}
-      </div>
+    <div className={`live-workspace ${view === "fit" ? "fit-mode" : ""}`}>
+      <div className="page-heading"><div><h1>Playtest sessions</h1><p className="break-all">{meta.runId} · {personas.length} testers · {meta.status === "running" ? "In progress" : meta.status}</p></div><div className="flex items-center gap-3">{meta.status === "running" && <Button variant="danger" onClick={stop} disabled={stopping}>{stopping ? "Stopping…" : "Stop playtest"}</Button>}<Button href={`/runs/${runId}/report`} variant={allDone ? "primary" : "outline"}>View report →</Button></div></div>
+      <RunNav runId={runId}/>
+      {error && <p role="alert" className="text-danger mb-4">{error}</p>}
+      <dl className="run-metrics"><div><dt>Active sessions</dt><dd>{personas.filter(p => ["starting", "playing", "reporting"].includes(p.status)).length}</dd></div><div><dt>Reports ready</dt><dd>{doneCount} <span className="text-muted text-base font-normal">/ {personas.length}</span></dd></div><div><dt>Findings reported</dt><dd>{personas.reduce((sum,p) => sum + p.findings.length, 0)}</dd></div><div><dt>Total cost</dt><dd>{usd(runCost(run))}</dd></div></dl>
+      <div className="flex items-center justify-between gap-4 mb-4 flex-wrap"><p className="text-sm text-muted">Open a session to see its full activity, screenshots, and findings.</p><Segmented value={view} options={["readable", "fit", "list"] as const} labels={{ readable: "Readable", fit: "Fit all", list: "List" }} onChange={setView}/></div>
+      {view === "list" ? <div className="panel overflow-x-auto"><table className="data-table"><thead><tr>{["Tester", "Status", "Actions", "Findings", "Cost", "Latest update", ""].map((h,i) => <th key={i} scope="col">{h || <span className="sr-only">Details</span>}</th>)}</tr></thead><tbody>{personas.map(p => <tr key={p.id}><td className="font-medium">{state.personaConfigs[basePersonaId(p.id)]?.name ?? p.id}</td><td><StatusChip status={p.status} size="sm"/></td><td>{p.steps}</td><td>{p.findings.length}</td><td>{usd(p.cost?.usd ?? 0)}</td><td className="min-w-[240px] max-w-lg text-muted leading-relaxed">{p.lastReasoning || "Waiting for an update."}</td><td><button className="text-info whitespace-nowrap" onClick={() => setFocus(p.id)}>View details</button></td></tr>)}</tbody></table></div> : <div className="session-grid" style={view === "fit" ? { gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` } : undefined} data-grid-cols={view === "fit" ? cols : 2} data-grid-rows={rows}>
+        {personas.map((p,i) => <Pane key={p.id} runId={runId} p={p} config={state.personaConfigs[basePersonaId(p.id)]} dense={view === "fit" && dense} index={i} onOpen={() => setFocus(p.id)}/>)}
+      </div>}
+      {!personas.length && <Empty title="No sessions yet" hint="Sessions will appear here when the playtest starts."/>}
 
       {focus && run.personas[focus] && (
         <ExpandedPane
+          key={focus}
           runId={runId}
           p={run.personas[focus]}
           config={state.personaConfigs[basePersonaId(focus)]}

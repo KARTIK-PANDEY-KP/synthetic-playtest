@@ -31,7 +31,7 @@ export function Analyst({ runId }: { runId: string }) {
 
   return (
     <div data-analyst>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {PRESET_QUESTIONS.map((q, i) => (
           <button
             key={q}
@@ -54,11 +54,11 @@ export function Analyst({ runId }: { runId: string }) {
             <div className="flex items-center gap-3 border-b border-line bg-panel2/60 px-5 py-3">
               <span className="eyebrow">asked</span>
               <span className="text-[15px] font-medium">{t.q}</span>
-              {t.ms && <span className="ml-auto readout text-[12px] text-dim">{(t.ms / 1000).toFixed(1)}s · gpt-6-astra · all reports in context</span>}
+              {t.ms && <span className="ml-auto readout text-[12px] text-dim">{(t.ms / 1000).toFixed(1)}s · reports reviewed</span>}
             </div>
             <div className="px-5 py-4" data-answer>
               {!t.a && !t.error && (
-                <div className="flex items-center gap-3 text-muted"><Spinner /> reading {"all"} reports, clustered findings and telemetry…</div>
+                <div className="flex items-center gap-3 text-muted"><Spinner /> Reviewing the reports and supporting evidence…</div>
               )}
               {t.error && <p className="text-danger">{t.error}</p>}
               {t.a && <Markdown text={t.a} className="text-[15.5px]" />}
@@ -69,13 +69,14 @@ export function Analyst({ runId }: { runId: string }) {
 
       <form
         onSubmit={(e) => { e.preventDefault(); ask(free); setFree(""); }}
-        className="mt-6 flex items-center gap-2 border-t border-line pt-4"
+        className="mt-6 flex flex-wrap items-center gap-2 border-t border-line pt-4"
       >
         <input
+          aria-label="Your question about this playtest"
           value={free}
           onChange={(e) => setFree(e.target.value)}
-          placeholder="…or ask something specific (e.g. why did Robert stall at the vent?)"
-          className="flex-1 rounded-lg bg-panel2 px-3 py-2 text-[14px] text-fg ring-1 ring-line outline-none placeholder:text-dim focus:ring-amber"
+          placeholder="Ask a question, e.g. where did testers get stuck?"
+          className="min-w-[200px] flex-1 rounded-lg bg-panel2 px-3 py-2 text-[14px] text-fg ring-1 ring-line outline-none placeholder:text-dim focus:ring-amber"
         />
         <Button type="submit" variant="outline" disabled={busy || !free.trim()} className="!py-2 !text-[14px]">Ask</Button>
       </form>

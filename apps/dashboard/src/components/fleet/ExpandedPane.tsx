@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { frameUrl, liveCandidates } from "@/lib/api";
@@ -7,221 +6,45 @@ import type { PersonaConfig } from "@/lib/contract";
 import type { PersonaState } from "@/lib/fleet-store";
 import { toRow, type StreamRow } from "@/lib/codex";
 import { kTokens, usd } from "@/lib/format";
-import { Avatar, SeverityChip, StatusChip, Tag } from "@/components/ui";
+import { useDialogFocus } from "@/lib/use-dialog-focus";
+import { Avatar, SeverityChip, StatusChip, Segmented } from "@/components/ui";
 import { LiveImage } from "./LiveImage";
 import { useSession } from "./useSession";
-
-export function ExpandedPane({ runId, p, config, onClose, onPrev, onNext }: {
-  runId: string; p: PersonaState; config?: PersonaConfig; onClose: () => void; onPrev: () => void; onNext: () => void;
-}) {
+export function ExpandedPane({ runId, p, config, onClose, onPrev, onNext }: { runId: string; p: PersonaState; config?: PersonaConfig; onClose: () => void; onPrev: () => void; onNext: () => void }) {
   const name = config?.name ?? p.id;
   const { events, connected } = useSession(runId, p.id);
-  const rows = useMemo(() => events.map(toRow).filter((r): r is StreamRow => r !== null), [events]);
-  const frames = useMemo(() => {
-    const out: { n: number; ref: string; step: number }[] = [];
-    for (const ev of events) if (ev.kind === "action" && ev.frame) {
-      const u = frameUrl(runId, ev.frame, p.id);
-      if (u) out.push({ n: out.length, ref: ev.frame, step: ev.step });
-    }
-    return out;
-  }, [events, runId, p.id]);
-  const findings = useMemo(() => {
-    const seen = new Map(p.findings.map((f) => [f.id, f]));
-    for (const ev of events) if (ev.kind === "finding" && !seen.has(ev.finding.id)) seen.set(ev.finding.id, ev.finding);
-    return [...seen.values()];
-  }, [events, p.findings]);
-
+  const dialogRef = useDialogFocus();
+  const [tab, setTab] = useState<"activity" | "findings" | "raw">("activity");
+  const [filter, setFilter] = useState<"all" | "reasoning" | "tool" | "telemetry">("all");
   const [viewFrame, setViewFrame] = useState<string | null>(null);
   const [autoScroll, setAutoScroll] = useState(true);
   const streamRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (autoScroll && streamRef.current) streamRef.current.scrollTop = streamRef.current.scrollHeight;
-  }, [rows.length, autoScroll]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") onPrev();
-      if (e.key === "ArrowRight") onNext();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose, onPrev, onNext]);
-
+  const rows = useMemo(() => events.map(toRow).filter((r): r is StreamRow => r !== null), [events]);
+  const visible = rows.filter(r => filter === "all" || r.kind === filter || filter === "reasoning" && r.kind === "message");
+  const frames = useMemo(() => events.flatMap(ev => ev.kind === "action" && ev.frame && frameUrl(runId, ev.frame, p.id) ? [{ ref: ev.frame, step: ev.step }] : []), [events, runId, p.id]);
+  const findings = useMemo(() => { const seen = new Map(p.findings.map(f => [f.id, f])); for (const ev of events) if (ev.kind === "finding") seen.set(ev.finding.id, ev.finding); return [...seen.values()]; }, [events, p.findings]);
+  useEffect(() => { if (autoScroll && streamRef.current) streamRef.current.scrollTop = streamRef.current.scrollHeight; }, [rows.length, autoScroll, filter, tab]);
+  useEffect(() => { const key = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); if ((e.target as HTMLElement)?.closest("input,textarea,select,button,summary")) return; if (e.key === "ArrowLeft") onPrev(); if (e.key === "ArrowRight") onNext(); }; window.addEventListener("keydown", key); return () => window.removeEventListener("keydown", key); }, [onClose, onPrev, onNext]);
   const lives = liveCandidates(p.liveUrl || `/api/runs/${runId}/${p.id}/live`, 0);
-  const e = config?.enforcement;
-
-  return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-ink/95 p-3 backdrop-blur-md rise" data-expanded={p.id} onClick={onClose}>
-      <div className="panel flex min-h-0 flex-1 flex-col overflow-hidden" onClick={(ev) => ev.stopPropagation()}>
-        {/* header */}
-        <div className="flex h-14 shrink-0 items-center gap-4 border-b border-line px-4">
-          <Avatar id={p.id} name={name} size={34} />
-          <div className="min-w-0 leading-tight">
-            <div className="flex items-center gap-2">
-              <span className="display text-[20px]">{name}</span>
-              {config && <span className="text-[13px] text-dim">{config.age}</span>}
-              <StatusChip status={p.status} size="sm" />
-            </div>
-            {config && <p className="truncate text-[13px] text-muted">{config.goal}</p>}
-          </div>
-          <div className="ml-auto flex items-center gap-5">
-            <Readout label="step" value={String(p.steps)} sub={e ? `of ${e.step_budget}` : undefined} />
-            <Readout label="cost" value={usd(p.cost?.usd ?? 0)} accent sub={p.cost ? `${kTokens(p.cost.inputTokens)} in · ${Math.round((p.cost.cachedInputTokens / Math.max(1, p.cost.inputTokens)) * 100)}% cached` : undefined} />
-            <Readout label="findings" value={String(findings.length)} />
-            <div className="flex items-center gap-1 border-l border-line pl-4">
-              <button type="button" onClick={onPrev} className="grid h-8 w-8 place-items-center rounded-md text-muted ring-1 ring-line hover:bg-panel2 hover:text-fg" aria-label="previous persona">←</button>
-              <button type="button" onClick={onNext} className="grid h-8 w-8 place-items-center rounded-md text-muted ring-1 ring-line hover:bg-panel2 hover:text-fg" aria-label="next persona">→</button>
-              <button type="button" onClick={onClose} className="ml-1 grid h-8 w-8 place-items-center rounded-md bg-panel2 text-fg ring-1 ring-line2 hover:bg-panel3" aria-label="close">✕</button>
-            </div>
-          </div>
-        </div>
-
-        {/* body */}
-        <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-          {/* left: feed + frames */}
-          <div className="flex min-h-0 flex-col border-r border-line">
-            <div className="relative min-h-0 flex-1 bg-black">
-              {viewFrame ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={viewFrame} alt="frame the agent saw" className="absolute inset-0 h-full w-full object-contain" />
-              ) : (
-                <LiveImage srcs={lives} active={p.status !== "queued"} fit="contain" className="absolute inset-0 h-full w-full" alt={`${name} live`} />
-              )}
-              <div className="absolute left-3 top-3 flex items-center gap-2">
-                {viewFrame ? (
-                  <button type="button" onClick={() => setViewFrame(null)} className="rounded-md bg-amber px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-ink">← back to live</button>
-                ) : (
-                  <span className="flex items-center gap-2 rounded-md bg-ink/70 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-fg ring-1 ring-line"><span className="live-dot" /> human view · 3 fps · $0</span>
-                )}
-              </div>
-            </div>
-            <div className="shrink-0 border-t border-line px-3 py-2">
-              <div className="flex items-center justify-between">
-                <span className="eyebrow">frames the agent actually saw · {frames.length}</span>
-                {e && <span className="text-[12px] text-dim">{e.reading === "skim" ? "text over 12 words blurred" : e.reading === "normal" ? "text over 40 words blurred" : "no redaction"}{e.audio === "off" ? " · no listen tool" : ""}</span>}
-              </div>
-              <div className="mt-1.5 flex gap-1.5 overflow-x-auto pb-1" data-frames>
-                {frames.length === 0 && <span className="text-[13px] text-dim">No screenshots yet.</span>}
-                {[...frames].reverse().map((f) => {
-                  const u = frameUrl(runId, f.ref, p.id)!;
-                  return (
-                    <button key={f.ref} type="button" onClick={() => setViewFrame(u)} className={`relative shrink-0 overflow-hidden rounded-md ring-1 ${viewFrame === u ? "ring-amber" : "ring-line hover:ring-line2"}`} title={`step ${f.step}`}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={u} alt={`frame at step ${f.step}`} loading="lazy" className="h-14 w-24 object-cover" />
-                      <span className="absolute bottom-0 right-0 rounded-tl bg-ink/80 px-1 font-mono text-[10px] text-muted">{f.step}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* right: findings + stream */}
-          <div className="flex min-h-0 flex-col">
-            <div className="shrink-0 border-b border-line px-4 py-2.5">
-              <div className="flex items-center justify-between">
-                <span className="eyebrow">findings so far · {findings.length}</span>
-                {p.status === "done" && <Link href={`/runs/${runId}/report`} className="text-[13px] font-semibold text-amber2 hover:underline">fleet report →</Link>}
-              </div>
-              <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto">
-                {findings.length === 0 && <li className="text-[13px] text-dim">Nothing flagged yet.</li>}
-                {findings.map((f) => (
-                  <li key={f.id} className="flex items-center gap-2 text-[14px]">
-                    <SeverityChip value={f.severity} />
-                    <span className="truncate">{f.title}</span>
-                    {f.room && <span className="ml-auto shrink-0 text-[12px] text-dim">{f.room}</span>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex shrink-0 items-center justify-between px-4 py-2">
-              <span className="eyebrow">reasoning · actions · telemetry</span>
-              <span className="flex items-center gap-3 text-[12px] text-dim">
-                <span className="flex items-center gap-1"><span className={`h-1.5 w-1.5 rounded-full ${connected ? "bg-ok" : "bg-amber blink"}`} />{connected ? "streaming" : "connecting"}</span>
-                <label className="flex items-center gap-1.5"><input type="checkbox" checked={autoScroll} onChange={(ev) => setAutoScroll(ev.target.checked)} className="accent-amber" /> follow</label>
-              </span>
-            </div>
-            <div
-              ref={streamRef}
-              data-stream
-              onScroll={(ev) => {
-                const el = ev.currentTarget;
-                const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 40;
-                if (!atBottom && autoScroll) setAutoScroll(false);
-                if (atBottom && !autoScroll) setAutoScroll(true);
-              }}
-              className="min-h-0 flex-1 overflow-y-auto px-4 pb-4"
-            >
-              <ol className="space-y-1.5">
-                {rows.map((r, i) => <Row key={i} r={r} />)}
-              </ol>
-            </div>
-          </div>
+  const download = () => { const url = URL.createObjectURL(new Blob([events.map(e => JSON.stringify(e)).join("\n")], { type: "application/x-ndjson" })); const a = document.createElement("a"); a.href = url; a.download = `${p.id}-session.jsonl`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); };
+  return <div ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-label={`${name} session details`} className="session-dialog-backdrop" data-expanded={p.id} onClick={onClose}>
+    <div className="session-dialog" onClick={e => e.stopPropagation()}>
+      <header className="session-dialog-header"><Avatar id={p.id} name={name} size={36}/><div className="min-w-0 flex-1"><h2 className="font-semibold text-lg">{name}</h2><p className="text-[13px] text-muted">{config?.goal ?? "Session details"}</p></div><StatusChip status={p.status}/><div className="flex gap-2"><button className="dialog-control" onClick={onPrev} aria-label="Previous tester">←</button><button className="dialog-control" onClick={onNext} aria-label="Next tester">→</button><button className="dialog-control" onClick={onClose} aria-label="Close session details">✕</button></div></header>
+      <div className="session-dialog-body">
+        <div className="session-media-column"><div className="flex justify-between items-center px-4 py-3 border-b border-line"><h3 className="text-sm font-semibold">{viewFrame ? "Recorded screenshot" : "Game view"}</h3>{viewFrame ? <button className="text-button" onClick={() => setViewFrame(null)}>Back to live view</button> : <span className="text-xs text-muted">{["done","stopped","failed"].includes(p.status) ? "Session ended" : "Live view"}</span>}</div><div className="session-large-image">{viewFrame ? <img src={viewFrame} alt="Selected screenshot from the tester’s session" className="absolute inset-0 h-full w-full object-contain"/> : <LiveImage srcs={lives} active={p.status !== "queued"} fit="contain" className="absolute inset-0 h-full w-full" alt={`${name} live game view`}/>}</div>
+        <div className="p-4 border-t border-line"><h3 className="text-sm font-semibold">Tester screenshots <span className="text-muted font-normal">({frames.length})</span></h3><p className="text-xs text-muted mt-1">Select a screenshot to inspect exactly what this tester saw.</p><div className="mt-3 flex gap-2 overflow-x-auto pb-2" data-frames>{!frames.length && <p className="text-sm text-muted">No screenshots recorded yet.</p>}{frames.map((f,i) => { const url = frameUrl(runId,f.ref,p.id)!; return <button key={`${f.ref}-${i}`} onClick={() => setViewFrame(url)} aria-label={`View screenshot at action ${f.step}`} aria-pressed={viewFrame === url} className={`shrink-0 rounded border p-1 ${viewFrame === url ? "border-info bg-info/5" : "border-line"}`}><img src={url} alt={`Action ${f.step}`} loading="lazy" className="h-14 w-24 object-contain bg-[#111923]"/><span className="block text-xs mt-1 text-muted">Action {f.step}</span></button>; })}</div></div>
+        <details className="border-t border-line p-4 text-sm"><summary className="font-semibold text-info">Tester profile & session totals <span aria-hidden="true">⌄</span></summary><p className="mt-3 text-muted leading-relaxed">{config?.bio}</p><dl className="detail-list mt-2"><div><dt>Actions taken</dt><dd>{p.steps}{config ? ` / ${config.enforcement.step_budget}` : ""}</dd></div><div><dt>Session cost</dt><dd>{usd(p.cost?.usd ?? 0)}</dd></div><div><dt>Input tokens</dt><dd>{kTokens(p.cost?.inputTokens ?? 0)}</dd></div>{config && <><div><dt>Reading</dt><dd>{config.enforcement.reading}</dd></div><div><dt>Audio</dt><dd>{config.enforcement.audio}</dd></div></>}</dl></details></div>
+        <div className="session-activity-column"><div className="p-4 border-b border-line"><Segmented value={tab} options={["activity","findings","raw"] as const} labels={{ activity: "Activity", findings: `Findings (${findings.length})`, raw: "Raw data" }} onChange={setTab}/></div>
+          {tab === "activity" && <><div className="flex justify-between gap-2 px-4 py-3 text-xs text-muted"><span>{connected ? "Live updates connected" : "Connecting to updates…"}</span><label className="flex items-center gap-2"><input type="checkbox" checked={autoScroll} onChange={e => setAutoScroll(e.target.checked)}/>Follow latest</label></div><div className="event-filter">{(["all","reasoning","tool","telemetry"] as const).map(v => <button key={v} aria-pressed={filter === v} onClick={() => setFilter(v)}>{({ all: "All activity", reasoning: "Tester thoughts", tool: "Actions", telemetry: "Game events" })[v]}</button>)}</div><div ref={streamRef} data-stream className="session-event-list" onScroll={e => { const el = e.currentTarget; if (el.scrollHeight-el.scrollTop-el.clientHeight > 50 && autoScroll) setAutoScroll(false); }}><ol>{visible.map((r,i) => <Row key={i} r={r}/>)}</ol>{!visible.length && <p className="text-sm text-muted p-4">No {filter === "all" ? "activity" : "matching events"} yet.</p>}</div></>}
+          {tab === "findings" && <div className="session-event-list p-5 space-y-5">{!findings.length && <p className="text-sm text-muted">No findings reported yet. They will appear here as the tester plays.</p>}{findings.map(f => <article key={f.id} className="border-b border-line pb-5"><SeverityChip value={f.severity}/><h3 className="font-semibold text-base mt-3">{f.title}</h3><p className="text-sm leading-relaxed text-muted mt-2">{f.description}</p>{f.room && <p className="text-xs text-muted mt-2">Room: {f.room}</p>}<details className="mt-3 text-sm"><summary className="text-info">Steps to reproduce ⌄</summary><ol className="list-decimal pl-5 mt-2 space-y-2">{f.reproSteps.map((s,i) => <li key={i}>{s}</li>)}</ol></details></article>)}<Link className="text-info text-sm" href={`/runs/${runId}/report`}>Open full playtest report →</Link></div>}
+          {tab === "raw" && <div className="session-event-list p-4"><div className="flex justify-between items-center mb-3"><span className="text-xs text-muted">{events.length} recorded events</span><button className="text-button" onClick={download}>Download JSONL</button></div><p className="text-sm text-muted mb-4">Complete recorded data, including game positions and system events.</p><pre className="text-xs leading-relaxed whitespace-pre-wrap break-all">{events.map(e => JSON.stringify(e)).join("\n") || "No events recorded yet."}</pre></div>}
         </div>
       </div>
     </div>
-  );
+  </div>;
 }
-
-function Readout({ label, value, sub, accent }: { label: string; value: string; sub?: string; accent?: boolean }) {
-  return (
-    <span className="leading-none">
-      <span className="block eyebrow !text-[10px]">{label}</span>
-      <span className={`readout block text-[18px] ${accent ? "text-amber2" : "text-fg"}`}>{value}</span>
-      {sub && <span className="block text-[11px] text-dim">{sub}</span>}
-    </span>
-  );
-}
-
-const ts = (t: number) => {
-  const s = Math.floor(t / 1000);
-  return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
-};
-
 function Row({ r }: { r: StreamRow }) {
-  const time = <span className="readout w-11 shrink-0 pt-0.5 text-[11px] text-dim">{ts(r.t)}</span>;
-  switch (r.kind) {
-    case "message":
-      return <li className="flex gap-3"><span className="w-11 shrink-0" />{time}<p className="text-[15px] italic leading-snug text-fg">{r.text}</p></li>;
-    case "reasoning":
-      return <li className="flex gap-3"><Tag>think</Tag>{time}<p className="text-[13.5px] leading-snug text-muted">{r.text.replace(/^\*\*[^*]+\*\*\s*[—-]\s*/, "")}</p></li>;
-    case "tool":
-      return (
-        <li className="flex items-baseline gap-3">
-          <Tag tone="info">tool</Tag>{time}
-          <p className="font-mono text-[12.5px] text-fg">
-            {r.tool}<span className="text-dim">({fmtArgs(r.args)})</span>
-            {r.frame && <span className="ml-2 text-dim">→ {r.frame}</span>}
-          </p>
-        </li>
-      );
-    case "finding":
-      return (
-        <li className="flex items-baseline gap-3 rounded-md bg-coral/10 px-2 py-1.5 ring-1 ring-coral/30">
-          <Tag tone="danger">finding</Tag>{time}
-          <p className="text-[14px] font-medium text-fg">{r.title} <span className="font-mono text-[11px] uppercase text-coral">{r.severity} · {r.category}</span></p>
-        </li>
-      );
-    case "gate":
-      return (
-        <li className="flex items-baseline gap-3 rounded-md bg-amber/10 px-2 py-1.5 ring-1 ring-amber/30">
-          <Tag tone="amber">{r.gate}</Tag>{time}
-          <p className="text-[13.5px] text-amber2">{r.detail}</p>
-        </li>
-      );
-    case "status":
-      return <li className="flex items-baseline gap-3"><Tag tone="ok">{r.status}</Tag>{time}<p className="text-[13px] text-muted">{r.detail}</p></li>;
-    case "usage":
-      return <li className="flex items-baseline gap-3"><Tag>usage</Tag>{time}<p className="font-mono text-[11.5px] text-dim">{kTokens(r.input)} in · {kTokens(r.cached)} cached · {r.output} out</p></li>;
-    case "telemetry":
-      return <li className="flex items-baseline gap-3"><Tag tone="ok">truth</Tag>{time}<p className="font-mono text-[12px] text-ok/80">{r.text}</p></li>;
-  }
-}
-
-function fmtArgs(a: unknown): string {
-  if (!a || typeof a !== "object") return "";
-  return Object.entries(a as Record<string, unknown>).map(([k, v]) => `${k}: ${typeof v === "string" ? `"${v}"` : String(v)}`).join(", ");
+  const seconds = Math.floor(r.t/1000), time = `${String(Math.floor(seconds/60)).padStart(2,"0")}:${String(seconds%60).padStart(2,"0")}`;
+  const labels: Record<StreamRow["kind"],string> = { message: "Tester update", reasoning: "Tester thought", tool: "Action", finding: "Finding", gate: "Session limit", status: "Status", usage: "Token usage", telemetry: "Game event" };
+  return <li className="event-row"><div className="flex justify-between gap-2 text-xs text-muted mb-2"><span className="font-semibold">{labels[r.kind]}</span><time className="tabular">{time}</time></div>{r.kind === "tool" ? <><p className="text-sm font-medium">{r.tool}{r.step !== undefined ? ` · Action ${r.step}` : ""}</p><details className="mt-2 text-xs"><summary className="text-info">Input & result ⌄</summary><pre className="mt-2 whitespace-pre-wrap break-all leading-relaxed bg-panel2 rounded p-3">{JSON.stringify({ args: r.args, result: r.result ?? null, frame: r.frame ?? null },null,2)}</pre></details></> : <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{"text" in r ? r.text : r.kind === "finding" ? r.title : r.kind === "gate" ? r.detail : r.kind === "status" ? `${r.status}${r.detail ? `: ${r.detail}` : ""}` : r.kind === "usage" ? `${kTokens(r.input)} input · ${kTokens(r.cached)} cached · ${kTokens(r.output)} output` : ""}</p>}</li>;
 }

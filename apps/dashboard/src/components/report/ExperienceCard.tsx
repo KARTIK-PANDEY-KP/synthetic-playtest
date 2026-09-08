@@ -19,11 +19,11 @@ export function ExperienceCard({ id, name, config, live, report }: { id: string;
   const color = personaColor(id);
   return (
     <article className="panel flex flex-col overflow-hidden" data-experience={id}>
-      <div className="flex items-center gap-3 border-b border-line p-4" style={{ background: `linear-gradient(90deg, ${color}22, transparent 70%)` }}>
+      <div className="flex items-center gap-3 border-b border-line p-4">
         <Avatar id={id} name={name} size={40} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <span className="display truncate text-[19px]">{name}</span>
+            <span className="display text-[19px]">{name}</span>
             {config && <span className="text-[12px] text-dim">{config.age}</span>}
           </div>
           <div className="text-[12.5px] text-muted">{live.steps} steps · {usd(live.cost?.usd ?? 0)} · {live.findings.length || report?.findings.length || 0} findings</div>
@@ -46,9 +46,9 @@ export function ExperienceCard({ id, name, config, live, report }: { id: string;
               {report.summary}
             </p>
             {report.abandonedReason && (
-              <p className="mt-3 rounded-md bg-danger/10 px-3 py-2 text-[13px] text-danger ring-1 ring-danger/30"><span className="font-mono uppercase tracking-wider">abandoned · </span>{report.abandonedReason}</p>
+              <p className="mt-3 rounded-md bg-danger/10 px-3 py-2 text-[13px] text-danger ring-1 ring-danger/30"><span className="font-semibold">abandoned · </span>{report.abandonedReason}</p>
             )}
-            <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
               {LANES.filter((l) => report.experience[l.key].length).map((l) => (
                 <div key={l.key}>
                   <p className={`eyebrow ${l.cls}`}>{l.label}</p>
@@ -75,7 +75,7 @@ export function ExperienceCard({ id, name, config, live, report }: { id: string;
             )}
           </>
         ) : (
-          <p className="text-[14px] text-dim">{live.status === "done" ? "Loading report…" : `Still ${live.status}. The narrative lands when the report does.`}</p>
+          <p className="text-[14px] text-dim">{live.status === "done" ? "Loading report…" : `Session ${live.status}. Feedback will appear when the report is ready.`}</p>
         )}
       </div>
     </article>

@@ -6,7 +6,7 @@ import { Tag } from "@/components/ui";
 
 const CLASS_ORDER: FlawClass[] = ["objective", "confusion", "familiarity", "pacing", "fairness", "accessibility", "decoy"];
 const CLASS_NOTE: Record<FlawClass, string> = {
-  objective: "crashes, soft-locks, state loss — what incumbents already find",
+  objective: "crashes, soft-locks, state loss — objective gameplay failures",
   confusion: "unclear labels, unrepeatable tutorials, hidden affordances",
   familiarity: "requires a genre convention the game never taught",
   pacing: "grind, dead time, no new information",
@@ -18,9 +18,9 @@ const CLASS_NOTE: Record<FlawClass, string> = {
 export function Scorecard({ score, findings }: { score: Score; findings: ClusteredFinding[] }) {
   const byLedger = new Map(findings.filter((f) => f.ledgerId).map((f) => [f.ledgerId!, f]));
   return (
-    <div className="grid grid-cols-12 gap-4" data-scorecard>
-      <div className="col-span-8 panel overflow-hidden">
-        <table className="w-full">
+    <div className="grid grid-cols-1 xl:grid-cols-12 gap-4" data-scorecard>
+      <div className="xl:col-span-8 panel overflow-x-auto">
+        <table className="w-full min-w-[520px]">
           <thead>
             <tr className="text-left">
               <th className="eyebrow px-4 py-2.5 font-normal">class</th>
@@ -65,7 +65,7 @@ export function Scorecard({ score, findings }: { score: Score; findings: Cluster
         </table>
       </div>
 
-      <div className="col-span-4 space-y-3">
+      <div className="xl:col-span-4 space-y-3">
         <ChipBlock label={`found · ${score.found.length}`} tone="ok">
           {score.found.map((id) => <LedgerChip key={id} id={id} f={byLedger.get(id)} tone="ok" />)}
         </ChipBlock>

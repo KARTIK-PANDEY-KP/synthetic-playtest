@@ -228,7 +228,7 @@ function mergeNotedFindings(report) {
     // `step` counts every tool call and its `frame` is a guess; the verifier slices the
     // action log by OUR step, so the two must agree.
     const n = noted.get(key(f));
-    if (n) { if (Number.isInteger(n.step)) f.step = n.step; if (n.frame) f.frame = n.frame; }
+    if (n) { if (Number.isInteger(n.step)) f.step = n.step; if (n.frame) f.frame = n.frame; if (n.state) f.state = n.state; }
     // Plain-English context for the report: what the agent was thinking and doing just
     // before it spoke up. Both come from the session log, so they cost nothing extra.
     const notedAt = session.history.find((e) => e.kind === 'finding' && key(e.finding) === key(f))?.t ?? Infinity;
@@ -236,7 +236,7 @@ function mergeNotedFindings(report) {
       && e.event?.type === 'item.completed' && e.event.item?.type === 'agent_message' && e.event.item.text?.trim());
     if (lastThought && !f.thinking) f.thinking = lastThought.event.item.text.trim().slice(0, 280);
     if (!f.actionsBefore) {
-      const acts = session.history.filter((e) => e.kind === 'action' && e.tool !== 'screenshot' && e.tool !== 'note_finding' && e.step <= f.step).slice(-6);
+      const acts = session.history.filter((e) => e.kind === 'action' && e.tool !== 'screenshot' && e.tool !== 'note_finding' && e.step <= f.step).slice(-10);
       f.actionsBefore = humanizeActions(acts);
     }
     if (!Array.isArray(f.reproSteps)) f.reproSteps = [];

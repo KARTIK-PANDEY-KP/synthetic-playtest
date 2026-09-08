@@ -9,6 +9,7 @@ import { basePersonaId, elapsed, pct, usd } from "@/lib/format";
 import { Avatar, Button, Empty, Spinner, StatusChip } from "@/components/ui";
 import { Markdown } from "@/components/Markdown";
 import { Analyst } from "@/components/analyst/Analyst";
+import { RunNav } from "@/components/RunNav";
 import { Scorecard } from "./Scorecard";
 import { FindingCard } from "./FindingCard";
 import { ExperienceCard } from "./ExperienceCard";
@@ -18,12 +19,12 @@ import { PlainEnglish } from "./PlainEnglish";
 interface Analysis { findings: ClusteredFinding[]; score: Score; reportMd: string }
 interface Pending { reportsIn: number; total: number }
 
-const NUM = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen"];
-const words = (n: number) => NUM[n] ?? String(n);
-
 export function ReportView({ runId }: { runId: string }) {
   const { state } = useFleet();
   const run = useRun(runId, { poll: 5000 });
+  const [query, setQuery] = useState("");
+  const [severity, setSeverity] = useState("all");
+  const [category, setCategory] = useState("all");
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [pending, setPending] = useState<Pending | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -86,12 +87,12 @@ export function ReportView({ runId }: { runId: string }) {
     return (
       <div className="mx-auto max-w-[1100px] px-6 py-8 rise">
         <p className="eyebrow">fleet report · {runId}</p>
-        <h1 className="display mt-1 text-[36px]">Analysis pending</h1>
+        <h1 className="display mt-1 text-[30px]">Report in progress</h1><RunNav runId={runId}/>
         <p className="mt-2 text-[16px] text-muted">
           {run ? `${run.order.filter((id) => run.personas[id]?.status === "done").length} of ${run.order.length} reports in. ` : pending && pending.total ? `${pending.reportsIn} of ${pending.total} reports in. ` : ""}
-          The cross-persona pass (cluster → verify → score) runs once the last agent files its report.
+          The combined report will be ready after every tester finishes. This page updates automatically.
         </p>
-        <div className="mt-6 grid grid-cols-2 gap-3">
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
           {personas.map((p) => (
             <div key={p.id} className="panel flex items-center gap-3 p-4">
               <Avatar id={p.id} name={nameOf(p.id)} size={36} />
@@ -107,11 +108,11 @@ export function ReportView({ runId }: { runId: string }) {
         {Object.keys(reports).length > 0 && (
           <div className="mt-8">
             <p className="eyebrow">in plain english · so far</p>
-            <div className="mt-3"><PlainEnglish personas={personas} reports={reports} nameOf={nameOf} configs={state.personaConfigs} /></div>
+            <div className="mt-3"><PlainEnglish runId={runId} personas={personas} reports={reports} nameOf={nameOf} configs={state.personaConfigs} /></div>
           </div>
         )}
         <div className="mt-6 flex gap-3">
-          <Link href={`/runs/${runId}`}><Button variant="outline">← watch the fleet live</Button></Link>
+          <Button href={`/runs/${runId}`} variant="outline">View sessions</Button>
         </div>
       </div>
     );
@@ -134,64 +135,53 @@ export function ReportView({ runId }: { runId: string }) {
     if (sev[a.severity] !== sev[b.severity]) return sev[a.severity] - sev[b.severity];
     return b.reporters.length - a.reporters.length;
   });
+  const filtered = sorted.filter(f => (severity === "all" || f.severity === severity) && (category === "all" || f.category === category) && `${f.title} ${f.description} ${f.room ?? ""} ${f.reporters.map(r => nameOf(r.persona)).join(" ")}`.toLowerCase().includes(query.trim().toLowerCase()));
   const groups = [
-    { key: "verified", title: "Verified — replayed at the same seed, reproduced", items: sorted.filter((f) => f.verified === true) },
-    { key: "unverified", title: "Not yet verified — no ground-truth signal to assert against", items: sorted.filter((f) => f.verified === null) },
-    { key: "failed", title: "Did not reproduce", items: sorted.filter((f) => f.verified === false) },
+    { key: "verified", title: "Verified in replay", items: filtered.filter((f) => f.verified === true) },
+    { key: "unverified", title: "Awaiting verification", items: filtered.filter((f) => f.verified === null) },
+    { key: "failed", title: "Did not reproduce", items: filtered.filter((f) => f.verified === false) },
   ];
 
   const mdBlob = `data:text/markdown;charset=utf-8,${encodeURIComponent(analysis.reportMd)}`;
 
   return (
-    <div className="mx-auto max-w-[1240px] px-6 py-6" data-report>
-      {/* header */}
-      <header className="rise flex items-start justify-between gap-6">
-        <div>
-          <p className="eyebrow">
-            fleet report · {runId}{meta ? ` · seed ${meta.seed} · ${meta.backend} · ${personas.length} testers · ${elapsed(meta.startedAt, meta.finishedAt)}` : ""}
-          </p>
-          <h1 className="display mt-2 text-[44px] leading-[1.02] text-balance">
-            <span className="text-amber2">{cap(words(foundLedger))} of {words(totalLedger)}</span> injected flaws found.{" "}
-            {score.decoysFlagged.length ? <>{cap(words(score.decoysFlagged.length))} false alarm{score.decoysFlagged.length === 1 ? "" : "s"}.</> : <>No false alarms.</>}{" "}
-            {score.emergent.length ? <span className="text-muted">{cap(words(score.emergent.length))} thing{score.emergent.length === 1 ? "" : "s"} nobody planted.</span> : null}
-          </h1>
-        </div>
-        <div className="flex shrink-0 gap-2 pt-1">
-          <Button href={api.exportUrl(runId)} variant="outline" download>↓ export.zip</Button>
-          <Button href={mdBlob} variant="outline" download={`${runId}-report.md`}>↓ report.md</Button>
-          <Link href={`/runs/${runId}`}><Button variant="ghost">grid</Button></Link>
-        </div>
-      </header>
+    <div className="workspace" data-report onClick={event => { const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#finding-"]'); if (link) { setPlainOnly(false); setQuery(""); setSeverity("all"); setCategory("all"); requestAnimationFrame(() => document.getElementById(link.hash.slice(1))?.scrollIntoView({ behavior: "smooth" })); } }}>
+      <div className="page-heading"><div><p className="eyebrow !mt-0 break-all">Playtest report · {runId}</p><h1 className="mt-2">Results & findings</h1><p>{foundLedger} of {totalLedger} known issues found. {score.decoysFlagged.length} false alarms. {score.emergent.length} additional findings to investigate.</p></div><div className="flex gap-2 flex-wrap"><Button href={api.exportUrl(runId)} variant="outline" download>Download all data</Button><Button href={mdBlob} variant="outline" download={`${runId}-report.md`}>Download report</Button></div></div>
+      <RunNav runId={runId}/>
+      <nav className="report-toc" aria-label="Report sections">{[["00","Summary"],["01","Coverage"],["02",`Findings (${findings.length})`],["03","Tester feedback"],["04","Compare testers"],["05","Questions"],["06","Full report"]].map(([n,label]) => <a key={n} href={`#report-${n}`} onClick={event => { event.preventDefault(); setPlainOnly(false); requestAnimationFrame(() => document.getElementById(`report-${n}`)?.scrollIntoView({ behavior: "smooth" })); }}>{label}</a>)}</nav>
 
       {/* headline numbers */}
-      <section className="mt-6 grid grid-cols-6 gap-3 rise" style={{ animationDelay: "80ms" }} data-headline>
-        <Big label="recall" value={pct(score.recall)} sub={`${foundLedger} / ${totalLedger} ledger flaws`} tone="amber" />
-        <Big label="precision" value={pct(score.precision)} sub={`${score.decoysFlagged.length} decoy${score.decoysFlagged.length === 1 ? "" : "s"} flagged`} tone={score.decoysFlagged.length ? "coral" : "ok"} />
-        <Big label="verified" value={`${verified}/${replayed}`} sub="replayed findings reproduce" tone="ok" />
-        <Big label="emergent" value={String(score.emergent.length)} sub="unledgered, looks real" tone="violet" />
-        <Big label="fleet cost" value={usd(cost)} sub={`${personas.reduce((s, p) => s + (p.steps ?? 0), 0)} steps · gpt-6-astra`} />
-        <Big label="would recommend" value={avgRec ? `${avgRec.toFixed(1)}/5` : "—"} sub={`${completed}/${Object.keys(reports).length || personas.length} finished the game`} />
+      <section className="mt-6 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 rise" style={{ animationDelay: "80ms" }} data-headline>
+        <Big label="Issue coverage (recall)" value={pct(score.recall)} sub={`${foundLedger} / ${totalLedger} known issues`} tone="amber" />
+        <Big label="Finding accuracy (precision)" value={pct(score.precision)} sub={`${score.decoysFlagged.length} false alarm${score.decoysFlagged.length === 1 ? "" : "s"}`} tone={score.decoysFlagged.length ? "coral" : "ok"} />
+        <Big label="Verified in replay" value={`${verified}/${replayed}`} sub="reproduced / checked" tone="ok" />
+        <Big label="Additional findings" value={String(score.emergent.length)} sub="not in the known issue list" tone="violet" />
+        <Big label="Total cost" value={usd(cost)} sub={`${personas.reduce((s, p) => s + (p.steps ?? 0), 0)} actions across all testers`} />
+        <Big label="Recommendation" value={avgRec ? `${avgRec.toFixed(1)}/5` : "—"} sub={`${completed}/${Object.keys(reports).length || personas.length} finished the game`} />
       </section>
 
       {/* scorecard */}
       <Section n="00" title="In plain English" sub="One line per problem, per tester: what broke, and what they were doing when it broke."
-        right={<Button variant="outline" onClick={() => setPlainOnly((v) => !v)}>{plainOnly ? "Show the full report" : "Just this, please"}</Button>}>
-        <PlainEnglish personas={personas} reports={reports} findings={findings} nameOf={nameOf} configs={state.personaConfigs} />
+        right={<Button variant="outline" onClick={() => setPlainOnly((v) => !v)}>{plainOnly ? "Show the detailed report" : "Hide the detailed report"}</Button>}>
+        <PlainEnglish runId={runId} personas={personas} reports={reports} findings={findings} nameOf={nameOf} configs={state.personaConfigs} />
       </Section>
 
       {!plainOnly && <>
-      <Section n="01" title="Scorecard" sub="Findings joined against ledger.json — the answer key nobody else has.">
+      <Section n="01" title="Issue coverage" sub="Compare the findings with the known issues intentionally included in this game.">
         <Scorecard score={score} findings={findings} />
       </Section>
 
       {/* findings */}
-      <Section n="02" title="Findings" sub={`${findings.length} clustered across ${personas.length} testers. Verified first.`}>
+      <Section n="02" title="Findings" sub={`${findings.length} distinct findings across ${personas.length} testers. Search by issue, room, or tester.`}>
+        <div className="panel p-4 mb-5 flex items-end flex-wrap gap-3"><label className="min-w-[180px] flex-1 text-xs font-medium text-muted">Search findings<input className="search-field mt-2" type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search findings, rooms, or testers"/></label><label className="text-xs font-medium text-muted">Severity<select className="search-field mt-2" value={severity} onChange={e => setSeverity(e.target.value)}><option value="all">All severities</option>{["critical","high","medium","low"].map(v => <option key={v} value={v}>{v[0].toUpperCase()+v.slice(1)}</option>)}</select></label><label className="text-xs font-medium text-muted">Category<select className="search-field mt-2" value={category} onChange={e => setCategory(e.target.value)}><option value="all">All categories</option>{[...new Set(findings.map(f => f.category))].map(v => <option key={v} value={v}>{v[0].toUpperCase()+v.slice(1)}</option>)}</select></label><button className="text-button mb-2" onClick={() => { setQuery(""); setSeverity("all"); setCategory("all"); }}>Clear filters</button></div>
+        <p className="text-sm text-muted mb-4" aria-live="polite">Showing {filtered.length} of {findings.length} findings</p>
+        {!filtered.length && <Empty title="No matching findings" hint="Try a different search or clear the filters to see every finding."/>}
         <div className="space-y-6">
           {groups.filter((g) => g.items.length).map((g) => (
             <div key={g.key}>
               <p className="eyebrow mb-2">{g.title} · {g.items.length}</p>
-              <div className="grid grid-cols-2 gap-3">
-                {g.items.map((f) => <FindingCard key={f.id} f={f} runId={runId} nameOf={nameOf} />)}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {g.items.map((f) => <div key={f.id} id={`finding-${f.id}`} className="scroll-mt-40"><FindingCard f={f} runId={runId} nameOf={nameOf} /></div>)}
               </div>
             </div>
           ))}
@@ -199,8 +189,8 @@ export function ReportView({ runId }: { runId: string }) {
       </Section>
 
       {/* experience */}
-      <Section n="03" title="In their own words" sub="The subjective narrative per tester — where they got confused, bored, treated unfairly.">
-        <div className="grid grid-cols-3 gap-3">
+      <Section n="03" title="Tester feedback" sub="Read each tester’s experience, including what worked and where they struggled.">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {personas.map((p) => (
             <ExperienceCard key={p.id} id={p.id} name={nameOf(p.id)} config={state.personaConfigs[basePersonaId(p.id)]} live={p} report={reports[p.id]} />
           ))}
@@ -208,19 +198,19 @@ export function ReportView({ runId }: { runId: string }) {
       </Section>
 
       {/* disagreement */}
-      <Section n="04" title="Where the fleet disagreed" sub="Findings split along enforcement lines, not personality. That is the argument for enforcing personas in the harness.">
+      <Section n="04" title="Compare testers" sub="See which testers reported each issue and where their experiences differ.">
         <Disagreement findings={findings} personas={personas.map((p) => p.id)} nameOf={nameOf} configs={state.personaConfigs} />
       </Section>
 
       {/* analyst */}
-      <Section n="05" title="Ask the fleet" sub="One gpt-6-astra call with every report in context. Three questions, on purpose." right={<Link href={`/runs/${runId}/analyst`} className="text-[14px] font-semibold text-amber2 hover:underline">full screen →</Link>}>
+      <Section n="05" title="Ask about this playtest" sub="Explore the findings with a question of your own or choose a suggested question." right={<Link href={`/runs/${runId}/analyst`} className="text-[14px] font-semibold text-amber2 hover:underline">full screen →</Link>}>
         <Analyst runId={runId} />
       </Section>
 
-      <Section n="06" title="Cross-persona report" sub="analysis/report.md, as written by the analysis pass.">
+      <Section n="06" title="Full report" sub="The complete written analysis, with findings and supporting context.">
         <details className="panel group">
           <summary className="cursor-pointer select-none px-5 py-3 text-[15px] font-semibold text-muted transition-colors hover:text-fg">
-            <span className="group-open:hidden">Show report.md</span><span className="hidden group-open:inline">Hide report.md</span>
+            <span className="group-open:hidden">Read the full report</span><span className="hidden group-open:inline">Hide the full report</span>
           </summary>
           <div className="border-t border-line px-6 py-5"><Markdown text={analysis.reportMd} className="text-[15.5px]" /></div>
         </details>
@@ -230,14 +220,12 @@ export function ReportView({ runId }: { runId: string }) {
   );
 }
 
-const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
 function Big({ label, value, sub, tone }: { label: string; value: string; sub: string; tone?: "amber" | "ok" | "coral" | "violet" }) {
   const c = tone === "amber" ? "text-amber2" : tone === "ok" ? "text-ok" : tone === "coral" ? "text-coral" : tone === "violet" ? "text-violet" : "text-fg";
   return (
     <div className="panel px-4 py-3.5">
       <span className="eyebrow">{label}</span>
-      <span className={`readout mt-1 block text-[34px] leading-none ${c}`}>{value}</span>
+      <span className={`tabular mt-2 block text-[28px] font-semibold leading-none ${c}`}>{value}</span>
       <span className="mt-1.5 block text-[12.5px] text-dim">{sub}</span>
     </div>
   );
@@ -245,11 +233,10 @@ function Big({ label, value, sub, tone }: { label: string; value: string; sub: s
 
 function Section({ n, title, sub, right, children }: { n: string; title: string; sub: string; right?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <section className="mt-10 rise" data-section={n}>
-      <div className="mb-4 flex items-end justify-between border-b border-line pb-3">
+    <section id={`report-${n}`} className="report-section mt-10" data-section={n}>
+      <div className="mb-4 flex flex-wrap gap-4 items-end justify-between border-b border-line pb-3">
         <div>
-          <p className="eyebrow">{n}</p>
-          <h2 className="display mt-0.5 text-[30px]">{title}</h2>
+          <h2 className="display mt-0.5 text-[24px]">{title}</h2>
           <p className="mt-0.5 text-[14.5px] text-muted">{sub}</p>
         </div>
         {right}

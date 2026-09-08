@@ -28,18 +28,21 @@ export class RunManager extends EventEmitter {
 
   // ── persistence ───────────────────────────────────────────────────────────
   #loadFromDisk() {
-    for (const id of readdirSync(this.cfg.runsDir).sort()) {
-      const file = join(this.cfg.runsDir, id, 'run.json');
-      if (!existsSync(file)) continue;
-      try {
-        const meta = JSON.parse(readFileSync(file, 'utf8'));
-        if (meta.status === 'running') { meta.status = 'stopped'; meta.finishedAt ??= new Date().toISOString(); writeFileSync(file, JSON.stringify(meta, null, 2)); }
-        const run = { meta, dir: join(this.cfg.runsDir, id), personas: new Map(), analysis: { status: existsSync(join(this.cfg.runsDir, id, 'analysis', 'findings.json')) ? 'ready' : 'none' }, stopping: false, live: false };
-        for (const key of meta.personas) run.personas.set(key, this.#coldPersona(run, key));
-        this.runs.set(id, run);
-      } catch (err) { this.log(`runs: skipping ${id}: ${err.message}`); }
-    }
+    for (const id of readdirSync(this.cfg.runsDir).sort()) this.#loadOne(id);
     this.log(`runs: ${this.runs.size} loaded from ${this.cfg.runsDir}`);
+  }
+
+  /** Index one run directory from disk (a run.json plus per-persona dirs). No-op if it is not a run. */
+  #loadOne(id) {
+    const file = join(this.cfg.runsDir, id, 'run.json');
+    if (!existsSync(file)) return;
+    try {
+      const meta = JSON.parse(readFileSync(file, 'utf8'));
+      if (meta.status === 'running') { meta.status = 'stopped'; meta.finishedAt ??= new Date().toISOString(); writeFileSync(file, JSON.stringify(meta, null, 2)); }
+      const run = { meta, dir: join(this.cfg.runsDir, id), personas: new Map(), analysis: { status: existsSync(join(this.cfg.runsDir, id, 'analysis', 'findings.json')) ? 'ready' : 'none' }, stopping: false, live: false };
+      for (const key of meta.personas) run.personas.set(key, this.#coldPersona(run, key));
+      this.runs.set(id, run);
+    } catch (err) { this.log(`runs: skipping ${id}: ${err.message}`); }
   }
 
   /** A persona from a previous process: state is reconstructed from disk on demand. */
@@ -236,7 +239,14 @@ export class RunManager extends EventEmitter {
   stopAll() { for (const id of this.runs.keys()) this.stop(id); }
 
   // ── read model ────────────────────────────────────────────────────────────
-  get(runId) { return this.runs.get(runId); }
+  get(runId) {
+    // Runs written by the runner CLI (or another orchestrator) land in runs/ after boot.
+    // Cold-load on first request instead of 404ing until a restart.
+    if (!this.runs.has(runId) && /^[\w.-]+$/.test(runId) && existsSync(join(this.cfg.runsDir, runId, 'run.json'))) {
+      try { this.#loadOne(runId); } catch (err) { this.log(`runs: could not cold-load ${runId}: ${err.message}`); }
+    }
+    return this.runs.get(runId);
+  }
   list() { return [...this.runs.values()].map((r) => r.meta).sort((a, b) => (a.startedAt < b.startedAt ? 1 : -1)); }
 
   personaLive(run, p) {

@@ -16,14 +16,13 @@ export function Disagreement({ findings, personas, nameOf, configs }: {
       const w = (x: ClusteredFinding) => (x.attribution === "unclear" ? 0 : x.attribution === "agent" ? 1 : 2);
       if (w(a) !== w(b)) return w(a) - w(b);
       return a.reporters.length - b.reporters.length;
-    })
-    .slice(0, 9);
+    });
 
-  if (!rows.length) return <p className="text-muted">Everyone agreed on everything. That never happens.</p>;
+  if (!rows.length) return <p className="text-muted">No differences in reported findings are available for this playtest.</p>;
 
   return (
-    <div className="panel overflow-hidden" data-disagreement>
-      <table className="w-full">
+    <div className="panel overflow-x-auto" data-disagreement>
+      <table className="w-full min-w-[720px]">
         <thead>
           <tr>
             <th className="eyebrow px-4 py-3 text-left font-normal">finding</th>
@@ -34,7 +33,7 @@ export function Disagreement({ findings, personas, nameOf, configs }: {
                   <div className="flex flex-col items-center gap-1">
                     <Avatar id={id} name={nameOf(id)} size={30} />
                     <span className="text-[12px] font-medium">{nameOf(id).split(" ")[0]}</span>
-                    {c && <span className="font-mono text-[9.5px] uppercase tracking-wider text-dim">{c.enforcement.reading} · {c.enforcement.genre_familiarity} · {c.enforcement.audio === "off" ? "mute" : "audio"}</span>}
+                    {c && <span className="text-[12px] text-dim">{c.enforcement.reading} · {c.enforcement.genre_familiarity} · {c.enforcement.audio === "off" ? "mute" : "audio"}</span>}
                   </div>
                 </th>
               );
@@ -58,13 +57,13 @@ export function Disagreement({ findings, personas, nameOf, configs }: {
                 {personas.map((id) => (
                   <td key={id} className="px-2 py-3 text-center">
                     {hit.has(id) ? (
-                      <span className="mx-auto grid h-8 w-8 place-items-center rounded-full text-[13px] font-bold text-ink" style={{ background: personaColor(id) }}>✓</span>
+                      <span className="mx-auto grid h-8 w-8 place-items-center rounded-full text-[13px] font-bold text-fg" style={{ background: `${personaColor(id)}20` }}>✓</span>
                     ) : (
-                      <span className="mx-auto block h-8 w-8 rounded-full ring-1 ring-inset ring-line2" />
+                      <span className="text-muted" aria-label="Not reported">—</span>
                     )}
                   </td>
                 ))}
-                <td className="max-w-[360px] px-4 py-3 text-[13.5px] leading-snug text-muted">{firstSentences(f.description, 2)}</td>
+                <td className="max-w-[360px] px-4 py-3 text-[13.5px] leading-snug text-muted">{f.description}</td>
               </tr>
             );
           })}
@@ -72,9 +71,4 @@ export function Disagreement({ findings, personas, nameOf, configs }: {
       </table>
     </div>
   );
-}
-
-function firstSentences(s: string, n: number): string {
-  const parts = s.match(/[^.!?]+[.!?]+/g) ?? [s];
-  return parts.slice(0, n).join(" ").trim();
 }

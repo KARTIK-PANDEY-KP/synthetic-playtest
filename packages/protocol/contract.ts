@@ -143,6 +143,17 @@ export interface Finding {
   thinking?: string;
   /** Stamped by the runner: the last few actions before the note, humanized ("pressed E ×3, walked forward"). */
   actionsBefore?: string[];
+  /** Stamped by the runner from ground-truth telemetry at the moment of the note. The agent never sees this. */
+  state?: {
+    room?: string;
+    objective?: string;
+    inventory: string[];
+    solved: string[];
+    roomsVisited: string[];   // in order, deduplicated
+    stepsSoFar: number;
+    stepBudget: number;
+    minutesIn: number;
+  };
 }
 
 /** The agent's final message, forced by `codex exec --output-schema report.schema.json`. */
