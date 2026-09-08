@@ -31,7 +31,8 @@ injected vs. flaws found — plus decoys that measure false positives. We know t
 ## Plans
 
 - [`docs/PLAN-PLATFORM.md`](docs/PLAN-PLATFORM.md) — the platform
-- [`docs/PLAN-GAME.md`](docs/PLAN-GAME.md) — the game and its flaw ledger
+- [`docs/GAME.md`](docs/GAME.md) — **what the game is, and the answer key of planted flaws**
+- [`docs/PLAN-GAME.md`](docs/PLAN-GAME.md) — the original game spec
 - [`docs/SPIKE-01-codex-vision.md`](docs/SPIKE-01-codex-vision.md) — ✅ proves agents can see
 
 ## Run it
