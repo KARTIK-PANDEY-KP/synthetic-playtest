@@ -1,0 +1,12 @@
+{
+  "name": "synthetic-playtest-sandbox",
+  "private": true,
+  "type": "module",
+  "description": "Runtime deps baked into the Modal sandbox image at /app so persona-mcp and the runner resolve them.",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "playwright": "^1.63.0",
+    "sharp": "^0.33.5",
+    "zod": "^4.5.4"
+  }
+}
