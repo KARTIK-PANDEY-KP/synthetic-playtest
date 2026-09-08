@@ -5,30 +5,29 @@ Two roles: one **speaks**, one **drives**. The driver never talks; the speaker n
 
 ---
 
-## 0:00 — The problem (30s)
+## 0:00 — The pattern (35s)
 
-> Every game you've ever loved was tested by people. Not just QA looking for crashes — **beta
-> testers and early-access players**, hundreds of them, playing the way real people play:
-> skimming the tutorial, getting lost, getting bored, rage-quitting at a door. Studios pay for
-> that in weeks and real money, and it's the only way to learn whether a game is *confusing*,
-> not just whether it's *broken*.
+> The same thing happens every time production outruns testing.
 >
-> That was fine when a studio shipped a game every three years. It is not fine now. AI is
-> about to make games at a pace no beta program can keep up with — more titles, more builds,
-> more iterations per day than there are humans to play them. **The bottleneck in game
-> production is about to be testing.**
-
-## 0:30 — Why now: the voice-AI parallel (35s)
-
-> We've seen this exact problem solved once already — in **voice AI**. Nobody QAs a voice
-> agent by hand anymore. You write *personas* — the impatient caller, the confused senior,
-> the one who mumbles — and you let them hammer the agent thousands of times. Persona-driven
-> testing is how that whole industry ships.
+> When AI made coding fast, people shipped buggy code faster than anyone could review it —
+> so testing had to become automated, and an industry grew around it. When voice agents got
+> easy to build, nobody could call them enough times by hand — so voice-AI testing became
+> **persona-driven**: you write the impatient caller, the confused senior, and let them
+> hammer the agent thousands of times. That's how that industry ships today.
 >
-> Games never got that, for one reason: **no model could actually play a game it had never
-> seen.** Until Astra. Astra saturates ARC-AGI-3 — the benchmark that is literally "understand
-> a novel interactive environment with no instructions" — and it can look at a screen and act
-> on it. That capability unlocks the same trick for games. So we built it.
+> Games are next. With Astra, game development and 3D modeling go from months to hours.
+> But games need a kind of testing code never did: **beta testers** — hundreds of real
+> people, skimming, getting lost, getting bored, rage-quitting at a door. It's the only way
+> to learn whether a game is *confusing*, not just *broken*. It runs at human speed, and
+> production is about to stop running at human speed.
+
+## 0:35 — Why now (30s)
+
+> So games need what code and voice already got: testing by agents that behave like the
+> people they replace. That was impossible for one reason — no model could play a game it
+> had never seen. Astra saturates ARC-AGI-3, the benchmark that is literally "understand a
+> novel interactive environment with no instructions." **The model that makes games fast is
+> the model that makes testing them possible.** So we built it.
 
 ## 1:05 — What it is (25s)
 
@@ -47,8 +46,10 @@ Two roles: one **speaks**, one **drives**. The driver never talks; the speaker n
 
 **Driver:** Fleet page → the five personas are pre-selected → **Launch**. Panes fill.
 
-> This is Station Kepler — a game we built for this, six rooms, first person. Five testers
-> just started, each in its own sandbox. One line of reasoning per pane.
+> This is Station Kepler — you wake alone on a dead research station as its last signal,
+> and have to bring it back: restore power, revive the greenhouse, restart the reactor
+> before the air runs out. Six rooms, first person, built for this. Five testers just
+> started, each in its own sandbox. One line of reasoning per pane.
 
 **Driver:** expand **Robert** as soon as a finding lands. Speaker reads it verbatim, then stops
 talking for five seconds. Last run, that line was:
