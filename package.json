@@ -14,6 +14,7 @@
     "orchestrator": "pnpm --filter orchestrator start",
     "orchestrator:dev": "pnpm --filter orchestrator dev",
     "spike:codex-vision": "spikes/codex-vision/run.sh",
-    "test": "pnpm game:build && pnpm game:test && pnpm smoke && pnpm test:runner"
+    "test": "pnpm game:build && pnpm game:test && pnpm smoke && pnpm test:runner",
+    "stack": "scripts/up.sh"
   }
 }

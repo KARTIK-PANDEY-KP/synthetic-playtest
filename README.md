@@ -37,10 +37,11 @@ injected vs. flaws found — plus decoys that measure false positives. We know t
 ## Run it
 
 ```bash
-pnpm install && pnpm game:build
-pnpm orchestrator                 # :4000 — serves the game on :5273, spawns runners, governor
-cd apps/dashboard && pnpm build && pnpm start   # :3000 — points at http://localhost:4000
+pnpm install
+pnpm stack        # builds what's missing, then: orchestrator :4000 · game :5273 · dashboard :3000
 ```
+
+(Separately if you prefer: `pnpm orchestrator`, and `cd apps/dashboard && pnpm build && pnpm start`.)
 
 Then open http://localhost:3000, pick personas (as many as you like — duplicates allowed),
 and Launch. Each pane is a live MJPEG feed of that persona's browser with one line of its
