@@ -1,6 +1,6 @@
 # Pitch — Synthetic Playtesting
 
-Spoken script, ~4 minutes with the demo woven in. Real numbers from run `20260908-210451-35b4`.
+Spoken script, ~4 minutes with the demo woven in (cut the 'Beyond games' beat if you are held to 3:30). Real numbers from run `20260908-210451-35b4`.
 Two roles: one **speaks**, one **drives**. The driver never talks; the speaker never touches the keyboard.
 
 ---
@@ -91,7 +91,19 @@ will do to this person" preview. Ten seconds. Back to the fleet.
 
 **Driver:** click analyst preset **1**. Let one paragraph render while the speaker finishes.
 
-## 3:15 — Close (30s)
+## 3:15 — Beyond games (25s)
+
+> And this isn't only for game studios. The agents don't know they're in a *game* — they
+> know they're a person walking through a 3D space, looking at things, trying things. Make any
+> 3D asset walkable — a building, a car interior, a product model, a level block-out — and the
+> same fleet walks through it as a first-timer, a power user, someone who can't hear, someone
+> who won't read, and comes back with what each of them noticed and what they'd change.
+>
+> We didn't build that tonight — but nothing in the pipeline is game-specific. The pattern is
+> **human personas, enforced, at scale, doing a job humans currently do by hand.** Testing is
+> the first one. It won't be the last.
+
+## 3:40 — Close (25s)
 
 > Voice AI already tests with personas. Games couldn't — the models couldn't play. Astra
 > changed that this month. As AI starts producing games faster than humans can play them,
@@ -115,7 +127,9 @@ Stop. Under time reads as confidence.
 > enforced, not prompted; a skimmer's screenshots are literally blurred. Last night five of
 > them played a game we seeded with fifteen flaws, for thirty-three dollars: three found,
 > zero false alarms, and one real problem we never planted that gated four of the five. Every
-> finding replay-verified. That's the beta program, before week one.
+> finding replay-verified. That's the beta program, before week one — and nothing in it is
+> game-specific: make any 3D model walkable and the same personas will walk it and tell you
+> what they'd change.
 
 ## Hooks (pick one for the opening line)
 
@@ -141,6 +155,14 @@ dead ends and silent doors a hundred people would have hit in week one, before w
 **Why Astra specifically?** It sees a screen it has never seen and acts on it — zero-shot,
 no SDK, no per-game training. And *playing badly in a specific, consistent way* while still
 reasoning coherently is harder than playing well. Nobody else is demoing that.
+
+**Is this only for games?** No — the agents perceive a 3D space through a screen and act
+in it as a person would; "game" is just the first thing worth doing that to. Any 3D asset
+or environment that can be made walkable — architecture, product models, vehicle interiors,
+level block-outs — gets the same treatment: walk it as N different people, report what each
+noticed and what they'd change. Not built tonight; no part of the pipeline would have to
+change. More broadly: persona-driven agents can take over any process that currently needs a
+panel of humans to try something and say how it felt.
 
 **Why a game you wrote?** So we could grade ourselves. It's also the same reason a voice-AI
 team writes its own test scenarios. Any browser game with a URL works the same way.
