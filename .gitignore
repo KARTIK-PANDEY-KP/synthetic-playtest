@@ -25,3 +25,6 @@ apps/*/pnpm-lock.yaml
 apps/*/pnpm-workspace.yaml
 packages/*/pnpm-lock.yaml
 spikes/*/pnpm-lock.yaml
+
+# agent worktrees live inside the repo tree
+.claude/
