@@ -153,6 +153,33 @@ holds a global token bucket and queues steps rather than eating 429s. Surface **
 and TPM headroom in the dashboard**: it makes the inevitable cost question answerable on
 stage instead of hand-waved.
 
+## What the first real fleet run actually produced (2026-09-08)
+
+Five personas, full budgets, real game, real Codex: **$33.22, 208 action steps.**
+
+| | |
+|---|---|
+| Recall | **3 / 15** ledger flaws — B1 (soft-lock), C1 (tutorial), G1 (crouch) |
+| Precision | 3 / 9 clusters; **0 decoys flagged** |
+| Verified by replay | 2 / 4 attempted (C1 ×2); B1/G1 predate tick-exact recording |
+| Emergent | **1** — "Door gives me nothing to work with": 4 of 5 testers stalled at the concourse's four identical, feedback-less locked doors. Not in the ledger. Attribution `game`. |
+
+The low recall is the finding: the emergent door problem gated 4 of 5 testers out of
+80% of the content. Only Priya (completionist, 115 steps) reached the Lab — and there hit
+B1, wrote a repro-quality report in character, and the game's own `softlock_entered`
+event confirmed it. Robert (no conventions) hit G1 and asked "How do I bend down?", as
+the ledger predicted. Every persona behaved like the person described.
+
+**Cost is superlinear in steps.** Codex keeps the whole conversation, so Maya cost
+$0.06/step at 13 steps and Priya **$0.20/step at 115**. Budget personas at 60–80 steps,
+not 130; a deep tester is a $15–25 line item, and that should be a deliberate choice.
+
+**Lessons that cost real time.** Replay verification needs the game's own tick-exact
+input recording, not the harness's wall-clock action log (95 replayed actions drifted
+and B1 did not recur). Telemetry and actions must share a clock. A finding's `step` and
+`frame` must be stamped by the runner, not the agent. And an unanchored `runs/` in
+`.gitignore` silently ate `apps/dashboard/src/app/runs/`.
+
 ## Verification — you are done when all of these pass
 
 1. `pnpm dev:local` — 1 persona, local Playwright, no Modal. The whole loop debuggable
