@@ -1,0 +1,14 @@
+{
+  "name": "analysis",
+  "private": true,
+  "type": "module",
+  "description": "Cross-persona playtest analysis: cluster, verify, score, report, ask",
+  "bin": { "playtest-analysis": "./cli.mjs" },
+  "scripts": {
+    "test": "node test.mjs",
+    "fixture": "node fixtures/make-fixture.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}
