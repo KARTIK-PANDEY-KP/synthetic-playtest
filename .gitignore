@@ -19,3 +19,9 @@ codex-home/
 # spike artifacts (regenerated each run)
 spikes/**/fixture.png
 spike-answer-key.json
+
+# nested lockfiles/workspaces confuse the monorepo root
+apps/*/pnpm-lock.yaml
+apps/*/pnpm-workspace.yaml
+packages/*/pnpm-lock.yaml
+spikes/*/pnpm-lock.yaml
