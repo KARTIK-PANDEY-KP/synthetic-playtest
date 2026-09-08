@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite --port 5273",
     "build": "vite build",
-    "preview": "vite preview --port 5273"
+    "preview": "vite preview --port 5273",
+    "fixtures": "node scripts/perfect-player.mjs",
+    "test": "node scripts/verify.mjs"
   },
   "dependencies": {
     "three": "^0.170.0"

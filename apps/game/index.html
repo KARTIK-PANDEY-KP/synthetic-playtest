@@ -1,39 +1,20 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Station Kepler</title>
-<style>
-  :root { color-scheme: dark; }
-  * { box-sizing: border-box; }
-  html, body { margin:0; height:100%; overflow:hidden; background:#05070a;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color:#e8eef5; }
-  #view { position:fixed; inset:0; display:block; }
-  .ui { position:fixed; pointer-events:none; user-select:none; }
-  #objective { top:18px; left:50%; transform:translateX(-50%); padding:8px 18px;
-    background:rgba(6,12,20,.78); border:1px solid #24384f; border-radius:6px;
-    font-size:15px; letter-spacing:.3px; }
-  #tutorial { top:50%; left:50%; transform:translate(-50%,-50%); max-width:560px;
-    padding:20px 26px; background:rgba(8,14,22,.92); border:1px solid #2f4a68;
-    border-radius:8px; font-size:17px; line-height:1.5; text-align:center; }
-  #prompt { bottom:120px; left:50%; transform:translateX(-50%); padding:6px 14px;
-    background:rgba(6,12,20,.8); border:1px solid #2f4a68; border-radius:4px; font-size:14px; }
-  #hud { bottom:18px; left:18px; font-size:13px; line-height:1.7; opacity:.9; }
-  #inventory { bottom:18px; right:18px; font-size:13px; text-align:right; opacity:.9; }
-  #crosshair { top:50%; left:50%; width:6px; height:6px; margin:-3px 0 0 -3px;
-    border-radius:50%; background:#e8eef5; opacity:.55; }
-  .hidden { display:none !important; }
-</style>
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1418"><title>Station Kepler — A signal in the silence</title></head>
 <body>
-  <canvas id="view"></canvas>
-  <div id="crosshair" class="ui"></div>
-  <div id="objective" class="ui" data-text-kind="hud"></div>
-  <div id="tutorial" class="ui hidden" data-text-kind="tutorial"></div>
-  <div id="prompt" class="ui hidden" data-text-kind="label"></div>
-  <div id="hud" class="ui" data-text-kind="hud"></div>
-  <div id="inventory" class="ui" data-text-kind="hud"></div>
+  <canvas id="view" aria-label="First-person view of Station Kepler. Move with WASD, look with arrow keys or mouse drag, interact with E." tabindex="0"></canvas>
+  <div class="vignette"></div>
+  <header class="topbar"><div class="brand" data-text-kind="hud"><span class="brand-symbol">✳</span><span>KEPLER<span class="brand-sub">ORBITAL RESEARCH STATION</span></span></div><div class="mission" data-text-kind="hud"><span class="eyebrow"><i></i> CURRENT DIRECTIVE</span><span id="objective">Restore power</span></div><button id="settings-button" aria-label="Open settings" data-text-kind="menu">Ⅱ <span>PAUSE</span><kbd>ESC</kbd></button></header>
+  <aside class="sector-rail" aria-label="Station sectors" id="sectors" data-text-kind="hud"></aside>
+  <div id="crosshair"><span></span></div>
+  <div id="tutorial" class="tutorial" data-text-kind="tutorial"><span class="eyebrow">WAKE SEQUENCE COMPLETE</span><p>You are the last signal.</p><div>Move with <b>W A S D</b>. Drag to look, or use arrow keys.<br>Press <b>E</b> to interact. Restore Station Kepler.</div></div>
+  <div id="prompt" class="prompt hidden" data-text-kind="label"></div>
+  <div id="message" class="message hidden" data-text-kind="hud" role="status"></div>
+  <div id="subtitle" class="subtitle hidden" data-text-kind="hud"></div>
+  <div id="hold" class="hold hidden"><div></div></div>
+  <footer class="bottom"><div class="location" data-text-kind="hud"><span class="eyebrow" id="sector">SECTOR 01 / 06</span><h1 id="room-name">Arrival airlock</h1><p id="room-subtitle">The silence after the signal.</p><div class="location-meta"><span class="live-dot"></span> KEPLER–186F <span class="divider">/</span> LOCAL SYSTEMS <span id="power-status">OFFLINE</span></div></div><div class="equipment"><div id="oxygen" data-text-kind="hud"><span class="eyebrow">SUIT O₂ <strong id="oxygen-value">—</strong></span><div class="oxygen-track"><div id="oxygen-fill"></div></div></div><button id="inventory-button" data-text-kind="hud"><span class="eyebrow">EQUIPMENT <kbd>I</kbd></span><span id="inventory-summary">No equipment collected</span><span class="equipment-icon">＋</span></button></div></footer>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Station interface"><section id="modal-card"></section></div>
+  <div id="load-error" class="modal hidden"><section class="error-card" data-text-kind="menu"><h1>Signal interrupted</h1><p id="error-detail"></p><button onclick="location.reload()">Reconnect</button></section></div>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

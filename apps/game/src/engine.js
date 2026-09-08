@@ -2,14 +2,15 @@ import { OBJECTS, OBSTACLES, LOGS } from './world.js';
 export const HZ = 60;
 export class Game {
   constructor(seed = 1, emit = () => {}) {
-    this.seed = seed >>> 0; this.emitCallback = emit; this.tick = 0; this.events = []; this.audio = []; this.keys = new Set(); this.seen = new Set(); this.settings = { sensitivity: 1, subtitles: true, sound: true }; this.reset();
+    this.initializeSeed(seed); this.emitCallback = emit; this.tick = 0; this.events = []; this.audio = []; this.keys = new Set(); this.seen = new Set(); this.settings = { sensitivity: 1, subtitles: true, sound: true }; this.reset();
   }
+  initializeSeed(seed) { this.seed = seed >>> 0; this.stars = Array.from({ length: 35 }, () => [this.random(), this.random(), this.random()]); }
   random() { this.seed = (this.seed * 1664525 + 1013904223) >>> 0; return this.seed / 4294967296; }
   event(type, data = {}) { const e = { t: Math.round(this.tick * 1000 / HZ), type, ...data }; this.events.push(e); this.emitCallback(e); }
   flaw(id) { if (!this.seen.has(id)) { this.seen.add(id); this.event('flaw_triggered', { flawId: id }); } }
   reset() {
     this.state = { room: 'airlock', inventory: [], objective: 'Restore power', oxygen: null, solved: [], softlocked: false };
-    this.pos = { x: 0, y: 1.65, z: 4 }; this.yaw = 0; this.pitch = 0; this.vy = 0; this.jump = 0;
+    this.pos = { x: 0, y: 1.65, z: 3 }; this.yaw = 0; this.pitch = 0; this.vy = 0; this.jump = 0;
     this.mode = 'play'; this.previousMode = 'play'; this.code = ''; this.terminal = ''; this.message = ''; this.messageUntil = 0; this.tutorialUntil = this.tick + 210; this.tutorialDismissed = false; this.tutorialAllowed = !this.everStarted; this.everStarted = true;
     this.watered = []; this.removed = new Set(); this.hold = 0; this.holdId = ''; this.lastActivity = this.tick; this.falling = false; this.liftUntil = 0; this.selected = []; this.seen.clear(); this.keys.clear(); this.event('room_entered', { room: 'airlock' }); this.saveCheckpoint();
   }
@@ -18,10 +19,10 @@ export class Game {
   solve(id) { if (!this.solved(id)) { this.state.solved.push(id); this.event('puzzle_solved', { puzzle: id }); this.cue('confirmed', 'System confirmed.'); } }
   say(message, seconds = 5) { this.message = message; this.messageUntil = this.tick + seconds * HZ; }
   cue(id, transcript) { this.audio.push({ t: Math.round(this.tick * 1000 / HZ), id, transcript }); }
-  pick(id) { if (this.state.inventory.includes(id)) return; this.state.inventory.push(id); this.removed.add(id); this.event('item_picked', { item: id }); this.cue('pickup', 'Equipment acquired.'); this.say(`${id.replaceAll('_', ' ')} added to inventory.`); }
+  pick(id) { if (this.state.inventory.includes(id)) return; this.state.inventory.push(id); if (id !== 'regulator') this.removed.add(id); this.event('item_picked', { item: id }); this.cue('pickup', 'Equipment acquired.'); this.say(`${id.replaceAll('_', ' ')} added to inventory.`); }
   use(id) { const i = this.state.inventory.indexOf(id); if (i < 0) return false; this.state.inventory.splice(i, 1); this.event('item_used', { item: id }); return true; }
   saveCheckpoint() { this.checkpoint = JSON.parse(JSON.stringify({ state: this.state, removed: [...this.removed], watered: this.watered })); }
-  restore() { if (this.mode === 'dead') return; const c = this.checkpoint; this.state = structuredClone(c.state); this.removed = new Set(c.removed); this.watered = [...c.watered]; this.pos = { x: 0, y: 1.65, z: 4 }; this.jump = 0; this.vy = 0; this.falling = false; this.yaw = 0; this.pitch = 0; this.mode = 'play'; this.keys.clear(); this.event('respawned'); this.say('Checkpoint restored.'); }
+  restore() { if (this.mode === 'dead' || this.state.softlocked) return; const c = this.checkpoint; this.state = structuredClone(c.state); this.removed = new Set(c.removed); this.watered = [...c.watered]; this.pos = { x: 0, y: 1.65, z: 4 }; this.jump = 0; this.vy = 0; this.falling = false; this.yaw = 0; this.pitch = 0; this.mode = 'play'; this.keys.clear(); this.event('respawned'); this.say('Checkpoint restored.'); }
   enter(room) {
     this.state.room = room; this.pos = { x: 0, y: 1.65, z: 4 }; this.yaw = 0; this.pitch = 0; this.keys.clear(); this.event('room_entered', { room });
     if (room === 'power') this.flaw('C4');
@@ -30,6 +31,11 @@ export class Game {
     this.saveCheckpoint();
   }
   objects() { return OBJECTS[this.state.room].filter(o => !this.removed.has(o.id) && (o.id !== 'bio_cell' || this.watered.length === 12)); }
+  canStand(x, z) {
+    const props = OBJECTS[this.state.room].filter(o => !['door', 'sealed', 'card', 'vent'].includes(o.kind)).map(o => ({ x: o.x, z: o.z, w: o.kind === 'plant' ? 1.5 : o.kind === 'pickup' ? 1 : 1.3, d: o.kind === 'plant' ? 1.4 : .95, h: o.kind === 'plant' ? .6 : .95 }));
+    if (this.state.room === 'airlock') props.push(...[-3, 3].map(x => ({ x, z: 2, w: .9, d: 1.8, h: 1.15 })));
+    return Math.abs(x) < 6.65 && Math.abs(z) < 6.65 && ![...(OBSTACLES[this.state.room] || []), ...props].some(o => this.jump < o.h && Math.abs(x - o.x) < o.w / 2 + .25 && Math.abs(z - o.z) < o.d / 2 + .25);
+  }
   target() {
     if (this.mode !== 'play' || this.falling || this.liftUntil) return null;
     const dir = { x: -Math.sin(this.yaw) * Math.cos(this.pitch), y: Math.sin(this.pitch), z: -Math.cos(this.yaw) * Math.cos(this.pitch) };
@@ -144,9 +150,16 @@ export class Game {
       if (!this.falling) {
         const speed = (this.crouching ? 1.5 : 3.6) / HZ / (Math.hypot(f, s) || 1);
         const dx = (-Math.sin(this.yaw) * f + Math.cos(this.yaw) * s) * speed, dz = (-Math.cos(this.yaw) * f - Math.sin(this.yaw) * s) * speed;
-        const can = (x, z) => Math.abs(x) < 6.65 && Math.abs(z) < 6.65 && !(OBSTACLES[this.state.room] || []).some(o => this.jump < o.h && Math.abs(x - o.x) < o.w / 2 + .25 && Math.abs(z - o.z) < o.d / 2 + .25);
+        const can = (x, z) => this.canStand(x, z);
         if (can(this.pos.x + dx, this.pos.z)) this.pos.x += dx;
         if (can(this.pos.x, this.pos.z + dz)) this.pos.z += dz;
+        // The arrival hatch is an automatic walking connection, preserving the
+        // original smoke fixture and normal forward/back traversal.
+        if (Math.abs(this.pos.x) < 1.15 && ((this.state.room === 'airlock' && this.pos.z < -6.2) || (this.state.room === 'corridor' && this.pos.z > 6.2))) {
+          const toCorridor = this.state.room === 'airlock', x = this.pos.x, yaw = this.yaw, pitch = this.pitch, held = new Set(this.keys);
+          this.enter(toCorridor ? 'corridor' : 'airlock');
+          this.pos.x = x; this.pos.z = toCorridor ? 6.15 : -6.15; this.yaw = yaw; this.pitch = pitch; this.keys = held;
+        }
         if (f || s) this.lastActivity = this.tick;
         if (this.vy || this.jump) { this.vy -= 9.8 / HZ; this.jump = Math.max(0, this.jump + this.vy / HZ); if (!this.jump) this.vy = 0; }
         this.pos.y = (this.crouching ? .8 : 1.65) + this.jump;

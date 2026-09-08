@@ -26,15 +26,23 @@ const regions = await driver.page.evaluate(() => window.__telemetry.textRegions(
 const tutorial = regions.find((r) => r.kind === 'tutorial');
 check('textRegions() reports the tutorial box', !!tutorial, tutorial ? `${tutorial.words} words at ${tutorial.w}x${tutorial.h}` : 'missing');
 
-// 3. redaction physically alters the pixels for a skim persona
+// 3. redaction physically alters the pixels for a skim persona.
+// Metric: Laplacian edge energy inside the tutorial box. Text is almost entirely
+// edges; a card's border and background are not. Whole-region stdev was the wrong
+// measure — it barely moved even when the text was unreadable.
 const before = await driver.page.screenshot({ type: 'png' });
 const redactedPath = await driver.screenshot();
-const rawStats = await sharp(before).extract({ left: tutorial.x, top: tutorial.y, width: tutorial.w, height: tutorial.h }).stats();
-const redStats = await sharp(redactedPath).extract({ left: tutorial.x, top: tutorial.y, width: tutorial.w, height: tutorial.h }).stats();
-const sharpness = (s) => s.channels[0].stdev;
+const region = { left: tutorial.x, top: tutorial.y, width: tutorial.w, height: tutorial.h };
+const edgeEnergy = async (src) => {
+  const { data } = await sharp(src).extract(region).greyscale()
+    .convolve({ width: 3, height: 3, kernel: [0, 1, 0, 1, -4, 1, 0, 1, 0] })
+    .raw().toBuffer({ resolveWithObject: true });
+  let sum = 0; for (const v of data) sum += v; return sum / data.length;
+};
+const rawEdges = await edgeEnergy(before), redEdges = await edgeEnergy(redactedPath);
 check('skim persona: tutorial text is blurred OUT OF THE PIXELS',
-  sharpness(redStats) < sharpness(rawStats) * 0.8,
-  `stdev ${sharpness(rawStats).toFixed(1)} -> ${sharpness(redStats).toFixed(1)}`);
+  redEdges < rawEdges * 0.5,
+  `edge energy ${rawEdges.toFixed(2)} -> ${redEdges.toFixed(2)}`);
 
 // 4. C1 fires — tutorial self-destructs and can never be re-read
 await driver.page.waitForTimeout(3800);
@@ -55,6 +63,11 @@ await driver.look('left', 700);
 await driver.page.waitForTimeout(700);
 const yawAfter = [...driver.events].reverse().find((e) => e.type === 'position')?.yaw;
 check('arrow-key look works without pointer lock', yawBefore !== yawAfter, `${yawBefore} -> ${yawAfter}`);
+
+// Restore heading before the stall test below: 'back' must cross the doorway,
+// and the look test just rotated the player ~1.1 rad off the corridor axis.
+await driver.look('right', 700);
+await driver.page.waitForTimeout(300);
 
 // 7. the audio gate is real, not advisory
 const dana = JSON.parse(readFileSync(new URL('./personas/dana.json', import.meta.url)));

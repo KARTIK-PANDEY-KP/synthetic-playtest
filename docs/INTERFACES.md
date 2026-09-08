@@ -120,7 +120,8 @@ position ⇒ `game`; 1 ⇒ `agent`. Stall is read from `telemetry` events, not s
 
 - **Verify by running it.** Report what you ran and what you saw. Never claim untested.
 - Path has a space (`astra hackathon`). Use `fileURLToPath`, never `URL.pathname`.
-- The string `brainbase` must not appear anywhere. No secrets in the tree; `.env*`,
-  `codex-home/`, `runs/` are ignored.
+- The author's employer/org name must not appear anywhere in this repo — not in code,
+  config, docs, or commit messages. No secrets in the tree; `.env*`, `codex-home/`,
+  `runs/` are ignored.
 - Commit messages: conventional commits, trailer `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`.
 - `window.__telemetry` must never reach the agent. Grep your agent-visible payloads for it.
