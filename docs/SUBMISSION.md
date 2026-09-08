@@ -8,30 +8,50 @@ Synthetic Playtest
 
 ## Project description
 
-Beta testing is done by humans — hundreds of early-access players finding out whether a game
-is confusing, boring, or unfair, not just whether it crashes. AI is about to produce games
-faster than humans can play them, and every existing AI game-testing tool only finds crashes.
+Every game you've ever loved was tested by people. Not just QA looking for crashes — beta
+testers and early-access players, hundreds of them, playing the way real people play:
+skimming the tutorial, getting lost, getting bored, quitting at a door that won't open.
+That's the only way a studio learns whether a game is *confusing*, not just whether it's
+*broken*, and it costs weeks and real money.
 
-Synthetic Playtest replaces the beta program with a fleet of GPT-6 Astra agents that play a
-game *as specific people*. You describe testers as personas — Maya, a streamer who skims
-everything; Robert, 52, first PC game ever; Dana, who plays with the sound off — and the
-harness **enforces** who they are rather than asking a prompt nicely: Maya's screenshots have
-long text blurred out before the model sees them; Dana has no "listen" tool at all. Each
-persona gets its own cloud sandbox (Modal) with a browser and a Codex agent, plays the game
-through screenshots and real input only, and files findings in character. Reports are
-deduplicated across testers, attributed to the game vs. the agent using telemetry the agents
-never see, and every finding with a ground-truth signal is **replay-verified** by re-running
-the exact inputs at the same seed.
+That worked when a studio shipped a game every three years. It won't work now. AI is about
+to make games — and 3D worlds, levels, and assets — faster than humans can play them.
+More titles, more builds, more iterations a day than there are people to test them. The
+bottleneck in game production is about to be testing.
+
+We've watched this exact problem get solved once already, in voice AI. Nobody QAs a voice
+agent by hand anymore: you write personas — the impatient caller, the confused senior, the
+one who mumbles — and let them hammer the agent thousands of times. Persona-driven testing
+is how that whole industry ships. Games never got it, for one reason: no model could play a
+game it had never seen. GPT-6 Astra can. So we built it.
+
+**Synthetic Playtest** is the beta program, run by agents. You describe testers as *people* —
+Maya, a streamer who skims everything; Robert, 52, first PC game ever; Dana, who plays with
+the sound off. Each one gets its own cloud sandbox with a browser and an Astra agent and
+plays the game the way that person would — not because a prompt asked nicely, but because
+the harness enforces it: Maya's screenshots have long text blurred out before the model ever
+sees them; Dana has no "listen" tool at all. They see only pixels and press only keys. As
+they play they file what a beta tester would file — confusion, boredom, unfairness, bugs —
+in their own voice. Reports are deduplicated across the fleet, attributed to the game or to
+the agent using telemetry the agents never see, and every finding with a ground-truth signal
+is replay-verified by re-running the exact inputs at the same seed. You can make as many
+personas as you want and watch every one of them live.
 
 To prove it works we built the test subject too: Station Kepler, a six-room first-person 3D
-game seeded with **15 deliberate flaws and 2 decoys**, so we hold an answer key and can score
-recall and precision. First real fleet run — five personas, $33: three planted flaws found,
-zero false alarms, and one real problem nobody planted (four silent, identical locked doors
-that stalled four of five testers). Verification reproduced 3/3 findings on replay.
+game seeded with fifteen deliberate flaws and two decoys, so we hold an answer key and can
+score ourselves. First real run — five personas, $33: three planted flaws found, zero false
+alarms, and one real problem nobody planted — four silent, identical locked doors that
+stalled four of five testers, exactly what a hundred early-access players would have found
+in week one. Found before week one, in twenty minutes.
 
-Persona-driven testing already runs the voice-AI industry. Games never got it because no
-model could play a game it had never seen. Astra can. Nothing in the pipeline is
-game-specific — any walkable 3D asset gets the same fleet of people.
+And this isn't only for games. The agents don't know they're in a game; they know they're
+a person in a 3D space, looking and trying. Make any 3D asset walkable — a building, a
+vehicle interior, a product model, a level block-out — and the same fleet walks it as a
+first-timer, a power user, someone who can't hear, someone who won't read, and reports what
+each of them noticed and would change. We didn't build that tonight, but nothing in the
+pipeline is game-specific. The pattern is human personas, enforced, at scale, doing a job
+that currently needs a room full of people to try something and say how it felt. Testing
+is the first such job. It won't be the last.
 
 ## Public GitHub repository
 
