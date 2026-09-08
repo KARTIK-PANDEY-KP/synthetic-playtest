@@ -53,9 +53,11 @@ CODEX_HOME=/agent/home codex exec --json \
   "$(cat /agent/persona-brief.md)"
 ```
 
-- **`--approve-for-me` is required.** Without it MCP calls fail with *"MCP tool call
+- **`--approve-for-me` is required locally.** Without it MCP calls fail with *"MCP tool call
   requires approval, but approval policy is never."* `mcp_servers.<name>.trusted=true` is
-  silently ignored. The `--dangerously-bypass-*` flag is **not** needed anywhere.
+  silently ignored. **Inside Modal** the runner must instead use
+  `--dangerously-bypass-approvals-and-sandbox` (`CODEX_EXTERNALLY_SANDBOXED=1`): Codex's Linux
+  sandbox is bubblewrap and cannot start inside a container — see SPIKE-01.
 - `--json` → JSONL on stdout → parsed into the live reasoning stream.
 - `--output-schema` → the final message is a typed `PlaytestReport`. No prose parsing.
 - **Keep the persona prefix byte-stable across steps.** Spike 01 measured 92% of input

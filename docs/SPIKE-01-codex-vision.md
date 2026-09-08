@@ -52,8 +52,15 @@ MCP tool call requires approval, but approval policy is never
 no effect). The flag that works is **`--approve-for-me`**, which routes approval requests
 through automatic review using the workspace-write sandbox.
 
-This is strictly safer than planned and **removes the need for the dangerous bypass flag
-entirely**, in Modal and locally.
+This is strictly safer than planned and removes the need for the bypass flag **on macOS**.
+
+**Correction (first Modal fleet run, 2026-09-08 22:33):** on Linux, Codex's own sandbox is
+bubblewrap, which cannot create namespaces inside a container. Every `view_image` failed with
+`fs sandbox helper failed … bwrap: loopback: Failed RTM_NEWADDR`, all four agents played
+blind, filed "I can't see the screen" and quit at 0 steps for ~$0.30 each. Inside Modal
+(already a sandbox) the runner is started with `CODEX_EXTERNALLY_SANDBOXED=1` and swaps
+`--approve-for-me` for `--dangerously-bypass-approvals-and-sandbox` — the flag's documented
+purpose. Never set that variable on a developer machine.
 
 ### 2. Measured cost is ~2× the estimate
 

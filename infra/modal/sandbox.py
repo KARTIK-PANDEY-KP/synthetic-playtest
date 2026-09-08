@@ -225,6 +225,9 @@ def cmd_run(a):
         if a.max_steps:
             args += ["--max-steps", str(a.max_steps)]
         env = {k: v for k, v in os.environ.items() if k.startswith("FAKE_") or k in ("ASTRA_MODEL",)}
+        # The sandbox IS the sandbox. Codex's own Linux sandbox (bubblewrap) cannot create
+        # namespaces inside a container and view_image fails — the agent plays blind.
+        env["CODEX_EXTERNALLY_SANDBOXED"] = "1"
         proc = sb.exec(*args, env=env, workdir=APP_DIR, timeout=a.timeout)
         state["runner_started"] = True
         relay_stderr(proc, "runner")

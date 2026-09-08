@@ -84,7 +84,11 @@ if (viewerPort > 0) {
 }
 
 // ── codex home: config.toml + auth ───────────────────────────────────────────
-const codexHome = codexHomeOpt ? resolve(codexHomeOpt) : mkdtempSync(join(tmpdir(), `sp-codex-${persona.id}-`));
+// Not under tmpdir(): codex refuses to create its helper binaries there ("Refusing to
+// create helper binaries under temporary dir") and warns on every run.
+const codexHomeBase = join(homedir(), '.cache', 'synthetic-playtest');
+mkdirSync(codexHomeBase, { recursive: true });
+const codexHome = codexHomeOpt ? resolve(codexHomeOpt) : mkdtempSync(join(codexHomeBase, `codex-${persona.id}-`));
 mkdirSync(codexHome, { recursive: true });
 const toml = (s) => JSON.stringify(s); // TOML basic strings share JSON's escaping for paths (spaces, quotes, backslashes)
 writeFileSync(join(codexHome, 'config.toml'), `model = ${toml(MODEL)}
@@ -132,7 +136,15 @@ writeFileSync(join(runDir, 'brief.md'), brief);
 // ── spawn codex ──────────────────────────────────────────────────────────────
 // The brief travels on stdin ('-'): as an argv prompt codex still reads stdin and
 // appends whatever it finds, which would perturb the byte-stable prefix.
-const args = ['exec', '--json', '--skip-git-repo-check', '--approve-for-me', '-C', join(runDir, 'frames'), '-m', MODEL,
+// Codex's own sandbox is Seatbelt on macOS and bubblewrap on Linux. bwrap cannot create
+// namespaces inside a container (Modal, Docker): view_image fails with "fs sandbox helper
+// failed … bwrap: loopback: Failed RTM_NEWADDR" and the agent plays blind. When the runner
+// is told it is already externally sandboxed, codex's sandbox is bypassed — the documented
+// use of that flag. Never set this on a developer's machine.
+const externallySandboxed = process.env.CODEX_EXTERNALLY_SANDBOXED === '1';
+const sandboxArgs = externallySandboxed ? ['--dangerously-bypass-approvals-and-sandbox'] : ['--approve-for-me'];
+if (externallySandboxed) console.error('[runner] CODEX_EXTERNALLY_SANDBOXED=1 — bypassing codex\'s own sandbox (container has no bwrap)');
+const args = ['exec', '--json', '--skip-git-repo-check', ...sandboxArgs, '-C', join(runDir, 'frames'), '-m', MODEL,
   '--output-schema', strictSchemaPath, '-o', reportPath, '-'];
 console.error(`[runner] codex ${args.join(' ')}  < brief (${brief.length} chars)`);
 const codex = spawn('codex', args, { env: childEnv, stdio: ['pipe', 'pipe', 'pipe'] });
