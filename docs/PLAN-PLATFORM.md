@@ -161,7 +161,7 @@ Five personas, full budgets, real game, real Codex: **$33.22, 208 action steps.*
 |---|---|
 | Recall | **3 / 15** ledger flaws — B1 (soft-lock), C1 (tutorial), G1 (crouch) |
 | Precision | 3 / 9 clusters; **0 decoys flagged** |
-| Verified by replay | 2 / 4 attempted (C1 ×2); B1/G1 predate tick-exact recording |
+| Verified by replay | 2 / 4 attempted (C1 ×2); B1/G1 predate tick-exact recording. **A follow-up 30-step Robert session with the game's own recording: 3 / 3 replays reproduced (C1 ×2, A1), 0 failed.** |
 | Emergent | **1** — "Door gives me nothing to work with": 4 of 5 testers stalled at the concourse's four identical, feedback-less locked doors. Not in the ledger. Attribution `game`. |
 
 The low recall is the finding: the emergent door problem gated 4 of 5 testers out of
