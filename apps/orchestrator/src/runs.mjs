@@ -55,6 +55,9 @@ export class RunManager extends EventEmitter {
       if (e.kind === 'status') status = e.status;
       if (e.kind === 'action') steps = Math.max(steps, e.step);
     }
+    // A valid report.json is definitive: the runner's final status line can trail the
+    // session copy, and a persona that wrote its report finished, whatever the log says.
+    if (report && !TERMINAL.has(status)) status = 'done';
     if (!TERMINAL.has(status)) status = 'stopped';
     return { key, id: readJson('persona.json')?.id ?? key.replace(/-\d+$/, ''), dir, status, steps, cost, lastReasoning, events, subscribers: new Set(), handle: null, cold: true };
   }

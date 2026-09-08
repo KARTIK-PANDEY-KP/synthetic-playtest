@@ -184,11 +184,13 @@ if (report) {
   writeFileSync(reportPath, JSON.stringify(report, null, 2));
   writeCost();
   status('done', `${report.findings.length} findings · ${session.steps} steps · $${costUsd(usage).toFixed(2)}${leakWarnings ? ` · ${leakWarnings} harness-file warnings` : ''}`);
+  publishSession();   // the final status line lands after the first publish
   await shutdown();
   process.exit(0);
 } else {
   writeCost();
   status('failed', `codex exited ${exitCode}; no valid report.json`);
+  publishSession();   // the final status line lands after the first publish
   await shutdown();
   process.exit(1);
 }
