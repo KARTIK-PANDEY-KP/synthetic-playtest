@@ -1,0 +1,19 @@
+{
+  "name": "orchestrator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dev": "RUNNER_CMD=\"node apps/orchestrator/dev/fake-runner.mjs\" RUNNER_PAUSE_SIGNALS=1 node src/index.mjs",
+    "fake-runner": "node dev/fake-runner.mjs"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "express": "^5.2.1",
+    "sharp": "^0.33.5",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}
