@@ -56,7 +56,10 @@ export function loadPersona(runDir, id) {
   const cost = readJson(join(pdir, 'cost.json'), null);
   const actions = session.filter((e) => e.kind === 'action');
   const inputActions = actions.filter((a) => INPUT_TOOLS.has(a.tool));
-  const telemetry = session.filter((e) => e.kind === 'telemetry').map((e) => e.event);
+  // The inner event.t is game-ms since boot; the OUTER e.t is when the harness saw it,
+  // on the same epoch clock as actions. Step mapping must use the outer one, or every
+  // telemetry event sorts before every action and lands at step 0.
+  const telemetry = session.filter((e) => e.kind === 'telemetry').map((e) => ({ ...e.event, t: e.t, gameT: e.event.t }));
   telemetry.sort((a, b) => a.t - b.t);
   const status = [...session].reverse().find((e) => e.kind === 'status')?.status ?? (report ? 'done' : 'failed');
 

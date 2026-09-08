@@ -1,5 +1,10 @@
 /** Private observation channel: never read by the game or its renderer. */
-export function installTelemetry(game) {
+/**
+ * `getRecording` returns the game's own tick-exact input log as a replay action log.
+ * The harness records wall-clock actions, which drift over long sessions; only this
+ * log replays byte-identically. Harness-only, like everything else on this channel.
+ */
+export function installTelemetry(game, getRecording = () => null) {
   const listeners = new Set();
   game.emitCallback = event => { for (const cb of listeners) { try { cb(structuredClone(event)); } catch { /* Observers cannot interrupt simulation. */ } } };
   Object.defineProperty(window, '__telemetry', {
@@ -8,6 +13,7 @@ export function installTelemetry(game) {
       snapshot: () => structuredClone(game.state),
       events: () => structuredClone(game.events),
       audioCues: () => structuredClone(game.audio),
+      recording: () => getRecording(),
       textRegions() {
         const out = [];
         for (const el of document.querySelectorAll('[data-text-kind]')) {

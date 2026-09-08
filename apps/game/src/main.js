@@ -10,7 +10,7 @@ const params = new URLSearchParams(location.search);
 // So `#replay=inline:<b64>` (never sent to the server) is accepted as well as `?replay=`.
 for (const [k, v] of new URLSearchParams(location.hash.slice(1))) if (!params.has(k)) params.set(k, v);
 const game = new Game(Number(params.get('seed') ?? 1));
-installTelemetry(game);
+installTelemetry(game, () => toActionLog({ ...recording, endTick: game.tick }));
 let view;
 try { view = createScene($('view'), game); } catch (e) { $('load-error').classList.remove('hidden'); $('error-detail').textContent = `WebGL could not start. Enable hardware acceleration and reconnect. ${e.message}`; }
 const recording = { version: 1, seed: Number(params.get('seed') ?? 1), hz: HZ, inputs: [], endTick: 0 };

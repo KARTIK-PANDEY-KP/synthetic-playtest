@@ -224,7 +224,25 @@ export class GameSession {
     return { text: 'You have put the game down. Write your final report now — it is the last thing you do.', isError: false };
   }
 
-  async close() { await this.driver?.stop(); }
+  /** The game's tick-exact input log — what the verifier replays. Null on old builds. */
+
+  async saveRecording() {
+
+    try {
+
+      const rec = await this.page.evaluate(() => (window.__telemetry && window.__telemetry.recording) ? window.__telemetry.recording() : null);
+
+      if (rec) { const { writeFileSync } = await import('node:fs'); writeFileSync(join(this.runDir, 'recording.json'), JSON.stringify(rec)); return true; }
+
+    } catch { /* browser already gone */ }
+
+    return false;
+
+  }
+
+  async close() {
+
+    await this.saveRecording(); await this.driver?.stop(); }
 }
 
 /**

@@ -151,7 +151,10 @@ async function llmRefine(items, groups, run, o) {
   const draft = groups.map((g, i) => `cluster ${i + 1}: ${g.map((k) => items[k].key).join(', ')}`).join('\n');
   const prompt = `You are deduplicating playtest findings written by ${run.personas.length} different testers of the same game.
 Group findings that describe THE SAME underlying issue (same place in the game, same root cause) even if worded differently
-or given different severities. Do NOT merge findings that merely share a room or a noun. Every key must appear in exactly one cluster.
+or given different severities. The test: would a developer fix them with the SAME single change? If yes they are one
+cluster — five testers saying "the door does nothing", "is it locked?", "E gives no response" about the same doors is ONE
+issue (no feedback on locked doors). Wayfinding ("which door leads where") is a DIFFERENT fix and a different cluster.
+Do NOT merge findings that merely share a room or a noun. Every key must appear in exactly one cluster.
 Return JSON matching the schema: clusters[] with a short neutral title and memberKeys[].
 
 FINDINGS

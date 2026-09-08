@@ -206,9 +206,15 @@ function readReport() {
 
 /** Findings noted mid-play ARE the persona's findings; if the final report forgot one, add it. */
 function mergeNotedFindings(report) {
-  const seen = new Set(report.findings.map((f) => f.title.trim().toLowerCase()));
-  for (const f of session.findings) if (!seen.has(f.title.trim().toLowerCase())) report.findings.push(f);
+  const key = (f) => f.title.trim().toLowerCase();
+  const noted = new Map(session.findings.map((f) => [key(f), f]));
+  for (const f of session.findings) if (!report.findings.some((r) => key(r) === key(f))) report.findings.push(f);
   for (const f of report.findings) {
+    // The runner's step counter and last-frame path are authoritative. The agent's own
+    // `step` counts every tool call and its `frame` is a guess; the verifier slices the
+    // action log by OUR step, so the two must agree.
+    const n = noted.get(key(f));
+    if (n) { if (Number.isInteger(n.step)) f.step = n.step; if (n.frame) f.frame = n.frame; }
     if (!Array.isArray(f.reproSteps)) f.reproSteps = [];
     if (!Number.isInteger(f.step)) f.step = session.steps;
     if (!f.id) f.id = `${persona.id}-f${report.findings.indexOf(f) + 1}`;

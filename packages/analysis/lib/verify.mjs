@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 /**
  * Replay-verify findings against the game.
  *
@@ -27,7 +29,11 @@ import { withDefaults } from './text.mjs';
 export const VERIFY_DEFAULTS = { timeoutMs: 60_000, maxPerCluster: 3, stepBefore: 5, stepAfter: 3, supportTimeoutMs: 8_000 };
 
 export function replayLog(persona, step, window = 3) {
-  return persona.inputActions.filter((a) => a.step <= step + window).map((a) => ({ t: a.t, tool: a.tool, args: a.args ?? {} }));
+  // SessionEvent.t is wall-clock epoch ms; the game's replay wants ms from simulation
+  // boot. Re-origin on the first action, or the sim computes tick ~1e11 and never ends.
+  const acts = persona.inputActions.filter((a) => a.step <= step + window);
+  const t0 = acts.length ? acts[0].t : 0;
+  return acts.map((a) => ({ t: Math.max(0, a.t - t0), tool: a.tool, args: a.args ?? {} }));
 }
 
 export function replayUrl(gameUrl, seed, log) {
@@ -39,6 +45,13 @@ export function replayUrl(gameUrl, seed, log) {
 }
 
 /** Run one replay in an existing browser context. Returns { status, events, note }. */
+function loadRecording(p) {
+  try {
+    const raw = JSON.parse(readFileSync(join(p.dir, 'recording.json'), 'utf8'));
+    return Array.isArray(raw) && raw.length ? raw : null;
+  } catch { return null; }
+}
+
 export async function runReplay(context, url, { timeoutMs, supportTimeoutMs }) {
   const page = await context.newPage();
   try {
@@ -83,7 +96,11 @@ export async function verifyRun(run, clusters, { gameUrl, log = () => {}, ...opt
         const own = c.ledgerId ? [`flaw_triggered:${c.ledgerId}`, `softlock_entered:${c.ledgerId}`].filter((k) => p.telemetry.some((e) => signalKey(e) === k && p.stepAt(e.t) <= (f.step ?? 0) + o.stepAfter)) : [];
         const expected = own.length ? own : near;   // what MUST recur
         if (!expected.length) { notes.push(`${m.persona}: no ground-truth signal within ${o.stepBefore} steps before / ${o.stepAfter} after the note — nothing to replay against`); continue; }
-        const log_ = replayLog(p, f.step ?? 0, o.stepAfter);
+        // Prefer the game's own tick-exact recording (recording.json, saved by the runner):
+        // wall-clock action logs drift over long sessions and stop reproducing. With a full
+        // recording the whole session is replayed, so signals may recur anywhere in it.
+        const rec = loadRecording(p);
+        const log_ = rec ?? replayLog(p, f.step ?? 0, o.stepAfter);
         const url = replayUrl(gameUrl, run.meta.seed ?? 1, log_);
         log(`[verify] ${c.id} ${m.persona}#${m.findingId}: replaying ${log_.length} actions, expecting ${expected.join(', ')}\n`);
         const r = await runReplay(context, url, o); summary.replays++;
