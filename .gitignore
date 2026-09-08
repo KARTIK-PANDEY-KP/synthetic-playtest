@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+.next/
+out/
+runs/
+*.log
+.DS_Store
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+codex-home/
+.modal.toml
+
+# spike artifacts (regenerated each run)
+spikes/**/fixture.png
+spike-answer-key.json
