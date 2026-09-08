@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Station Kepler</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; overflow:hidden; background:#05070a;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color:#e8eef5; }
+  #view { position:fixed; inset:0; display:block; }
+  .ui { position:fixed; pointer-events:none; user-select:none; }
+  #objective { top:18px; left:50%; transform:translateX(-50%); padding:8px 18px;
+    background:rgba(6,12,20,.78); border:1px solid #24384f; border-radius:6px;
+    font-size:15px; letter-spacing:.3px; }
+  #tutorial { top:50%; left:50%; transform:translate(-50%,-50%); max-width:560px;
+    padding:20px 26px; background:rgba(8,14,22,.92); border:1px solid #2f4a68;
+    border-radius:8px; font-size:17px; line-height:1.5; text-align:center; }
+  #prompt { bottom:120px; left:50%; transform:translateX(-50%); padding:6px 14px;
+    background:rgba(6,12,20,.8); border:1px solid #2f4a68; border-radius:4px; font-size:14px; }
+  #hud { bottom:18px; left:18px; font-size:13px; line-height:1.7; opacity:.9; }
+  #inventory { bottom:18px; right:18px; font-size:13px; text-align:right; opacity:.9; }
+  #crosshair { top:50%; left:50%; width:6px; height:6px; margin:-3px 0 0 -3px;
+    border-radius:50%; background:#e8eef5; opacity:.55; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <canvas id="view"></canvas>
+  <div id="crosshair" class="ui"></div>
+  <div id="objective" class="ui" data-text-kind="hud"></div>
+  <div id="tutorial" class="ui hidden" data-text-kind="tutorial"></div>
+  <div id="prompt" class="ui hidden" data-text-kind="label"></div>
+  <div id="hud" class="ui" data-text-kind="hud"></div>
+  <div id="inventory" class="ui" data-text-kind="hud"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

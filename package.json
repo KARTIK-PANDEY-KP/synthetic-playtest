@@ -1,0 +1,12 @@
+{
+  "name": "synthetic-playtest",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "game:dev": "pnpm --filter station-kepler dev",
+    "game:build": "pnpm --filter station-kepler build",
+    "spike:codex-vision": "spikes/codex-vision/run.sh",
+    "smoke": "node packages/persona-mcp/smoke.mjs",
+    "proof:redaction": "node packages/persona-mcp/proof-redaction.mjs"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "persona-mcp",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "playwright": "^1.49.0",
+    "sharp": "^0.33.5",
+    "zod": "^4.5.4"
+  }
+}

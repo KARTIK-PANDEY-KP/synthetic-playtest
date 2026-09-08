@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+  - spikes/*
+
+# esbuild (via vite) needs its postinstall to fetch the platform binary.
+# pnpm 11 spells this `allowBuilds`; `onlyBuiltDependencies` is silently ignored.
+allowBuilds:
+  esbuild: true
+  sharp: true
