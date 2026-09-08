@@ -14,7 +14,7 @@ import { writeFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { conceptSet, domainConcepts, bigrams, jaccard, intersect, normalizeRoom, maxSeverity, mode, severityRank, withDefaults } from './text.mjs';
-import { analyzePersona, attribute, DEFAULTS as ATTR_DEFAULTS } from './attribution.mjs';
+import { analyzePersona, attribute, DEFAULTS as ATTR_DEFAULTS, claimObjectiveSignals } from './attribution.mjs';
 import { runCodex } from './codex.mjs';
 
 export const CLUSTER_DEFAULTS = { threshold: 0.5, ...ATTR_DEFAULTS };
@@ -109,9 +109,13 @@ export function materialize(items, groups, run) {
 export function attributeAll(clusters, run, opts = {}) {
   const personasById = Object.fromEntries(run.personas.map((p) => [p.id, p]));
   const digests = Object.fromEntries(run.personas.map((p) => [p.id, analyzePersona(p, opts)]));
-  for (const c of clusters) {
-    const members = c.members.map((m) => ({ persona: m.persona, finding: personasById[m.persona].findings.find((f) => f.id === m.findingId) ?? { step: m.step } }));
-    const { attribution, evidence } = attribute({ room: c.room ?? 'unknown', members }, digests, personasById, opts);
+  // Resolve every cluster's members first so soft-lock events can be claimed across
+  // clusters (each goes to the same persona's finding filed soonest after it).
+  const resolved = clusters.map((c) => ({ id: c.id, room: c.room ?? 'unknown',
+    members: c.members.map((m) => ({ persona: m.persona, finding: personasById[m.persona].findings.find((f) => f.id === m.findingId) ?? { step: m.step } })) }));
+  const claims = claimObjectiveSignals(resolved, run);
+  for (const [i, c] of clusters.entries()) {
+    const { attribution, evidence } = attribute(resolved[i], digests, personasById, { ...opts, claims });
     c.attribution = attribution; c.attributionEvidence = evidence;
   }
   return { clusters, digests };

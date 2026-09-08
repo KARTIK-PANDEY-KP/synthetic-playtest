@@ -71,6 +71,23 @@ export class GameDriver {
     this.loaded = true;
     await this.page.goto(`${this.gameUrl}?seed=${this.seed}`, { waitUntil: 'load' });
     await this.page.waitForFunction(() => !!window.__telemetry, null, { timeout: 10_000 });
+    await this.#backfillBootEvents();
+  }
+
+  /**
+   * The game emits its first events (room_entered for the spawn room) synchronously at
+   * boot, up to 30ms before the init-script subscription lands, so live sessions never
+   * recorded the spawn room. Pull the game's own event list once and log what we missed.
+   */
+  async #backfillBootEvents() {
+    try {
+      const all = await this.page.evaluate(() => window.__telemetry.events());
+      const key = (e) => `${e.t}|${e.type}|${e.room ?? e.item ?? e.flawId ?? e.puzzle ?? ''}`;
+      const seen = new Set(this.events.map(key));
+      const missed = all.filter((e) => e.type !== 'position' && !seen.has(key(e)));
+      for (const e of missed) { this.events.push(e); try { this.onEvent?.(e); } catch { /* logging must never break play */ } }
+      return missed.length;
+    } catch { return 0; }
   }
 
   /**

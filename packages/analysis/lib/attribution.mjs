@@ -119,6 +119,25 @@ export function gameThreshold(n, override) {
  * @param digests analyzePersona() per persona id
  * @param personasById loaded personas
  */
+/** Each soft-lock event goes to the same persona's finding filed soonest after it, within 10 steps. */
+export function claimObjectiveSignals(clusters, run) {
+  const claims = new Map();
+  for (const p of run.personas) {
+    const notes = [];
+    // A soft-lock corroborates a report of a BUG or something UNFAIR. A confusion or
+    // boredom note filed nearby is a different complaint and must not inherit it.
+    for (const c of clusters) for (const m of c.members)
+      if (m.persona === p.id && ['bug', 'unfair'].includes(m.finding.category)) notes.push({ c, step: m.finding.step ?? 0 });
+    for (const e of p.telemetry) {
+      const k = signalKey(e); if (!k || !k.startsWith('softlock_entered:')) continue;
+      const at = p.stepAt(e.t); let best = null;
+      for (const n of notes) { const d = n.step - at; if (d >= 0 && d <= 10 && (!best || d < best.d)) best = { c: n.c, d }; }
+      if (best) { if (!claims.has(best.c.id)) claims.set(best.c.id, new Set()); claims.get(best.c.id).add(k); }
+    }
+  }
+  return claims;
+}
+
 export function attribute(cluster, digests, personasById, opts = {}) {
   const { radius, signalWindow } = withDefaults(DEFAULTS, opts);
   const N = Object.keys(digests).length;
@@ -146,19 +165,53 @@ export function attribute(cluster, digests, personasById, opts = {}) {
     if (hit) stalled.push({ persona: id, steps: hit.steps, idleMs: hit.idleMs, signals: hit.signals });
   }
 
-  let attribution = 'unclear';
+  // Same-room tier. A room can have several instances of one affordance (the concourse
+  // has four identical doors ~8 units apart): testers stall at different spots on the
+  // same complaint. If enough of them stalled in the room with a compatible signature,
+  // that is still the game — one fix would clear all of them. Position agreement stays
+  // the stronger tier and is what the evidence reports when it holds.
+  const stalledInRoom = [];
+  for (const [id, d] of Object.entries(digests)) {
+    const hit = d.stalls.find((s) => s.room === cluster.room && matchesSignature(s));
+    if (hit) stalledInRoom.push({ persona: id, steps: hit.steps, idleMs: hit.idleMs, signals: hit.signals, spot: hit.spot });
+  }
+  const distinctSpots = new Set(stalledInRoom.map((s) => `${Math.round(s.spot.x)},${Math.round(s.spot.z)}`)).size;
+
+  // Room tier only counts REPORTERS of this cluster who also stalled in the room — other
+  // personas stuck nearby on something else are not evidence for this complaint.
+  const reporterIds = new Set(cluster.members.map((m) => m.persona));
+  const corroborated = stalledInRoom.filter((s) => reporterIds.has(s.persona));
+  // Objective tier: a failure state the game itself recorded is ground truth regardless
+  // of how many testers reached that point.
+  // Only a soft-lock is unambiguously the game's fault. puzzle_failed fires when the TESTER
+  // guesses wrong, and dying to a timer is a design choice the fairness flaws cover.
+  // A soft-lock event is claimed by exactly ONE finding — the same persona's note filed
+  // soonest after it (claimObjectiveSignals) — so a later, unrelated complaint in the same
+  // room does not inherit it.
+  const isObjective = (k) => k.startsWith('softlock_entered:');
+  const objective = new Set([...signature].filter(isObjective));
+  for (const k of opts.claims?.get(cluster.id) ?? []) objective.add(k);
+
+  let attribution = 'unclear'; let tier = 'spot';
   if (stalled.length >= threshold) attribution = 'game';
-  else if (stalled.length === 1) attribution = 'agent';
+  else if (objective.size) { attribution = 'game'; tier = 'objective'; }
+  else if (reporterIds.size >= threshold && corroborated.length >= Math.ceil(reporterIds.size / 2)) { attribution = 'game'; tier = 'room'; }
+  else if (stalled.length === 1 && reporterIds.size === 1) attribution = 'agent';   // one tester, one stall: theirs
 
   const evidence = {
-    rule: `${stalled.length} of ${N} personas stalled here (game ⇔ ≥${threshold}, agent ⇔ exactly 1)`,
+    rule: tier === 'room'
+      ? `${reporterIds.size} of ${N} personas reported this and ${corroborated.length} of them stalled in ${cluster.room}, at ${distinctSpots} distinct spots (game ⇔ ≥${threshold} reporters, half corroborated by a stall)`
+      : tier === 'objective'
+      ? `the game itself recorded a failure state here (${[...objective].join(', ')}) — objective, independent of tester count`
+      : `${stalled.length} of ${N} personas stalled here (game ⇔ ≥${threshold}, agent ⇔ exactly 1)`,
+    tier, objective: [...objective], corroborated: corroborated.map(({ spot, ...rest }) => rest),
     room: cluster.room, spot: spot ? { x: +spot.x.toFixed(2), z: +spot.z.toFixed(2) } : null,
     signature: [...signature], stalled, threshold,
     reached: Object.values(digests).filter((d) => d.rooms.includes(cluster.room)).map((d) => d.id),
   };
 
   // Capability-gap refinement for the sole-staller case.
-  if (attribution === 'agent' && spot) {
+  if (stalled.length === 1 && spot) {   // sole staller: look for an enforced capability gap, whatever tier decided
     const lone = digests[stalled[0].persona];
     const others = Object.values(digests).filter((d) => d.id !== lone.id && d.rooms.includes(cluster.room) && d.visited(cluster.room, spot, radius + 1));
     if (others.length >= 2) {
