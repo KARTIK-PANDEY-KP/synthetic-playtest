@@ -1,0 +1,71 @@
+{
+  "persona": "sam",
+  "summary": "Found the keycard in three actions, found a sequence break in the lab — and the sequence break was a soft-lock. The fuse goes into the wrong socket and the game says nothing. That is a run-killer for anyone who does not play the intended order. Everything else was fast.",
+  "completed": false,
+  "abandonedReason": "Soft-locked: fuse consumed in the lab, breaker unpowerable.",
+  "findings": [
+    {
+      "id": "sam-f1",
+      "severity": "low",
+      "category": "confusion",
+      "title": "Tutorial auto-closes and cannot be reopened",
+      "description": "Controls popup timed out after about three seconds. Did not need it, but there is no key to re-read the tutorial, which will hurt anyone who does.",
+      "room": "airlock",
+      "reproSteps": [
+        "Start the game",
+        "Wait ~3 seconds",
+        "Popup gone, no way to reopen"
+      ],
+      "frame": "frames/00000.png",
+      "step": 5
+    },
+    {
+      "id": "sam-f2",
+      "severity": "medium",
+      "category": "confusion",
+      "title": "Lab terminal rejects every code and gives no hint where the code is",
+      "description": "Four codes, four rejections, zero feedback beyond \"Authorization rejected\". No indication of code length, no hint about where to find it.",
+      "room": "lab",
+      "reproSteps": [
+        "Open the lab terminal",
+        "Type any code and press Enter",
+        "Rejected with no hint"
+      ],
+      "frame": "frames/00002.png",
+      "step": 42
+    },
+    {
+      "id": "sam-f3",
+      "severity": "critical",
+      "category": "bug",
+      "title": "Fuse consumed by the lab receptacle; the power room breaker needs it and there is no way back",
+      "description": "I put the ceramic fuse into the auxiliary receptacle in the lab first. It clicked, nothing happened, the fuse was gone from my inventory. The power room socket then wants a fuse and there is only one. The game never says the run is unwinnable — it just lets you wander.",
+      "room": "lab",
+      "reproSteps": [
+        "Pick up the fuse in the airlock",
+        "Go to the lab before the power room",
+        "Use the fuse on the auxiliary receptacle",
+        "Go to the power room: socket needs a fuse, none exist"
+      ],
+      "frame": "frames/00003.png",
+      "step": 71
+    }
+  ],
+  "experience": {
+    "confused": [
+      "Lab terminal code — never found where it lives",
+      "Why the power door has a card reader if the duct is the way in"
+    ],
+    "bored": [
+      "Walking the hub twice"
+    ],
+    "unfair": [
+      "Fuse consumed silently by the wrong socket, with no restart prompt"
+    ],
+    "enjoyed": [
+      "Crouch-peeking the keycard behind the crate",
+      "The vent shortcut"
+    ]
+  },
+  "wouldRecommend": 1
+}

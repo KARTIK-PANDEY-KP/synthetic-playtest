@@ -1,0 +1,1165 @@
+[
+  {
+    "id": "cf-01",
+    "title": "Fuse consumed by the lab receptacle; the power room breaker needs it and there is no way back",
+    "category": "bug",
+    "severity": "critical",
+    "description": "I put the ceramic fuse into the auxiliary receptacle in the lab first. It clicked, nothing happened, the fuse was gone from my inventory. The power room socket then wants a fuse and there is only one. The game never says the run is unwinnable — it just lets you wander.",
+    "room": "lab",
+    "reporters": [
+      {
+        "persona": "sam",
+        "count": 1,
+        "findingIds": [
+          "sam-f3"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "sam/frames/00003.png"
+    ],
+    "reproSteps": [
+      "Pick up the fuse in the airlock",
+      "Go to the lab before the power room",
+      "Use the fuse on the auxiliary receptacle",
+      "Go to the power room: socket needs a fuse, none exist"
+    ],
+    "members": [
+      {
+        "persona": "sam",
+        "findingId": "sam-f3",
+        "step": 71,
+        "severity": "critical",
+        "category": "bug",
+        "title": "Fuse consumed by the lab receptacle; the power room breaker needs it and there is no way back",
+        "frame": "frames/00003.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "lab",
+      "spot": {
+        "x": 2.11,
+        "z": -4.37
+      },
+      "signature": [],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "ledgerId": "B1",
+    "verificationNote": "sam: reproduced flaw_triggered:B1, softlock_entered:B1 after replaying 71 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-02",
+    "title": "The duct code is only ever spoken by a wall speaker — no subtitle, no text, nothing on screen",
+    "category": "accessibility",
+    "severity": "critical",
+    "description": "The duct terminal needs a code. The only source is a \"maintenance recording\" from a speaker. I play with the sound off, subtitles are on, and nothing appears on screen when it plays — not a caption, not a log entry, nothing. I tried every number I had seen. There is no way for me to progress.",
+    "room": "corridor",
+    "reporters": [
+      {
+        "persona": "dana",
+        "count": 1,
+        "findingIds": [
+          "dana-f2"
+        ]
+      }
+    ],
+    "attribution": "game",
+    "verified": true,
+    "frames": [
+      "dana/frames/00003.png"
+    ],
+    "reproSteps": [
+      "Mute the game (or play without sound)",
+      "Press E on the corridor speaker",
+      "Observe: no caption or text appears",
+      "Duct terminal cannot be solved"
+    ],
+    "members": [
+      {
+        "persona": "dana",
+        "findingId": "dana-f2",
+        "step": 68,
+        "severity": "critical",
+        "category": "accessibility",
+        "title": "The duct code is only ever spoken by a wall speaker — no subtitle, no text, nothing on screen",
+        "frame": "frames/00003.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "1 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1); overridden to game: every persona who passed this spot used `listen` here and dana never did",
+      "room": "corridor",
+      "spot": {
+        "x": -5.95,
+        "z": 2.41
+      },
+      "signature": [
+        "puzzle_failed:vent_lock"
+      ],
+      "stalled": [
+        {
+          "persona": "dana",
+          "steps": 9,
+          "idleMs": 65881,
+          "signals": [
+            "puzzle_failed:vent_lock"
+          ]
+        }
+      ],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ],
+      "capabilityGap": {
+        "tool": "listen",
+        "staller": "dana",
+        "comparedTo": [
+          "maya",
+          "robert",
+          "sam",
+          "priya"
+        ],
+        "why": "Dana Kim plays with audio off — the listen tool does not exist for this persona"
+      }
+    },
+    "ledgerId": "A1",
+    "verificationNote": "dana: reproduced flaw_triggered:A1 after replaying 72 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-03",
+    "title": "The personnel keycard is a tiny sliver on the floor behind the crate with no highlight",
+    "category": "confusion",
+    "severity": "high",
+    "description": "I searched the crate corner deliberately and still needed to crouch before the card was visible. Nothing marks it — no glint, no prompt until you are almost on top of it. A required item should not be the least visible object in the room.",
+    "room": "corridor",
+    "reporters": [
+      {
+        "persona": "robert",
+        "count": 1,
+        "findingIds": [
+          "robert-f4"
+        ]
+      },
+      {
+        "persona": "maya",
+        "count": 1,
+        "findingIds": [
+          "maya-f2"
+        ]
+      },
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f1"
+        ]
+      }
+    ],
+    "attribution": "game",
+    "verified": true,
+    "frames": [
+      "robert/frames/00003.png",
+      "maya/frames/00003.png",
+      "priya/frames/00001.png"
+    ],
+    "reproSteps": [
+      "Enter the corridor",
+      "Crouch beside the crate on the right",
+      "Keycard sliver becomes visible at floor level"
+    ],
+    "members": [
+      {
+        "persona": "robert",
+        "findingId": "robert-f4",
+        "step": 43,
+        "severity": "high",
+        "category": "confusion",
+        "title": "I cannot find the keycard the card readers want",
+        "frame": "frames/00003.png"
+      },
+      {
+        "persona": "maya",
+        "findingId": "maya-f2",
+        "step": 30,
+        "severity": "high",
+        "category": "confusion",
+        "title": "Keycard is hidden behind a crate with no highlight",
+        "frame": "frames/00003.png"
+      },
+      {
+        "persona": "priya",
+        "findingId": "priya-f1",
+        "step": 22,
+        "severity": "medium",
+        "category": "confusion",
+        "title": "The personnel keycard is a tiny sliver on the floor behind the crate with no highlight",
+        "frame": "frames/00001.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "4 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "corridor",
+      "spot": {
+        "x": 3.11,
+        "z": 0.86
+      },
+      "signature": [
+        "flaw_triggered:C3"
+      ],
+      "stalled": [
+        {
+          "persona": "maya",
+          "steps": 9,
+          "idleMs": 29442,
+          "signals": [
+            "flaw_triggered:C3"
+          ]
+        },
+        {
+          "persona": "robert",
+          "steps": 10,
+          "idleMs": 51051,
+          "signals": []
+        },
+        {
+          "persona": "priya",
+          "steps": 6,
+          "idleMs": 16537,
+          "signals": [
+            "flaw_triggered:C3"
+          ]
+        },
+        {
+          "persona": "dana",
+          "steps": 9,
+          "idleMs": 25001,
+          "signals": [
+            "flaw_triggered:C3"
+          ]
+        }
+      ],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "ledgerId": "C3",
+    "verificationNote": "robert: reproduced flaw_triggered:A1 after replaying 47 actions · maya: reproduced flaw_triggered:C3 after replaying 34 actions (the matched ledger flaw itself) · priya: reproduced flaw_triggered:C3 after replaying 26 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-04",
+    "title": "Tutorial popup vanished before I could read it",
+    "category": "confusion",
+    "severity": "high",
+    "description": "The controls card in the airlock disappeared after a couple of seconds. I had skimmed half of it. There is no way to bring it back, so I guessed the keys — fine for me, brutal for anyone new.",
+    "room": "airlock",
+    "reporters": [
+      {
+        "persona": "sam",
+        "count": 1,
+        "findingIds": [
+          "sam-f1"
+        ]
+      },
+      {
+        "persona": "maya",
+        "count": 1,
+        "findingIds": [
+          "maya-f1"
+        ]
+      },
+      {
+        "persona": "robert",
+        "count": 1,
+        "findingIds": [
+          "robert-f1"
+        ]
+      }
+    ],
+    "attribution": "game",
+    "verified": true,
+    "frames": [
+      "sam/frames/00000.png",
+      "maya/frames/00000.png",
+      "robert/frames/00000.png"
+    ],
+    "reproSteps": [
+      "Start a new game",
+      "Do nothing for about four seconds",
+      "Tutorial card disappears; no key or menu brings it back"
+    ],
+    "members": [
+      {
+        "persona": "sam",
+        "findingId": "sam-f1",
+        "step": 5,
+        "severity": "low",
+        "category": "confusion",
+        "title": "Tutorial auto-closes and cannot be reopened",
+        "frame": "frames/00000.png"
+      },
+      {
+        "persona": "maya",
+        "findingId": "maya-f1",
+        "step": 5,
+        "severity": "medium",
+        "category": "confusion",
+        "title": "Tutorial popup vanished before I could read it",
+        "frame": "frames/00000.png"
+      },
+      {
+        "persona": "robert",
+        "findingId": "robert-f1",
+        "step": 5,
+        "severity": "high",
+        "category": "confusion",
+        "title": "The instructions disappeared while I was still reading them",
+        "frame": "frames/00000.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "4 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "airlock",
+      "spot": {
+        "x": 0.05,
+        "z": 3.8
+      },
+      "signature": [],
+      "stalled": [
+        {
+          "persona": "maya",
+          "steps": 8,
+          "idleMs": 33012,
+          "signals": [
+            "flaw_triggered:C1"
+          ]
+        },
+        {
+          "persona": "robert",
+          "steps": 9,
+          "idleMs": 65833,
+          "signals": [
+            "flaw_triggered:C1"
+          ]
+        },
+        {
+          "persona": "sam",
+          "steps": 9,
+          "idleMs": 25388,
+          "signals": [
+            "flaw_triggered:C1"
+          ]
+        },
+        {
+          "persona": "dana",
+          "steps": 8,
+          "idleMs": 33893,
+          "signals": [
+            "flaw_triggered:C1"
+          ]
+        }
+      ],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "ledgerId": "C1",
+    "verificationNote": "sam: reproduced flaw_triggered:C1 after replaying 9 actions (the matched ledger flaw itself) · maya: reproduced flaw_triggered:C1 after replaying 9 actions (the matched ledger flaw itself) · robert: reproduced flaw_triggered:C1 after replaying 9 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-05",
+    "title": "The power door is a dead end — the real entrance is an unmarked floor duct",
+    "category": "confusion",
+    "severity": "high",
+    "description": "The door labelled \"Power • access reader\" accepts the keycard and then says \"Door motor offline. Service duct access available.\" Nothing points to the duct, which sits at ankle height on the opposite wall. Everyone will try this door first and everyone will be turned away.",
+    "room": "corridor",
+    "reporters": [
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f2"
+        ]
+      },
+      {
+        "persona": "dana",
+        "count": 1,
+        "findingIds": [
+          "dana-f1"
+        ]
+      }
+    ],
+    "attribution": "game",
+    "verified": true,
+    "frames": [
+      "priya/frames/00002.png",
+      "dana/frames/00001.png"
+    ],
+    "reproSteps": [
+      "Get the keycard",
+      "Use it on the power door",
+      "Motor offline message; find the duct on the far wall by yourself"
+    ],
+    "members": [
+      {
+        "persona": "priya",
+        "findingId": "priya-f2",
+        "step": 31,
+        "severity": "high",
+        "category": "confusion",
+        "title": "The power door is a dead end — the real entrance is an unmarked floor duct",
+        "frame": "frames/00002.png"
+      },
+      {
+        "persona": "dana",
+        "findingId": "dana-f1",
+        "step": 44,
+        "severity": "medium",
+        "category": "confusion",
+        "title": "Power door reports 'Door motor offline' and points at a duct I could not find at first",
+        "frame": "frames/00001.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "5 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "corridor",
+      "spot": {
+        "x": -4.54,
+        "z": -5.5
+      },
+      "signature": [],
+      "stalled": [
+        {
+          "persona": "maya",
+          "steps": 12,
+          "idleMs": 33962,
+          "signals": [
+            "flaw_triggered:A1"
+          ]
+        },
+        {
+          "persona": "robert",
+          "steps": 6,
+          "idleMs": 21450,
+          "signals": []
+        },
+        {
+          "persona": "sam",
+          "steps": 10,
+          "idleMs": 50936,
+          "signals": []
+        },
+        {
+          "persona": "priya",
+          "steps": 11,
+          "idleMs": 21288,
+          "signals": [
+            "flaw_triggered:A1"
+          ]
+        },
+        {
+          "persona": "dana",
+          "steps": 9,
+          "idleMs": 33087,
+          "signals": []
+        }
+      ],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "verificationNote": "priya: reproduced flaw_triggered:A1 after replaying 35 actions · dana: reproduced flaw_triggered:G1 after replaying 48 actions"
+  },
+  {
+    "id": "cf-06",
+    "title": "'Calibrate' silently wiped the accepted sequence",
+    "category": "bug",
+    "severity": "high",
+    "description": "After the terminal accepted 321, I pressed the panel button labelled Calibrate expecting a tuning step. It cleared the sequence. The label says calibrate; the behaviour is reset.",
+    "room": "reactor",
+    "reporters": [
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f8"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "priya/frames/00006.png"
+    ],
+    "reproSteps": [
+      "Enter the accepted ignition sequence",
+      "Press Calibrate",
+      "Sequence is cleared; ignite refuses"
+    ],
+    "members": [
+      {
+        "persona": "priya",
+        "findingId": "priya-f8",
+        "step": 121,
+        "severity": "high",
+        "category": "bug",
+        "title": "'Calibrate' silently wiped the accepted sequence",
+        "frame": "frames/00006.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "reactor",
+      "spot": {
+        "x": 3.1,
+        "z": -3.52
+      },
+      "signature": [
+        "flaw_triggered:C2",
+        "puzzle_failed:sequence"
+      ],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "priya"
+      ]
+    },
+    "ledgerId": "C2",
+    "verificationNote": "priya: reproduced flaw_triggered:C2 after replaying 125 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-07",
+    "title": "An oxygen countdown appeared with no announcement",
+    "category": "unfair",
+    "severity": "high",
+    "description": "On arriving in the reactor an oxygen meter appeared in the HUD and started falling. No message, no alarm, no cue. I only noticed because I read the HUD out of habit. Running out presumably means a restart.",
+    "room": "reactor",
+    "reporters": [
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f6"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "priya/frames/00006.png"
+    ],
+    "reproSteps": [
+      "Enter the reactor",
+      "Watch the HUD: oxygen counts down from 180 with no announcement"
+    ],
+    "members": [
+      {
+        "persona": "priya",
+        "findingId": "priya-f6",
+        "step": 111,
+        "severity": "high",
+        "category": "unfair",
+        "title": "An oxygen countdown appeared with no announcement",
+        "frame": "frames/00006.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "reactor",
+      "spot": {
+        "x": 0,
+        "z": 4
+      },
+      "signature": [
+        "flaw_triggered:P2",
+        "flaw_triggered:B4",
+        "flaw_triggered:U2"
+      ],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "priya"
+      ]
+    },
+    "ledgerId": "U2",
+    "verificationNote": "priya: reproduced flaw_triggered:U2 after replaying 115 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-08",
+    "title": "Ignition code needs the colour log from the airlock — four rooms back, no reminder",
+    "category": "unfair",
+    "severity": "high",
+    "description": "The ignition sequence is derived from the expedition log in the airlock: cold before life before heat, blue/green/red mapped to 3/2/1. That log is four rooms and forty minutes behind you and nothing in the reactor restates it. I happened to have read it.",
+    "room": "reactor",
+    "reporters": [
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f7"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "priya/frames/00006.png"
+    ],
+    "reproSteps": [
+      "Read the expedition log in the airlock",
+      "Reach the reactor ignition terminal",
+      "Derive 3-2-1 from colour order with no in-room reminder"
+    ],
+    "members": [
+      {
+        "persona": "priya",
+        "findingId": "priya-f7",
+        "step": 115,
+        "severity": "high",
+        "category": "unfair",
+        "title": "Ignition code needs the colour log from the airlock — four rooms back, no reminder",
+        "frame": "frames/00006.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "reactor",
+      "spot": {
+        "x": 0,
+        "z": -3.9
+      },
+      "signature": [
+        "flaw_triggered:U1"
+      ],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "priya"
+      ]
+    },
+    "ledgerId": "U1",
+    "verificationNote": "priya: reproduced flaw_triggered:U1 after replaying 119 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-09",
+    "title": "The service duct says the opening is too low and nothing I press gets me through",
+    "category": "unfair",
+    "severity": "high",
+    "description": "The recording gave me the duct code and the terminal accepted it. But when I press E at the duct it just says the opening is too low. I have tried every key I know. Nothing explains how to get lower.",
+    "room": "corridor",
+    "reporters": [
+      {
+        "persona": "robert",
+        "count": 1,
+        "findingIds": [
+          "robert-f5"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "robert/frames/00003.png"
+    ],
+    "reproSteps": [
+      "Enter 482 at the duct terminal",
+      "Walk to the service duct and press E",
+      "Message: \"The opening is too low\" — no hint how to proceed"
+    ],
+    "members": [
+      {
+        "persona": "robert",
+        "findingId": "robert-f5",
+        "step": 55,
+        "severity": "high",
+        "category": "unfair",
+        "title": "The service duct says the opening is too low and nothing I press gets me through",
+        "frame": "frames/00003.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "2 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "corridor",
+      "spot": {
+        "x": -6.05,
+        "z": 1.89
+      },
+      "signature": [
+        "flaw_triggered:G1"
+      ],
+      "stalled": [
+        {
+          "persona": "robert",
+          "steps": 11,
+          "idleMs": 40969,
+          "signals": [
+            "flaw_triggered:G1"
+          ]
+        },
+        {
+          "persona": "dana",
+          "steps": 6,
+          "idleMs": 37302,
+          "signals": [
+            "flaw_triggered:G1"
+          ]
+        }
+      ],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "ledgerId": "G1",
+    "verificationNote": "robert: reproduced flaw_triggered:G1 after replaying 59 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-10",
+    "title": "Lab terminal rejects every code and gives no hint where the code is",
+    "category": "confusion",
+    "severity": "medium",
+    "description": "Four codes, four rejections, zero feedback beyond \"Authorization rejected\". No indication of code length, no hint about where to find it.",
+    "room": "lab",
+    "reporters": [
+      {
+        "persona": "sam",
+        "count": 1,
+        "findingIds": [
+          "sam-f2"
+        ]
+      }
+    ],
+    "attribution": "agent",
+    "verified": true,
+    "frames": [
+      "sam/frames/00002.png"
+    ],
+    "reproSteps": [
+      "Open the lab terminal",
+      "Type any code and press Enter",
+      "Rejected with no hint"
+    ],
+    "members": [
+      {
+        "persona": "sam",
+        "findingId": "sam-f2",
+        "step": 42,
+        "severity": "medium",
+        "category": "confusion",
+        "title": "Lab terminal rejects every code and gives no hint where the code is",
+        "frame": "frames/00002.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "1 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "lab",
+      "spot": {
+        "x": -0.88,
+        "z": -4.3
+      },
+      "signature": [
+        "puzzle_failed:terminal"
+      ],
+      "stalled": [
+        {
+          "persona": "sam",
+          "steps": 9,
+          "idleMs": 54016,
+          "signals": [
+            "puzzle_failed:terminal"
+          ]
+        }
+      ],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "verificationNote": "sam: reproduced puzzle_failed:terminal after replaying 46 actions"
+  },
+  {
+    "id": "cf-11",
+    "title": "Objective still says 'Restore power' but the service notes say the lab controller does that",
+    "category": "confusion",
+    "severity": "medium",
+    "description": "The HUD objective has read \"Restore power\" since the airlock. In the power room the notes explain that this room only bridges the circuit and the lab controller performs the actual restore. The objective text never changes to say so.",
+    "room": "power",
+    "reporters": [
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f3"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "priya/frames/00003.png"
+    ],
+    "reproSteps": [
+      "Enter the power room",
+      "Read the service notes",
+      "Compare with the HUD objective"
+    ],
+    "members": [
+      {
+        "persona": "priya",
+        "findingId": "priya-f3",
+        "step": 49,
+        "severity": "medium",
+        "category": "confusion",
+        "title": "Objective still says 'Restore power' but the service notes say the lab controller does that",
+        "frame": "frames/00003.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "power",
+      "spot": {
+        "x": 2.11,
+        "z": -4.37
+      },
+      "signature": [
+        "flaw_triggered:G2"
+      ],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "sam",
+        "priya"
+      ]
+    },
+    "ledgerId": "C4",
+    "verificationNote": "priya: reproduced flaw_triggered:C4 after replaying 53 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-12",
+    "title": "Opening settings while typing at the terminal silently wiped the code",
+    "category": "bug",
+    "severity": "medium",
+    "description": "I had typed two digits, opened settings to check subtitles, closed it, and the field was empty. No message. If you do not notice, you submit an incomplete code and get rejected.",
+    "room": "lab",
+    "reporters": [
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f4"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "priya/frames/00004.png"
+    ],
+    "reproSteps": [
+      "Open the lab terminal",
+      "Type part of the code",
+      "Press Escape to open settings, Escape again to close",
+      "Code field is empty"
+    ],
+    "members": [
+      {
+        "persona": "priya",
+        "findingId": "priya-f4",
+        "step": 64,
+        "severity": "medium",
+        "category": "bug",
+        "title": "Opening settings while typing at the terminal silently wiped the code",
+        "frame": "frames/00004.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "lab",
+      "spot": {
+        "x": 0,
+        "z": -3.6
+      },
+      "signature": [
+        "flaw_triggered:B3"
+      ],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "ledgerId": "B3",
+    "verificationNote": "priya: reproduced flaw_triggered:B3 after replaying 68 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-13",
+    "title": "Sealed bulkhead door cannot be opened",
+    "category": "bug",
+    "severity": "medium",
+    "description": "There is a large door on the right side of the hall. Pressing E on it says it is welded shut and permanently sealed. It looks exactly like the other doors, so I assume it is supposed to open and something is broken.",
+    "room": "corridor",
+    "reporters": [
+      {
+        "persona": "robert",
+        "count": 1,
+        "findingIds": [
+          "robert-f3"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "robert/frames/00002.png"
+    ],
+    "reproSteps": [
+      "Enter the corridor",
+      "Walk to the bulkhead on the right wall",
+      "Press E — it never opens"
+    ],
+    "members": [
+      {
+        "persona": "robert",
+        "findingId": "robert-f3",
+        "step": 23,
+        "severity": "medium",
+        "category": "bug",
+        "title": "Sealed bulkhead door cannot be opened",
+        "frame": "frames/00002.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "corridor",
+      "spot": {
+        "x": 5.78,
+        "z": 1.37
+      },
+      "signature": [
+        "flaw_triggered:D1"
+      ],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "ledgerId": "D1",
+    "verificationNote": "robert: reproduced flaw_triggered:D1 after replaying 27 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-14",
+    "title": "Watering twelve identical plants is dead air",
+    "category": "boredom",
+    "severity": "medium",
+    "description": "Three planters in and nothing new has happened: same animation, same message with a counter. Nine more of these. On stream this is where the audience leaves.",
+    "room": "greenhouse",
+    "reporters": [
+      {
+        "persona": "maya",
+        "count": 1,
+        "findingIds": [
+          "maya-f3"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": null,
+    "frames": [
+      "maya/frames/00006.png"
+    ],
+    "reproSteps": [
+      "Restore station power",
+      "Enter the greenhouse",
+      "Hold E on each of the twelve identical planters"
+    ],
+    "members": [
+      {
+        "persona": "maya",
+        "findingId": "maya-f3",
+        "step": 87,
+        "severity": "medium",
+        "category": "boredom",
+        "title": "Watering twelve identical plants is dead air",
+        "frame": "frames/00006.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "greenhouse",
+      "spot": {
+        "x": 1.5,
+        "z": -5.01
+      },
+      "signature": [],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "priya"
+      ]
+    },
+    "ledgerId": "P1",
+    "verificationNote": "maya: no ground-truth signal within 5 steps before / 3 after the note — nothing to replay against"
+  },
+  {
+    "id": "cf-15",
+    "title": "Forty-five second lift ride with nothing to look at",
+    "category": "boredom",
+    "severity": "low",
+    "description": "The reactor transit lift takes forty-five seconds. There is no window, no log, no audio — just the message \"Reactor transit in progress.\" Even a patient player checks the clock.",
+    "room": "corridor",
+    "reporters": [
+      {
+        "persona": "priya",
+        "count": 1,
+        "findingIds": [
+          "priya-f5"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": true,
+    "frames": [
+      "priya/frames/00006.png"
+    ],
+    "reproSteps": [
+      "Collect the bioelectric cell",
+      "Use the reactor lift",
+      "Wait 45 seconds"
+    ],
+    "members": [
+      {
+        "persona": "priya",
+        "findingId": "priya-f5",
+        "step": 111,
+        "severity": "low",
+        "category": "boredom",
+        "title": "Forty-five second lift ride with nothing to look at",
+        "frame": "frames/00006.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "corridor",
+      "spot": {
+        "x": 0,
+        "z": 4
+      },
+      "signature": [
+        "flaw_triggered:P2",
+        "flaw_triggered:B4",
+        "flaw_triggered:U2"
+      ],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "ledgerId": "P2",
+    "verificationNote": "priya: reproduced flaw_triggered:P2 after replaying 115 actions (the matched ledger flaw itself)"
+  },
+  {
+    "id": "cf-16",
+    "title": "I picked up a ceramic fuse but nothing tells me what it is for",
+    "category": "confusion",
+    "severity": "low",
+    "description": "The fuse went into my inventory with a chime. The screen says \"carrying: fuse\" and nothing else. I would have liked a sentence about where it belongs.",
+    "room": "airlock",
+    "reporters": [
+      {
+        "persona": "robert",
+        "count": 1,
+        "findingIds": [
+          "robert-f2"
+        ]
+      }
+    ],
+    "attribution": "unclear",
+    "verified": null,
+    "frames": [
+      "robert/frames/00001.png"
+    ],
+    "reproSteps": [
+      "Pick up the fuse in the airlock",
+      "Check the inventory text"
+    ],
+    "members": [
+      {
+        "persona": "robert",
+        "findingId": "robert-f2",
+        "step": 16,
+        "severity": "low",
+        "category": "confusion",
+        "title": "I picked up a ceramic fuse but nothing tells me what it is for",
+        "frame": "frames/00001.png"
+      }
+    ],
+    "attributionEvidence": {
+      "rule": "0 of 5 personas stalled here (game ⇔ ≥4, agent ⇔ exactly 1)",
+      "room": "airlock",
+      "spot": {
+        "x": 3.1,
+        "z": -3.03
+      },
+      "signature": [],
+      "stalled": [],
+      "threshold": 4,
+      "reached": [
+        "maya",
+        "robert",
+        "sam",
+        "priya",
+        "dana"
+      ]
+    },
+    "verificationNote": "robert: no ground-truth signal within 5 steps before / 3 after the note — nothing to replay against"
+  }
+]
