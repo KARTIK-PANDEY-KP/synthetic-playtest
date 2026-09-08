@@ -27,7 +27,17 @@ export function PersonasView() {
     setBasedOn(p.id);
     setDraft({ ...p, id: `${p.id}-2`, name: p.name, enforcement: { ...p.enforcement } });
   };
-  const startBlank = () => { setBasedOn(null); setDraft(DEFAULT_PERSONA); };
+  // Resetting the draft is invisible when the form is already blank, and on a narrow window
+  // the form sits off to the right. Take the user to it and put the cursor in the first field.
+  const startBlank = () => {
+    setBasedOn(null); setDraft(DEFAULT_PERSONA);
+    setToast("Blank profile ready — fill in the form and save.");
+    requestAnimationFrame(() => {
+      const form = document.querySelector<HTMLFormElement>("[data-persona-form]");
+      form?.scrollIntoView({ behavior: "smooth", block: "start" });
+      form?.querySelector<HTMLInputElement>("input, textarea, select")?.focus();
+    });
+  };
 
   return (
     <div className="workspace grid grid-cols-1 lg:grid-cols-12 gap-8">
