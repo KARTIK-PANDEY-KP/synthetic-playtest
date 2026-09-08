@@ -28,7 +28,7 @@ export function ReportView({ runId }: { runId: string }) {
   const [error, setError] = useState<string | null>(null);
   const [reports, setReports] = useState<Record<string, PlaytestReport>>({});
 
-  // analysis (409 = still running → poll)
+  // analysis (409 or 202+pending = still running → poll)
   useEffect(() => {
     let alive = true;
     let timer: ReturnType<typeof setTimeout> | null = null;
@@ -36,6 +36,13 @@ export function ReportView({ runId }: { runId: string }) {
       try {
         const a = await api.analysis(runId);
         if (!alive) return;
+        // The orchestrator answers 202 with { status: "pending", score: null } while personas
+        // are still playing (the mock used 409). Either shape means: not yet — keep polling.
+        if (!a.score || (a as { status?: string }).status === "pending") {
+          setPending((prev) => prev ?? { reportsIn: 0, total: 0 });
+          timer = setTimeout(load, 4000);
+          return;
+        }
         setAnalysis(a); setPending(null); setError(null);
       } catch (e) {
         if (!alive) return;
@@ -79,7 +86,7 @@ export function ReportView({ runId }: { runId: string }) {
         <p className="eyebrow">fleet report · {runId}</p>
         <h1 className="display mt-1 text-[36px]">Analysis pending</h1>
         <p className="mt-2 text-[16px] text-muted">
-          {pending ? `${pending.reportsIn} of ${pending.total} reports in. ` : ""}
+          {run ? `${run.order.filter((id) => run.personas[id]?.status === "done").length} of ${run.order.length} reports in. ` : pending && pending.total ? `${pending.reportsIn} of ${pending.total} reports in. ` : ""}
           The cross-persona pass (cluster → verify → score) runs once the last agent files its report.
         </p>
         <div className="mt-6 grid grid-cols-2 gap-3">
