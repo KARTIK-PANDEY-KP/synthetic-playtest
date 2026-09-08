@@ -35,7 +35,7 @@ export function PersonaForm({ value, onChange, onSaved }: { value: PersonaConfig
   const e = value.enforcement;
 
   return (
-    <form onSubmit={submit} className="mt-3 grid grid-cols-12 gap-4" data-persona-form>
+    <form onSubmit={submit} noValidate className="mt-3 grid grid-cols-12 gap-4" data-persona-form>
       {/* preview — always visible, changes with every slider */}
       <div className="col-span-12 rounded-xl border border-amber/30 bg-amber/5 px-5 py-3.5" data-preview>
         <p className="eyebrow text-amber2">How {value.name.split(" ")[0] || "this tester"} will experience the game</p>
@@ -112,7 +112,7 @@ export function PersonaForm({ value, onChange, onSaved }: { value: PersonaConfig
               <Segmented<"on" | "off"> value={e.audio} options={["on", "off"]} onChange={(v) => setE("audio", v)} />
             </Field>
             <Field label="step budget" hint="hard cap">
-              <input type="number" min={10} max={400} step={10} value={e.step_budget} onChange={(ev) => setE("step_budget", Number(ev.target.value))} className="readout w-full rounded-lg bg-panel2 px-3 py-1.5 text-[17px] text-fg ring-1 ring-line outline-none focus:ring-amber" name="step_budget" />
+              <input type="number" min={10} max={400} value={e.step_budget} onChange={(ev) => setE("step_budget", Number(ev.target.value))} className="readout w-full rounded-lg bg-panel2 px-3 py-1.5 text-[17px] text-fg ring-1 ring-line outline-none focus:ring-amber" name="step_budget" />
             </Field>
           </div>
           <Field label="reasoning effort" hint="how much time the tester spends deciding what to do">
