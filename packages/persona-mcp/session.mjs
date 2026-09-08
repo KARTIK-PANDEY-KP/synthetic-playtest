@@ -38,13 +38,15 @@ const OVER =
 export class GameSession {
   static async create(opts) { const s = new GameSession(opts); await s.start(); return s; }
 
-  constructor({ persona, gameUrl, seed = 1, runDir }) {
+  constructor({ persona, gameUrl, seed = 1, runDir, sessionPath }) {
     this.persona = persona;
     this.gameUrl = gameUrl;
     this.seed = Number(seed) || 1;
     this.runDir = runDir;
     this.frameDir = join(runDir, 'frames');
-    this.sessionPath = join(runDir, 'session.jsonl');
+    // Overridable: the runner keeps this at a private temp path while codex is alive,
+    // because the log carries flaw ids and the agent's sandbox can read its cwd.
+    this.sessionPath = sessionPath ?? join(runDir, 'session.jsonl');
     this.tools = new Set(toolNames(persona));
     this.history = [];
     this.listeners = new Set();

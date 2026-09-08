@@ -54,7 +54,14 @@ rmSync(reportPath, { force: true });
 rmSync(join(runDir, 'session.jsonl'), { force: true });
 
 // ── event plumbing: everything goes to stdout AND session.jsonl ───────────────
-const session = await GameSession.create({ persona, gameUrl, seed, runDir });
+// The session log names every flaw the tester hits. While codex is alive it lives at
+// an unguessable temp path outside the agent's cwd, and is moved into the run dir
+// only after codex exits. The live feed (stdout + /stream) is unaffected.
+const privateDir = mkdtempSync(join(tmpdir(), 'sp-session-'));
+const privateSessionPath = join(privateDir, 'session.jsonl');
+const publicSessionPath = join(runDir, 'session.jsonl');
+const publishSession = () => { try { copyFileSync(privateSessionPath, publicSessionPath); } catch { /* nothing logged yet */ } };
+const session = await GameSession.create({ persona, gameUrl, seed, runDir, sessionPath: privateSessionPath });
 const out$ = (e) => process.stdout.write(JSON.stringify(e) + '\n');
 session.subscribe(out$);
 const emit = (e) => session.emit(e);
@@ -125,7 +132,7 @@ writeFileSync(join(runDir, 'brief.md'), brief);
 // ── spawn codex ──────────────────────────────────────────────────────────────
 // The brief travels on stdin ('-'): as an argv prompt codex still reads stdin and
 // appends whatever it finds, which would perturb the byte-stable prefix.
-const args = ['exec', '--json', '--skip-git-repo-check', '--approve-for-me', '-C', runDir, '-m', MODEL,
+const args = ['exec', '--json', '--skip-git-repo-check', '--approve-for-me', '-C', join(runDir, 'frames'), '-m', MODEL,
   '--output-schema', strictSchemaPath, '-o', reportPath, '-'];
 console.error(`[runner] codex ${args.join(' ')}  < brief (${brief.length} chars)`);
 const codex = spawn('codex', args, { env: childEnv, stdio: ['pipe', 'pipe', 'pipe'] });
@@ -162,11 +169,13 @@ session.subscribe((e) => { if (e.kind === 'gate' && (e.gate === 'abandon' || /re
 
 const timer = setTimeout(() => { console.error(`[runner] wall clock ${timeoutMin} min exceeded; stopping codex`); codex.kill('SIGTERM'); }, timeoutMin * 60_000);
 const onSignal = (sig) => { console.error(`[runner] ${sig}; stopping`); codex.kill('SIGTERM'); };
+  publishSession();
 process.on('SIGINT', () => onSignal('SIGINT'));
 process.on('SIGTERM', () => onSignal('SIGTERM'));
 
 const exitCode = await new Promise((r) => codex.on('close', (code) => r(code)));
 clearTimeout(timer);
+publishSession();
 
 // ── verdict ──────────────────────────────────────────────────────────────────
 const report = readReport();
