@@ -51,6 +51,7 @@ writeFileSync(join(runDir, 'persona.json'), JSON.stringify(persona, null, 2));
 const reportPath = join(runDir, 'report.json');
 const costPath = join(runDir, 'cost.json');
 rmSync(reportPath, { force: true });
+rmSync(join(runDir, 'session.jsonl'), { force: true });
 
 // ── event plumbing: everything goes to stdout AND session.jsonl ───────────────
 const session = await GameSession.create({ persona, gameUrl, seed, runDir });
@@ -87,6 +88,10 @@ command = "node"
 args = [${toml(SERVER)}]
 startup_timeout_sec = 30
 tool_timeout_sec = 120
+# Pre-approve every game tool. Without this each MCP call goes through the
+# --approve-for-me auto-reviewer, a second model session that cost ~38% of the
+# tokens in the first measured run. (Valid: auto | prompt | writes | approve.)
+default_tools_approval_mode = "approve"
 
 [mcp_servers.game.env]
 PERSONA_CONFIG = ${toml(join(runDir, 'persona.json'))}
@@ -104,15 +109,27 @@ if (!process.env.CODEX_API_KEY) {
   if (!existsSync(copiedAuth)) copyFileSync(src, copiedAuth);
 }
 
+// ── output schema: OpenAI strict mode wants every property required ───────────
+// The shared schema marks room/frame/abandonedReason optional, which the API
+// rejects ("'required' ... must include every key"). Derive a strict twin:
+// optional → required + nullable. Nulls are stripped from the saved report, so
+// what lands on disk still matches packages/protocol/report.schema.json.
+const strictSchema = strictify(JSON.parse(readFileSync(SCHEMA, 'utf8')));
+const strictSchemaPath = join(codexHome, 'report.strict.schema.json');
+writeFileSync(strictSchemaPath, JSON.stringify(strictSchema, null, 2));
+
 // ── the brief (byte-stable per persona; saved for the record) ────────────────
 const brief = buildBrief(persona);
 writeFileSync(join(runDir, 'brief.md'), brief);
 
 // ── spawn codex ──────────────────────────────────────────────────────────────
+// The brief travels on stdin ('-'): as an argv prompt codex still reads stdin and
+// appends whatever it finds, which would perturb the byte-stable prefix.
 const args = ['exec', '--json', '--skip-git-repo-check', '--approve-for-me', '-C', runDir, '-m', MODEL,
-  '--output-schema', SCHEMA, '-o', reportPath, brief];
-console.error(`[runner] codex ${args.slice(0, -1).join(' ')} "<brief ${brief.length} chars>"`);
-const codex = spawn('codex', args, { env: childEnv, stdio: ['ignore', 'pipe', 'pipe'] });
+  '--output-schema', strictSchemaPath, '-o', reportPath, '-'];
+console.error(`[runner] codex ${args.join(' ')}  < brief (${brief.length} chars)`);
+const codex = spawn('codex', args, { env: childEnv, stdio: ['pipe', 'pipe', 'pipe'] });
+codex.stdin.end(brief);
 let playing = false;
 const LEAK = /session\.jsonl|persona\.json|cost\.json|report\.json|brief\.md|codex-home|__telemetry/i;
 let leakWarnings = 0;
@@ -169,7 +186,7 @@ if (report) {
 
 function readReport() {
   try {
-    const r = JSON.parse(readFileSync(reportPath, 'utf8'));
+    const r = stripNulls(JSON.parse(readFileSync(reportPath, 'utf8')));
     const ok = r && typeof r.persona === 'string' && typeof r.summary === 'string' && typeof r.completed === 'boolean'
       && Array.isArray(r.findings) && r.experience && ['confused', 'bored', 'unfair', 'enjoyed'].every((k) => Array.isArray(r.experience[k]))
       && Number.isInteger(r.wouldRecommend) && r.wouldRecommend >= 1 && r.wouldRecommend <= 5
@@ -187,6 +204,32 @@ function mergeNotedFindings(report) {
     if (!Number.isInteger(f.step)) f.step = session.steps;
     if (!f.id) f.id = `${persona.id}-f${report.findings.indexOf(f) + 1}`;
   }
+}
+
+/** Every object property required; formerly-optional ones accept null. Recursive. */
+function strictify(node) {
+  if (Array.isArray(node)) return node.map(strictify);
+  if (!node || typeof node !== 'object') return node;
+  const out = { ...node };
+  if (out.type === 'object' && out.properties) {
+    const required = new Set(out.required ?? []);
+    out.properties = Object.fromEntries(Object.entries(out.properties).map(([k, v]) => {
+      const sv = strictify(v);
+      if (required.has(k)) return [k, sv];
+      const types = Array.isArray(sv.type) ? sv.type : [sv.type];
+      return [k, { ...sv, type: types.includes('null') ? types : [...types, 'null'] }];
+    }));
+    out.required = Object.keys(out.properties);
+    out.additionalProperties = false;
+  }
+  if (out.items) out.items = strictify(out.items);
+  return out;
+}
+
+function stripNulls(v) {
+  if (Array.isArray(v)) return v.map(stripNulls);
+  if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v).filter(([, x]) => x !== null).map(([k, x]) => [k, stripNulls(x)]));
+  return v;
 }
 
 async function shutdown() {

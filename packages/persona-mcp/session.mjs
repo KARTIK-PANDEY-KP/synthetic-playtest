@@ -60,8 +60,10 @@ export class GameSession {
 
   async start() {
     mkdirSync(this.frameDir, { recursive: true });
+    // deferLoad: the game starts on the persona's first look/action, so the opening
+    // seconds are seen by the player instead of burning while the model boots.
     this.driver = new GameDriver({
-      gameUrl: this.gameUrl, persona: this.persona, frameDir: this.frameDir, seed: this.seed,
+      gameUrl: this.gameUrl, persona: this.persona, frameDir: this.frameDir, seed: this.seed, deferLoad: true,
       onEvent: (e) => this.emit({ kind: 'telemetry', event: e }),
     });
     await this.driver.start();
@@ -95,6 +97,11 @@ export class GameSession {
     if (name === 'abandon') return this.#abandon(String(args.reason ?? ''));
     if (name === 'note_finding') return this.#noteFinding(args);
     if (this.abandoned) return { text: OVER, isError: false };
+
+    if (!this.driver.loaded) {
+      await this.driver.load();
+      this.emit({ kind: 'status', status: 'playing', detail: 'game loaded on first look' });
+    }
 
     if (name === 'screenshot') {
       const path = await this.driver.screenshot();
