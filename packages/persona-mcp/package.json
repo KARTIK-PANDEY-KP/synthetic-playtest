@@ -2,6 +2,13 @@
   "name": "persona-mcp",
   "private": true,
   "type": "module",
+  "scripts": {
+    "smoke": "node smoke.mjs",
+    "test": "node test-server.mjs",
+    "serve": "node serve.mjs --port 5273",
+    "run": "node runner.mjs",
+    "audit": "node audit-run.mjs"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
     "playwright": "^1.49.0",

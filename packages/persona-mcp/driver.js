@@ -16,11 +16,15 @@ import { join } from 'node:path';
 const READING_BUDGET = { skim: 12, normal: 60, thorough: Infinity };
 
 export class GameDriver {
-  constructor({ gameUrl, persona, frameDir, seed = 1 }) {
+  constructor({ gameUrl, persona, frameDir, seed = 1, onEvent = null, deferLoad = false }) {
     this.gameUrl = gameUrl;
     this.persona = persona;
     this.frameDir = frameDir;
     this.seed = seed;
+    this.deferLoad = deferLoad;
+    this.loaded = false;
+    /** Ground-truth listener (session logging). Never wired to anything the agent can read. */
+    this.onEvent = onEvent;
     this.events = [];
     this.frameNo = 0;
     this.stepNo = 0;
@@ -38,6 +42,7 @@ export class GameDriver {
     await this.ctx.exposeBinding('__harnessEvent', (_src, e) => {
       this.events.push(e);
       if (PROGRESS.has(e.type)) this.stallSteps = 0;
+      try { this.onEvent?.(e); } catch { /* a logging failure must never break play */ }
     });
     await this.page.addInitScript(() => {
       const install = () => {
@@ -50,9 +55,22 @@ export class GameDriver {
       }
     });
 
+    if (!this.deferLoad) await this.load();
+    return this;
+  }
+
+  /**
+   * Start the game. With `deferLoad`, this happens on the persona's FIRST look or
+   * action rather than at browser launch: a human sees the opening frame the
+   * instant the game starts, whereas the model's first screenshot arrives
+   * ~15 s after spawn — long enough for a 3.5 s tutorial to have come and gone
+   * unseen. The game clock starts when the player sits down, not before.
+   */
+  async load() {
+    if (this.loaded) return;
+    this.loaded = true;
     await this.page.goto(`${this.gameUrl}?seed=${this.seed}`, { waitUntil: 'load' });
     await this.page.waitForFunction(() => !!window.__telemetry, null, { timeout: 10_000 });
-    return this;
   }
 
   /**
@@ -109,6 +127,11 @@ export class GameDriver {
   async crouch(on) { await this.page.keyboard[on ? 'down' : 'up']('ControlLeft'); this.#step(); }
   async interact() { await this.page.keyboard.press('KeyE'); await this.page.waitForTimeout(150); this.#step(); }
   async typeText(text) { await this.page.keyboard.type(String(text).slice(0, 120)); this.#step(); }
+  /** Inventory toggle. Input-level: the game binds it to I. */
+  async openInventory() { await this.page.keyboard.press('KeyI'); await this.page.waitForTimeout(150); this.#step(); }
+  /** Items are consumed by interacting with the thing they fit; `name` is intent, logged
+   *  for the action record. Still just a key press — nothing semantic. */
+  async useItem(_name) { await this.page.keyboard.press('KeyE'); await this.page.waitForTimeout(150); this.#step(); }
 
   /** Audio cues, granted only to personas that can hear. */
   async listen() {

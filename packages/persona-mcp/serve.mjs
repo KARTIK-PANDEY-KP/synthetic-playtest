@@ -15,7 +15,7 @@ const TYPES = {
   '.svg': 'image/svg+xml', '.woff2': 'font/woff2',
 };
 
-export async function serveGame(root = GAME_DIST) {
+export async function serveGame(root = GAME_DIST, port = 0) {
   const server = createServer(async (req, res) => {
     const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     // Resolve first, then key the content type off the FILE, not the URL:
@@ -28,6 +28,13 @@ export async function serveGame(root = GAME_DIST) {
       res.end(body);
     } catch { res.writeHead(404); res.end('not found'); }
   });
-  await new Promise((r) => server.listen(0, '127.0.0.1', r));
+  await new Promise((r) => server.listen(port, '127.0.0.1', r));
   return { server, url: `http://127.0.0.1:${server.address().port}/` };
+}
+
+// CLI: `node serve.mjs [--port 5273]` — serves the built game until killed.
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const i = process.argv.indexOf('--port');
+  const { url } = await serveGame(GAME_DIST, i >= 0 ? Number(process.argv[i + 1]) : 5273);
+  console.log(`serving ${GAME_DIST} at ${url}`);
 }
