@@ -139,6 +139,10 @@ export interface Finding {
   frame?: string;
   /** Step index when noted — lets the verifier slice the action log. */
   step: number;
+  /** Stamped by the runner: the agent's last message before it noted this — what it was thinking, in its own words. */
+  thinking?: string;
+  /** Stamped by the runner: the last few actions before the note, humanized ("pressed E ×3, walked forward"). */
+  actionsBefore?: string[];
 }
 
 /** The agent's final message, forced by `codex exec --output-schema report.schema.json`. */

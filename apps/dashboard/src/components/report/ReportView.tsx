@@ -13,6 +13,7 @@ import { Scorecard } from "./Scorecard";
 import { FindingCard } from "./FindingCard";
 import { ExperienceCard } from "./ExperienceCard";
 import { Disagreement } from "./Disagreement";
+import { PlainEnglish } from "./PlainEnglish";
 
 interface Analysis { findings: ClusteredFinding[]; score: Score; reportMd: string }
 interface Pending { reportsIn: number; total: number }
@@ -27,6 +28,7 @@ export function ReportView({ runId }: { runId: string }) {
   const [pending, setPending] = useState<Pending | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reports, setReports] = useState<Record<string, PlaytestReport>>({});
+  const [plainOnly, setPlainOnly] = useState(false);
 
   // analysis (409 or 202+pending = still running → poll)
   useEffect(() => {
@@ -102,6 +104,12 @@ export function ReportView({ runId }: { runId: string }) {
           ))}
           {!personas.length && <div className="col-span-2 flex items-center gap-3 text-muted"><Spinner /> loading run…</div>}
         </div>
+        {Object.keys(reports).length > 0 && (
+          <div className="mt-8">
+            <p className="eyebrow">in plain english · so far</p>
+            <div className="mt-3"><PlainEnglish personas={personas} reports={reports} nameOf={nameOf} configs={state.personaConfigs} /></div>
+          </div>
+        )}
         <div className="mt-6 flex gap-3">
           <Link href={`/runs/${runId}`}><Button variant="outline">← watch the fleet live</Button></Link>
         </div>
@@ -166,6 +174,12 @@ export function ReportView({ runId }: { runId: string }) {
       </section>
 
       {/* scorecard */}
+      <Section n="00" title="In plain English" sub="One line per problem, per tester: what broke, and what they were doing when it broke."
+        right={<Button variant="outline" onClick={() => setPlainOnly((v) => !v)}>{plainOnly ? "Show the full report" : "Just this, please"}</Button>}>
+        <PlainEnglish personas={personas} reports={reports} findings={findings} nameOf={nameOf} configs={state.personaConfigs} />
+      </Section>
+
+      {!plainOnly && <>
       <Section n="01" title="Scorecard" sub="Findings joined against ledger.json — the answer key nobody else has.">
         <Scorecard score={score} findings={findings} />
       </Section>
@@ -211,6 +225,7 @@ export function ReportView({ runId }: { runId: string }) {
           <div className="border-t border-line px-6 py-5"><Markdown text={analysis.reportMd} className="text-[15.5px]" /></div>
         </details>
       </Section>
+      </>}
     </div>
   );
 }
