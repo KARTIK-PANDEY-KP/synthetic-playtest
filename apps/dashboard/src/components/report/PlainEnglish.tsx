@@ -21,7 +21,7 @@ const firstSentence = (s?: string) => (s ?? "").split(/(?<=[.!?])\s/)[0].trim();
 const lower = (s?: string) => (s ? s.charAt(0).toLowerCase() + s.slice(1) : "");
 
 function howFound(f: Finding): string {
-  const where = f.room ? `In the ${lower(f.room)}` : "";
+  const where = f.room ? `In the ${f.room.toLowerCase()}` : "";   // agents capitalize rooms inconsistently
   const doing = f.actionsBefore?.length ? `after ${f.actionsBefore.join(", ")}` : "";
   const lead = [where, doing].filter(Boolean).join(", ");
   if (f.thinking) return `${lead ? lead + " — " : ""}“${firstSentence(f.thinking)}”`;
