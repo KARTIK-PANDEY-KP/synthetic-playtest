@@ -141,6 +141,12 @@ Measured in Spike 01, not estimated:
 | 100-step session | ~$12 / persona |
 | 4-persona fleet run | **~$45** |
 
+**Measured in real sessions (not the spike):** Maya, 13 action steps, real game, real
+Codex: **$0.80–0.83, 92.8% cached** — ~$0.06 per action step, because screenshots are
+cheap perception calls and only actions carry reasoning. A 100-step persona lands near
+**$6–8**, a 5-persona fleet near **$35**. `--approve-for-me` adds a hidden ~$0.66
+reviewer session per run unless the MCP server is pre-approved — see SPIKE-01 §3.
+
 **The governor is required, not optional.** Tier-1 limits are **500 RPM / 500K TPM**.
 Four agents at 8s/step ≈ 240K TPM — fine. Eight agents hits the ceiling. The orchestrator
 holds a global token bucket and queues steps rather than eating 429s. Surface **live cost

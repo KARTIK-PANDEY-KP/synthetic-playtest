@@ -95,6 +95,22 @@ args = ["/abs/path/to/persona-mcp/server.mjs"]
 PERSONA_CONFIG = "/abs/path/to/persona.json"
 ```
 
+### 3. `--approve-for-me` spawns a paid reviewer session — pre-approve the MCP server instead
+
+Found by the runner workstream in the first real sessions: with `--approve-for-me`, Codex
+routes each MCP tool approval through a **second model session** whose tokens do not
+appear in `turn.completed.usage`. On a 25-step run it cost **~$0.66 on top of $0.97** —
+40% hidden overhead. Setting this in the run's `config.toml` removes it entirely:
+
+```toml
+[mcp_servers.game]
+default_tools_approval_mode = "approve"   # valid: auto | prompt | writes | approve
+```
+
+`--approve-for-me` stays on the command line (it is what makes MCP calls legal at all),
+but with the server pre-approved no reviewer is ever consulted. Measured across three
+real sessions afterwards: **$0.80–0.97 per 13–25-step run, 92–94% of input cached.**
+
 ## Reproduce
 
 ```bash
