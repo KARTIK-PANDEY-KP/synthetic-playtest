@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+pnpm-lock.yaml
+*.tsbuildinfo
+.env
+.env.*
+!.env.local.example
+mock/.personas.json
