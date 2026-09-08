@@ -88,36 +88,54 @@ Everything that reasons in this project is **GPT-6 Astra**, driven through the *
 
 ## Feedback on GPT-6 Astra
 
-**What was remarkable.** Astra played a first-person 3D game it had never seen, from
-screenshots alone, and stayed *in character under structural constraints* — a skimmer with
-blurred text, a first-timer who had never heard of WASD — for a hundred-plus steps without
-collapsing into a generic competent assistant. Playing badly in a specific, consistent way
-while still reasoning coherently is harder than playing well, and it did it. Findings were
-genuinely useful: it discovered a real usability problem we had not planted (silent locked
-doors) that four of five personas independently hit. Cache hit rates of 90–94% made
-per-step cost workable.
+**GPT-6 Astra is the reason this product can exist.** Persona-driven testing has been standard
+in voice AI for years; it never reached games because no model could play a game it had never
+seen. We tried to build exactly this before and it was not possible. With Astra it took one
+night, and the specific capabilities that made the difference showed up in our own runs:
 
-**Where we lost hours — all in the Codex CLI harness, none in the model:**
+1. **Zero-shot play of an unseen 3D world from pixels alone.** No SDK, no per-game training,
+   no DOM — only screenshots of a first-person Three.js game it had never encountered, and
+   real key presses back. Astra navigated a six-room station, found a keycard the size of a
+   fingernail behind a crate, operated terminals, and combined inventory items. This is
+   ARC-AGI-3 — "understand a novel interactive environment with no instructions" — as a
+   product, and it is the capability the entire market was waiting on.
 
-1. **MCP image content is dropped.** Codex ignores image blocks returned from MCP tools
-   (openai/codex#4819, #10334). Our screenshot tool has to write a PNG and return the path,
-   and the agent calls `view_image` itself. Two calls per look.
-2. **`--approve-for-me` spawns a hidden reviewer session** whose tokens never appear in
-   `turn.completed.usage` — ~40% extra cost per run before we found
-   `default_tools_approval_mode = "approve"` (valid values only discoverable from a config
-   error). Please document this.
-3. **`mcp_servers.<name>.trusted = true` is silently accepted and does nothing.**
-4. **Codex's Linux sandbox (bubblewrap) cannot start inside a container.** In Modal every
-   `view_image` failed with `bwrap: loopback: Failed RTM_NEWADDR` and agents played blind.
-   The bypass flag works, but the failure mode should be detected and explained.
-5. **Usage is reported once, at turn end.** No live cost meter is possible for a
-   long-running agent without parsing `sessions/*.jsonl`.
-6. **Cost is superlinear in steps** because the full conversation is retained: $0.06/step at
-   13 steps, $0.20/step at 115. Server-side compaction for long agentic sessions would change
-   the economics of exactly this kind of workload.
-7. `codex exec` appends stdin to an argv prompt, which breaks a byte-stable cached prefix —
-   pipe the whole prompt via stdin. Strict output schemas reject optional fields; we derive a
-   nullable twin at runtime.
+2. **Constrained competence.** Playing *badly in a specific, consistent way* while still
+   reasoning coherently is harder than playing well, and Astra did it for 100+ steps without
+   collapsing into a generic competent assistant. A skimmer with the long text blurred out of
+   her screenshots stayed a skimmer. A 52-year-old first-timer who had never heard of WASD
+   asked "which of those letters takes me forward?" and, forty steps later, "how do I bend
+   down?" — and quit, as that person would. Every other model we have used dissolves the
+   persona within a few turns. This is what makes the agents *testers* instead of assistants.
 
-Net: the model is ready for this workload today; the CLI needs a "long-running agent with
-custom perception" path that doesn't require rediscovering these seven things.
+3. **Session-long reasoning across 1M context.** Our completionist read a memo in room two —
+   "keep the ceramic fuse for distribution" — and, forty steps and two rooms later, when a
+   terminal consumed it, filed a repro-quality bug report connecting the two: *"The memo told
+   me to save that fuse for distribution, so spending it while inspecting something felt
+   awful."* Our first-timer solved a color riddle from room one unprompted — "cold, life, heat
+   → blue, green, red → 3, 2, 1" — the game's hardest inference. A stateless agent cannot
+   produce either finding.
+
+4. **Discovery, not just execution.** Four of five personas independently found a real
+   usability flaw we had not planted — silent, identical locked doors — and described it in
+   four different voices. Nothing in their instructions pointed at it. The fleet found the
+   thing a hundred human early-access players would have found in week one.
+
+5. **Disciplined tool use.** Across every session the agents used only the game's MCP tools
+   and `view_image` — zero shell commands, zero attempts to read the harness, and every final
+   report conformed to a strict JSON schema on the first try. `reasoning_effort` worked as a
+   per-persona cost dial, and prompt caching carried 90–94% of input tokens, making a
+   five-persona fleet run a $33 line item.
+
+**What would make it even better** — all in the Codex CLI harness, none in the model:
+MCP image content blocks are dropped (openai/codex#4819), so screenshots go to disk and back
+through `view_image`; `--approve-for-me` spawns a hidden reviewer session (~40% extra cost)
+until you find the undocumented `default_tools_approval_mode = "approve"`; Codex's Linux
+sandbox (bubblewrap) cannot start inside a container, so agents in Modal played blind until we
+bypassed it; usage is reported only at turn end, so no live cost meter; and cost grows
+superlinearly with session length ($0.06/step at 13, $0.20 at 115) because the whole
+conversation is retained — server-side compaction would change the economics of long agentic
+sessions. A first-class "long-running agent with custom perception" path in the CLI would
+save the next team the two hours we spent rediscovering these.
+
+Net: the model is ready for this workload today. It is the first one that is.
